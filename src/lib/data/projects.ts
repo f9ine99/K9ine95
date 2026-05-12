@@ -77,7 +77,7 @@ export const projects: Project[] = [
             { name: "HamerAI", color: "#3178c6" }
         ],
         preview: {
-            repo: "impact",
+            repo: "impactis",
             description: "Three-sided marketplace linking startups, investors, and advisors—AI-assisted matching.",
             stars: 0,
             contributors: [
@@ -96,8 +96,7 @@ export const projects: Project[] = [
             { name: "Other", color: "#8b949e", percentage: 0.2 }
         ],
         isPrivate: true,
-        demoUrl: "https://skiwai.com",
-        githubUrl: "https://github.com/f9ine99/impact"
+        demoUrl: "https://skiwai.com"
     },
     {
         slug: "hamerai",
