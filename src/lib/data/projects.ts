@@ -276,7 +276,7 @@ export const projects: Project[] = [
             { name: "Vite", color: "#646cff" }
         ],
         preview: {
-            repo: "my-portfolio",
+            repo: "K9ine95",
             description: "Premium, terminal-inspired portfolio website",
             stars: 0,
             contributors: [{ name: "Firaol", avatar: "/images/firaol.jpg" }]
@@ -287,7 +287,7 @@ export const projects: Project[] = [
             { name: "CSS", color: "#563d7c", percentage: 14.5 }
         ],
         demoUrl: "https://firaol.xyz",
-        githubUrl: "https://github.com/f9ine99/my-portfolio"
+        githubUrl: "https://github.com/f9ine99/K9ine95"
     },
     {
         slug: "detectify",

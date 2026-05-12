@@ -49,8 +49,8 @@
           <Clock3 size={12} />
           {time}
         </span>
-        <a 
-          href="https://github.com/f9ine99/my-portfolio/commit/{commitHash}" 
+        <a
+          href={`https://github.com/f9ine99/K9ine95/commit/${commitHash}`} 
           target="_blank" 
           rel="noopener noreferrer" 
           class="commit"
