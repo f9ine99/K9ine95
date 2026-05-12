@@ -251,7 +251,9 @@
     pointer-events: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 50;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 158, 100, 0.25);
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.6),
+      0 0 25px color-mix(in srgb, var(--accent-orange) 28%, transparent);
   }
 
   .avatar-tooltip::after {

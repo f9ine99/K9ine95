@@ -131,7 +131,7 @@
   .description :global(a) {
     color: var(--accent-orange);
     text-decoration: none;
-    border-bottom: 1px dotted rgba(255, 158, 100, 0.4);
+    border-bottom: 1px dotted color-mix(in srgb, var(--accent-orange) 42%, transparent);
     padding-bottom: 1px;
     transition: all 0.2s ease;
   }
@@ -139,7 +139,7 @@
   .description :global(a:hover) {
     color: var(--text-primary);
     border-bottom-color: var(--accent-orange);
-    background: rgba(255, 158, 100, 0.1);
+    background: color-mix(in srgb, var(--accent-orange) 12%, transparent);
   }
 
   .tags {

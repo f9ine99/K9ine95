@@ -52,7 +52,6 @@
   let wpm = $state(0);
   let accuracy = $state(100);
   let isFinished = $state(false);
-  let isFocused = $state(false);
   let activePaw = $state('none');
   let charElements = $state<HTMLElement[]>([]);
   let inputElement = $state<HTMLInputElement | null>(null);
@@ -89,19 +88,19 @@
   });
 
   const caretStyle = $derived.by(() => {
-    if (userInput.length === 0) return 'left: 0; top: 0.35rem;';
+    if (userInput.length === 0) return 'left: 0; top: 0.28rem;';
     
     // Position at the NEXT character to type
     if (userInput.length < targetText.length) {
       const el = charElements[userInput.length];
-      if (el) return `left: ${el.offsetLeft}px; top: ${el.offsetTop + 6}px;`;
+      if (el) return `left: ${el.offsetLeft}px; top: ${el.offsetTop + 4}px;`;
     }
     
     // If at the very end
     const lastEl = charElements[targetText.length - 1];
-    if (lastEl) return `left: ${lastEl.offsetLeft + lastEl.offsetWidth}px; top: ${lastEl.offsetTop + 6}px;`;
+    if (lastEl) return `left: ${lastEl.offsetLeft + lastEl.offsetWidth}px; top: ${lastEl.offsetTop + 4}px;`;
     
-    return 'left: 0; top: 0.35rem;';
+    return 'left: 0; top: 0.28rem;';
   });
 
 
@@ -162,7 +161,21 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="typing-test" id="typing" onclick={() => inputElement?.focus()}>
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<div
+  class="typing-test"
+  id="typing"
+  role="region"
+  aria-labelledby="typing-play-heading"
+  onclick={() => inputElement?.focus()}
+>
+  <header class="typing-intro">
+    <h2 id="typing-play-heading" class="typing-intro-heading">If you love typing</h2>
+    <p class="typing-intro-copy">
+      Click, type the gray line. New line: <kbd class="typing-kbd">Tab</kbd> or <span class="typing-intro-action">Reset</span>.
+    </p>
+  </header>
+
   <TypingStatsHeader {wpm} {accuracy} onReset={() => reset(true)} />
 
   <TypingBongoCat {isFinished} {accuracy} {mistakes} {activePaw} {eyeTransform} />
@@ -198,8 +211,6 @@
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
-        onfocus={() => isFocused = true}
-        onblur={() => isFocused = false}
       />
 
 
@@ -210,17 +221,103 @@
 <style>
   .typing-test {
     background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 2.5rem;
-    margin: 3rem auto;
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.375rem 1.5rem 1.5rem;
+    margin: 2rem auto;
+    max-width: min(48rem, 100%);
     position: relative;
+    cursor: pointer;
+    box-shadow: none;
+    transition:
+      border-color 0.22s ease,
+      box-shadow 0.28s ease,
+      background-color 0.22s ease;
+  }
+
+  .typing-test:hover {
+    border-color: var(--border-medium);
+  }
+
+  .typing-test:focus-within {
+    border-color: color-mix(in srgb, var(--accent-orange) 55%, var(--border-medium));
+    animation: typingSectionGlow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes typingSectionGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--accent-orange) 32%, transparent),
+        0 0 20px color-mix(in srgb, var(--accent-orange) 14%, transparent),
+        0 0 40px color-mix(in srgb, var(--accent-orange) 8%, transparent);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--accent-orange) 42%, transparent),
+        0 0 28px color-mix(in srgb, var(--accent-orange) 20%, transparent),
+        0 0 52px color-mix(in srgb, var(--accent-orange) 12%, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typing-test:focus-within {
+      animation: none;
+      box-shadow:
+        0 0 0 1px color-mix(in srgb, var(--accent-orange) 35%, transparent),
+        0 0 18px color-mix(in srgb, var(--accent-orange) 12%, transparent);
+    }
+  }
+
+  .typing-intro {
+    margin-bottom: 1rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .typing-intro-heading {
+    margin: 0 0 0.25rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    color: var(--heading-color);
+  }
+
+  .typing-intro-copy {
+    margin: 0;
+    max-width: 32rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  .typing-intro-action {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .typing-kbd {
+    display: inline-block;
+    padding: 0.06rem 0.35rem;
+    margin: 0 0.08rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text-primary);
+    vertical-align: 0.06em;
+    border-radius: 4px;
+    border: 1px solid var(--border-medium);
+    background: var(--subtle-bg);
   }
 
   .test-area {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .typing-input {
@@ -233,20 +330,20 @@
   /* Monkeytype inspired styles */
   .target-text {
     position: relative;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-family: var(--font-mono);
-    line-height: 1.5;
+    line-height: 1.45;
     user-select: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.035em;
   }
 
   .caret {
     position: absolute;
     width: 2px;
-    height: 1.5rem;
+    height: 1.2rem;
     background: var(--accent-orange);
     transition: all 0.1s cubic-bezier(0.19, 1, 0.22, 1);
-    top: 0.35rem;
+    top: 0.28rem;
   }
 
 
@@ -278,19 +375,32 @@
 
 
   @media (max-width: 768px) {
+    .typing-intro {
+      margin-bottom: 0.875rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .typing-intro-heading {
+      font-size: 0.8125rem;
+    }
+
+    .typing-intro-copy {
+      font-size: 0.75rem;
+    }
+
     .typing-test {
-      padding: 1.5rem;
-      margin: 1.5rem auto;
+      padding: 1.125rem 1.125rem 1.25rem;
+      margin: 1.35rem auto;
     }
 
     .target-text {
-      font-size: 1.1rem;
+      font-size: 1.02rem;
       line-height: 1.4;
     }
 
     .caret {
-      height: 1.1rem;
-      top: 0.2rem;
+      height: 1.02rem;
+      top: 0.18rem;
     }
   }
 </style>

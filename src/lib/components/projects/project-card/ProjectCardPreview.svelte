@@ -160,21 +160,21 @@
 
   .public-badge {
     color: var(--accent-orange);
-    background: rgba(var(--accent-orange-rgb, 255, 158, 100), 0.1);
-    border: 1px solid rgba(var(--accent-orange-rgb, 255, 158, 100), 0.2);
+    background: color-mix(in srgb, var(--accent-orange) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-orange) 22%, transparent);
     transition: all 0.3s ease;
   }
 
   .public-badge:hover {
-    background: rgba(var(--accent-orange-rgb, 255, 158, 100), 0.15);
-    border-color: rgba(var(--accent-orange-rgb, 255, 158, 100), 0.4);
-    box-shadow: 0 0 8px rgba(var(--accent-orange-rgb, 255, 158, 100), 0.2);
+    background: color-mix(in srgb, var(--accent-orange) 18%, transparent);
+    border-color: color-mix(in srgb, var(--accent-orange) 42%, transparent);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--accent-orange) 22%, transparent);
     transform: translateY(-1px);
   }
 
   .os-icon-enhanced {
     animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 2px rgba(var(--accent-orange-rgb, 255, 158, 100), 0.4));
+    filter: drop-shadow(0 0 2px color-mix(in srgb, var(--accent-orange) 42%, transparent));
   }
 
   .inner-path {
@@ -285,7 +285,9 @@
     pointer-events: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 50;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 158, 100, 0.2);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.5),
+      0 0 20px color-mix(in srgb, var(--accent-orange) 22%, transparent);
   }
 
   .avatar-tooltip::after {

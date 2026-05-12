@@ -5,8 +5,8 @@
 
 <div class="drawer-section">
   <div class="section-title">
-    <Palette size={16} />
-    <span>FLAVOR</span>
+    <Palette size={14} />
+    <span>Theme</span>
   </div>
   <div class="flavor-grid">
     {#each themes as theme}
@@ -20,7 +20,7 @@
 <div class="drawer-section">
   <div class="section-title">
     <div class="color-dot" style="background: var(--accent-orange)"></div>
-    <span>ACCENT COLOR</span>
+    <span>Accent</span>
   </div>
   <div class="color-grid">
     {#each colors as color}
@@ -43,7 +43,7 @@
       onchange={(event) => setBgEffect((event.currentTarget as HTMLInputElement).checked)}
     />
     <span class="checkmark"></span>
-    <span class="label-text">Background effect: <span class="status">{themeState.bgEffect ? 'on' : 'off'}</span></span>
+    <span class="label-text">Grid background <span class="status">{themeState.bgEffect ? 'on' : 'off'}</span></span>
   </label>
 </div>
 
@@ -51,35 +51,38 @@
   .drawer-section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.65rem;
   }
 
   .section-title {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.45rem;
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
   }
 
   .flavor-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 0.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 0.35rem;
+    background: var(--subtle-bg);
+    padding: 0.4rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
   }
 
   .flavor-btn {
     background: none;
     border: 1px solid transparent;
-    border-radius: 8px;
-    padding: 0.6rem;
+    border-radius: 6px;
+    padding: 0.45rem 0.5rem;
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     cursor: pointer;
     transition: all 0.2s;
     text-align: center;
@@ -99,7 +102,7 @@
   .color-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
 
   .color-circle {
@@ -122,9 +125,19 @@
   .color-circle.active {
     opacity: 1;
     outline: 2px solid var(--glow-color, currentColor);
-    outline-offset: 3px;
-    box-shadow: 0 0 4px 1px var(--glow-color, currentColor), 0 0 8px 2px var(--glow-color, currentColor);
-    animation: color-glow-pulse 2s ease-in-out infinite;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--glow-color, currentColor) 40%, transparent);
+  }
+
+  .section-title :global(svg) {
+    flex-shrink: 0;
+  }
+
+  .color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
 
   .effect-toggle {
@@ -134,9 +147,10 @@
   .toggle {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.55rem;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
   }
 
   .toggle input {
@@ -172,14 +186,4 @@
     font-weight: 600;
   }
 
-  @keyframes color-glow-pulse {
-    0%,
-    100% {
-      box-shadow: 0 0 4px 1px var(--glow-color, currentColor), 0 0 8px 2px var(--glow-color, currentColor);
-    }
-
-    50% {
-      box-shadow: 0 0 6px 2px var(--glow-color, currentColor), 0 0 12px 4px var(--glow-color, currentColor);
-    }
-  }
 </style>

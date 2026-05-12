@@ -32,8 +32,8 @@
 
   .back-link:hover {
     color: var(--accent-orange);
-    background: rgba(255, 158, 100, 0.06);
-    border-color: rgba(255, 158, 100, 0.15);
+    background: color-mix(in srgb, var(--accent-orange) 8%, transparent);
+    border-color: color-mix(in srgb, var(--accent-orange) 18%, transparent);
     transform: translateX(-4px);
   }
 

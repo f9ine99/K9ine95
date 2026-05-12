@@ -43,12 +43,12 @@
     text-decoration: none;
     font-family: var(--font-mono);
     padding: 0.6rem 1.25rem;
-    border: 1px solid rgba(255, 158, 100, 0.2);
+    border: 1px solid color-mix(in srgb, var(--accent-orange) 22%, transparent);
     border-radius: 10px;
     transition: all 0.2s ease;
   }
 
   .back-btn:hover {
-    background: rgba(255, 158, 100, 0.08);
+    background: color-mix(in srgb, var(--accent-orange) 10%, transparent);
   }
 </style>

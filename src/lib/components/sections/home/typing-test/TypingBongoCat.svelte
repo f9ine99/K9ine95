@@ -45,9 +45,9 @@
 <style>
   .cat-container {
     position: absolute;
-    top: -45px;
-    right: 30px;
-    width: 100px;
+    top: -38px;
+    right: 1.125rem;
+    width: 84px;
   }
 
   .bongo-cat {
@@ -71,9 +71,9 @@
 
   @media (max-width: 768px) {
     .cat-container {
-      width: 70px;
-      top: -30px;
-      right: 15px;
+      width: 64px;
+      top: -28px;
+      right: 0.65rem;
     }
   }
 </style>

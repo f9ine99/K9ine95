@@ -12,26 +12,26 @@
 
 <div class="stats-header">
   <div class="stat">
-    <Zap size={14} class="icon-wpm" />
+    <Zap size={13} class="icon-wpm" />
     <span>{wpm} WPM</span>
   </div>
 
   <div class="stat">
-    <Target size={14} class="icon-acc" />
+    <Target size={13} class="icon-acc" />
     <span>{accuracy}% ACC</span>
   </div>
 
-  <button class="reset-btn" onclick={() => onReset()} title="Reset Test (Tab)">
-    <RefreshCw size={14} />
-    <span class="reset-hint">tab to restart</span>
+  <button type="button" class="reset-btn" onclick={() => onReset()} title="New line (keyboard: Tab)">
+    <RefreshCw size={13} />
+    <span class="reset-hint">Reset</span>
   </button>
 </div>
 
 <style>
   .stats-header {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
     align-items: center;
     font-family: var(--font-mono);
   }
@@ -39,8 +39,8 @@
   .stat {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
     color: var(--text-muted);
   }
 
@@ -57,28 +57,28 @@
     border: none;
     color: var(--text-muted);
     cursor: pointer;
-    padding: 5px;
-    border-radius: 4px;
-    transition: all 0.2s;
+    padding: 0.25rem 0.45rem;
+    border-radius: 6px;
+    transition: color 0.15s ease, background-color 0.15s ease;
     margin-left: auto;
   }
 
   .reset-btn:hover {
     color: var(--accent-orange);
-    background: rgba(255, 158, 100, 0.1);
+    background: var(--overlay-light);
   }
 
   .reset-hint {
-    font-size: 0.7rem;
-    opacity: 0.6;
-    margin-left: 0.5rem;
-    text-transform: lowercase;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-left: 0.35rem;
+    opacity: 0.85;
   }
 
   @media (max-width: 768px) {
     .stats-header {
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      gap: 0.875rem;
+      margin-bottom: 0.875rem;
       flex-wrap: wrap;
     }
   }

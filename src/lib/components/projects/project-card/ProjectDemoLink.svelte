@@ -26,8 +26,8 @@
     gap: 0.6rem;
     margin-top: auto;
     padding: 1rem 1.25rem;
-    background: rgba(var(--accent-orange-rgb, 255, 158, 100), 0.08);
-    border: 1px solid rgba(var(--accent-orange-rgb, 255, 158, 100), 0.15);
+    background: color-mix(in srgb, var(--accent-orange) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-orange) 18%, transparent);
     border-radius: 12px;
     color: var(--accent-orange);
     font-size: 0.9rem;
@@ -58,7 +58,7 @@
     background: var(--accent-orange);
     color: #000;
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(255, 158, 100, 0.4);
+    box-shadow: 0 10px 20px color-mix(in srgb, var(--accent-orange) 42%, transparent);
     border-color: transparent;
   }
 
