@@ -51,7 +51,7 @@ export const projects: Project[] = [
         slug: "impactis",
         title: "Impactis",
         date: "Testing — 2026",
-        description: "A collaborative project with <a href=\"https://github.com/RasAbrish\" target=\"_blank\">Abrham</a>, <a href=\"https://github.com/amegi123\" target=\"_blank\">Amanuel</a>, and <strong>Yonas</strong> under HamerAI—<strong>Impactis</strong> (<a href=\"https://skiwai.com\" target=\"_blank\" rel=\"noopener noreferrer\">skiwai.com</a>) connects startups with investors and advisors, and vice versa, in an AI-assisted marketplace. Currently in testing.",
+        description: "A collaborative project with <a href=\"https://github.com/RasAbrish\" target=\"_blank\" rel=\"noopener noreferrer\">Abrham</a>, <a href=\"https://github.com/amegi123\" target=\"_blank\" rel=\"noopener noreferrer\">Amanuel</a>, <a href=\"https://github.com/BirukW-23\" target=\"_blank\" rel=\"noopener noreferrer\">Biruk</a>, and <strong>Yonas</strong> under HamerAI—<strong>Impactis</strong> (<a href=\"https://skiwai.com\" target=\"_blank\" rel=\"noopener noreferrer\">skiwai.com</a>) connects startups with investors and advisors, and vice versa, in an AI-assisted marketplace. Currently in testing.",
         longDescription: "<strong>Impactis</strong>, served at <a href=\"https://skiwai.com\" target=\"_blank\" rel=\"noopener noreferrer\">skiwai.com</a>, is the evolved HamerAI platform that links startups, investors, and advisors in one place so each side can discover and work with the others. The team is shipping an AI-powered core on top of a TypeScript stack. I contributed the initial system architecture and built the admin module: identity and access management, routing operational traffic through admin-facing APIs, loading and aggregating data for dashboards, and the surrounding admin workflows that keep the product observable and manageable while we harden it in testing.",
         features: [
             "Three-sided marketplace connecting startups, investors, and advisors",
@@ -77,26 +77,34 @@ export const projects: Project[] = [
             { name: "HamerAI", color: "#3178c6" }
         ],
         preview: {
-            repo: "impactis",
+            repo: "impact",
             description: "Three-sided marketplace linking startups, investors, and advisors—AI-assisted matching.",
             stars: 0,
             contributors: [
                 { name: "Firaol", avatar: "/images/firaol.jpg" },
                 { name: "Abrham", avatar: "https://github.com/RasAbrish.png" },
                 { name: "Amanuel", avatar: "https://github.com/amegi123.png" },
+                { name: "Biruk", avatar: "https://github.com/BirukW-23.png" },
                 { name: "GitHub Contributor", avatar: "https://github.com/github.png" }
             ]
         },
+        languages: [
+            { name: "TypeScript", color: "#3178c6", percentage: 95.4 },
+            { name: "JavaScript", color: "#f1e05a", percentage: 3.6 },
+            { name: "PLpgSQL", color: "#336791", percentage: 0.7 },
+            { name: "Dockerfile", color: "#384d54", percentage: 0.1 },
+            { name: "Other", color: "#8b949e", percentage: 0.2 }
+        ],
         isPrivate: true,
         demoUrl: "https://skiwai.com",
         githubUrl: "https://github.com/f9ine99/impact"
     },
     {
-        slug: "ethiohamerai",
-        title: "EthioHamerAI",
+        slug: "hamerai",
+        title: "HamerAI",
         date: "Ongoing — May 2026",
         description: "An ongoing HamerAI initiative in the waitlist and landing-page phase: a business audit experience that surfaces problems clearly and guides teams toward fixes—with a FastAPI and Next.js stack.",
-        longDescription: "EthioHamerAI extends the HamerAI vision with a dedicated audit surface for businesses. The product is currently focused on waitlist capture and a polished landing experience while the core engine takes shape behind the scenes. My work centers on the audit system itself—structuring how businesses are evaluated, how findings are framed in a constructive tone, and how a prompt pipeline turns raw inputs into consistent, actionable guidance rather than generic AI output.",
+        longDescription: "The platform extends the HamerAI vision with a dedicated audit surface for businesses. The product is currently focused on waitlist capture and a polished landing experience while the core engine takes shape behind the scenes. My work centers on the audit system itself—structuring how businesses are evaluated, how findings are framed in a constructive tone, and how a prompt pipeline turns raw inputs into consistent, actionable guidance rather than generic AI output.",
         features: [
             "Business audit flow designed to uncover operational and strategic gaps",
             "Clear, constructive reporting so teams understand what to fix and why",
@@ -125,6 +133,12 @@ export const projects: Project[] = [
             stars: 0,
             contributors: [{ name: "Firaol", avatar: "/images/firaol.jpg" }]
         },
+        languages: [
+            { name: "TypeScript", color: "#3178c6", percentage: 51.2 },
+            { name: "Python", color: "#3572A5", percentage: 36.4 },
+            { name: "CSS", color: "#563d7c", percentage: 8.9 },
+            { name: "HTML", color: "#e34c26", percentage: 3.5 }
+        ],
         demoUrl: "https://ethiohamerai.vercel.app",
         isPrivate: true
     },

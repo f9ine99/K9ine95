@@ -4,7 +4,7 @@
 
   import { projects } from '$lib/data/projects';
   const featuredProjects = projects.filter(p =>
-    ['termus-melesu', 'impactis'].includes(p.slug)
+    ['hamerai', 'impactis'].includes(p.slug)
   );
 </script>
 
