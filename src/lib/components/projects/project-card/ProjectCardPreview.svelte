@@ -13,7 +13,10 @@
   let { preview, languages, isPrivate = false, slug, isHovered = false }: Props = $props();
 </script>
 
-<div class="preview-container" class:card-hovered={isHovered}>
+<div class="terminal-wrap" class:card-hovered={isHovered}>
+  <div class="terminal-backdrop" aria-hidden="true"></div>
+  <div class="terminal-inner">
+    <div class="preview-container">
   <div class="terminal-header">
     <div class="dots">
       <span class="dot red"></span>
@@ -65,8 +68,8 @@
                 class="mini-avatar"
                 loading="lazy"
                 decoding="async"
-                width="36"
-                height="36"
+                width="32"
+                height="32"
               />
               <div class="avatar-tooltip">{contributor.name}</div>
             </div>
@@ -98,19 +101,103 @@
       </div>
     {/if}
   </div>
+    </div>
+  </div>
 </div>
 
 <style>
+  .terminal-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: 18px;
+    padding: var(--terminal-frost-padding);
+  }
+
+  .terminal-backdrop {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+    background: color-mix(in srgb, var(--terminal-frost-bg) 66%, transparent);
+    border: 1px solid var(--terminal-frost-border);
+    backdrop-filter: blur(var(--terminal-frost-blur)) saturate(155%);
+    -webkit-backdrop-filter: blur(var(--terminal-frost-blur)) saturate(155%);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.65) inset,
+      0 10px 36px rgba(0, 0, 0, 0.08);
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .terminal-wrap.card-hovered .terminal-backdrop {
+    background: color-mix(in srgb, var(--terminal-frost-bg) 76%, transparent);
+    border-color: var(--terminal-frost-border-hover);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.55) inset,
+      0 12px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .terminal-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  :global(.Latte) .terminal-backdrop {
+    background: color-mix(in srgb, var(--terminal-frost-bg) 78%, transparent);
+    border-color: rgba(0, 0, 0, 0.09);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+      0 8px 28px rgba(0, 0, 0, 0.04);
+  }
+
+  :global(.Latte) .terminal-wrap.card-hovered .terminal-backdrop {
+    background: color-mix(in srgb, var(--terminal-frost-bg) 86%, transparent);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-backdrop {
+      transition: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: var(--terminal-frost-bg);
+    }
+
+    :global(.Latte) .terminal-backdrop {
+      background: var(--terminal-frost-bg);
+    }
+
+    .terminal-wrap.card-hovered .terminal-backdrop {
+      background: var(--terminal-frost-bg-hover);
+    }
+
+    :global(.Latte) .terminal-wrap.card-hovered .terminal-backdrop {
+      background: var(--terminal-frost-bg-hover);
+    }
+  }
+
   .preview-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: min(100%, 28.25rem);
+    margin-inline: auto;
+    min-height: var(--terminal-preview-min-h);
     background: var(--terminal-bg);
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-subtle);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
   }
 
   .terminal-header {
     background: var(--overlay-light);
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 0.82rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -119,12 +206,12 @@
 
   .dots {
     display: flex;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
   }
 
@@ -144,10 +231,10 @@
   .public-badge {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 0.65rem;
+    gap: 0.28rem;
+    font-size: 0.58rem;
     font-family: var(--font-mono);
-    padding: 0.2rem 0.55rem;
+    padding: 0.14rem 0.4rem;
     border-radius: 6px;
     opacity: 0.8;
   }
@@ -188,22 +275,23 @@
   .stars {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.75rem;
+    gap: 0.3rem;
+    font-size: 0.66rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
   }
 
   .terminal-body {
-    padding: 1.25rem;
+    flex: 1;
+    padding: 0.92rem 0.94rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.58rem;
     font-family: var(--font-mono);
   }
 
   .repo-info {
-    font-size: 0.85rem;
+    font-size: 0.81rem;
     font-weight: 600;
   }
 
@@ -222,17 +310,22 @@
   }
 
   .repo-desc {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     line-height: 1.5;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .contributors {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
+    gap: 0.55rem;
+    margin-top: 0.15rem;
   }
 
   .avatar-stack {
@@ -242,7 +335,7 @@
   }
 
   .avatar-wrapper {
-    margin-left: -12px;
+    margin-left: -11px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 1;
@@ -302,8 +395,8 @@
   }
 
   .mini-avatar {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: 2px solid var(--terminal-bg);
     display: block;
@@ -311,21 +404,21 @@
   }
 
   .ctb-count {
-    font-size: 0.75rem;
+    font-size: 0.64rem;
     color: var(--text-muted);
     opacity: 0.8;
     margin-left: 0.5rem;
   }
 
   .language-bar {
-    margin-top: 1rem;
-    padding-top: 0.75rem;
+    margin-top: 0.5rem;
+    padding-top: 0.48rem;
     border-top: 1px solid var(--border-subtle);
   }
 
   .bar-track {
     display: flex;
-    height: 6px;
+    height: 5px;
     border-radius: 3px;
     overflow: hidden;
     gap: 2px;
@@ -336,28 +429,28 @@
     transition: opacity 0.2s ease;
   }
 
-  .preview-container.card-hovered .bar-segment {
+  .terminal-wrap.card-hovered .bar-segment {
     opacity: 0.85;
   }
 
   .bar-labels {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 0.6rem;
+    gap: 0.45rem 0.55rem;
+    margin-top: 0.42rem;
   }
 
   .lang-label {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
-    font-size: 0.7rem;
+    gap: 0.26rem;
+    font-size: 0.6rem;
     color: var(--text-muted);
   }
 
   .lang-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     flex-shrink: 0;
   }

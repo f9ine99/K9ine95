@@ -25,6 +25,14 @@
     --overlay-medium: rgba(255, 255, 255, 0.06);
     --overlay-heavy: rgba(255, 255, 255, 0.12);
     --terminal-bg: #1e1e2e;
+    /* Terminal frost frame: wider frosted ring, shorter min terminal body on cards */
+    --terminal-frost-padding: clamp(1.45rem, 5.5vw, 2.65rem);
+    --terminal-preview-min-h: clamp(12.75rem, 35vw, 15.35rem);
+    --terminal-frost-bg: #fefefa;
+    --terminal-frost-bg-hover: #f4f4f0;
+    --terminal-frost-blur: 26px;
+    --terminal-frost-border: rgba(20, 20, 28, 0.1);
+    --terminal-frost-border-hover: rgba(20, 20, 28, 0.14);
     --inset-highlight: rgba(255, 255, 255, 0.05);
     --shadow-color: rgba(0, 0, 0, 0.7);
     --shadow-medium: rgba(0, 0, 0, 0.2);

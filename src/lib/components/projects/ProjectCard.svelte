@@ -10,7 +10,6 @@
     title: string;
     date: string;
     description: string;
-    tags: Project['tags'];
     preview: Project['preview'];
     languages?: Project['languages'];
     isPrivate?: boolean;
@@ -18,7 +17,7 @@
     slug: string;
   }
 
-  let { title, date, description, tags, preview, languages, isPrivate, demoUrl, slug }: Props = $props();
+  let { title, date, description, preview, languages, isPrivate, demoUrl, slug }: Props = $props();
   const safeDescription = $derived(sanitizeRichText(description));
   let isHovered = $state(false);
 </script>
@@ -34,7 +33,7 @@
     onmouseleave={() => (isHovered = false)}
   >
     <ProjectCardPreview {preview} {languages} {isPrivate} {slug} {isHovered} />
-    <ProjectCardInfo {title} {date} {safeDescription} {tags} />
+    <ProjectCardInfo {title} {date} {safeDescription} />
   </a>
 
   {#if demoUrl}

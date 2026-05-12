@@ -14,78 +14,83 @@
 
 <div class="hero" in:fly={{ y: 30, duration: 600, easing: backOut }}>
   <div class="terminal-card">
-    <div class="terminal-preview">
-      <div class="terminal-header">
-        <div class="dots">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-        </div>
-        {#if project.isPrivate}
-          <div class="private-badge">
-            <Lock size={12} />
-            <span>Private</span>
+    <div class="terminal-hero-wrap">
+      <div class="terminal-backdrop" aria-hidden="true"></div>
+      <div class="terminal-inner">
+        <div class="terminal-preview">
+        <div class="terminal-header">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
           </div>
-        {:else if project.preview.stars}
-          <div class="stars-badge">
-            <span>{project.preview.stars}</span>
-            <Star size={12} fill="currentColor" />
-          </div>
-        {/if}
-      </div>
-
-      <div class="terminal-body">
-        <div class="repo-info">
-          <span class="owner">f9ine99</span>
-          <span class="separator">/</span>
-          <span class="repo-name">{project.preview.repo}</span>
+          {#if project.isPrivate}
+            <div class="private-badge">
+              <Lock size={11} />
+              <span>Private</span>
+            </div>
+          {:else if project.preview.stars}
+            <div class="stars-badge">
+              <span>{project.preview.stars}</span>
+              <Star size={11} fill="currentColor" />
+            </div>
+          {/if}
         </div>
 
-        <p class="repo-desc">{@html safePreviewDescription}</p>
-
-        {#if project.preview.contributors}
-          <div class="contributors">
-            <div class="avatar-stack">
-              {#each project.preview.contributors as contributor}
-                <div class="avatar-wrapper">
-                  <img
-                    src={contributor.avatar}
-                    alt={contributor.name}
-                    class="avatar"
-                    loading="lazy"
-                    decoding="async"
-                    width="42"
-                    height="42"
-                  />
-                  <div class="avatar-tooltip">{contributor.name}</div>
-                </div>
-              {/each}
-            </div>
-            <span class="ctb-text">
-              {project.preview.contributors.length}
-              {project.preview.contributors.length === 1 ? 'Contributor' : 'Contributors'}
-            </span>
+        <div class="terminal-body">
+          <div class="repo-info">
+            <span class="owner">f9ine99</span>
+            <span class="separator">/</span>
+            <span class="repo-name">{project.preview.repo}</span>
           </div>
-        {/if}
 
-        {#if project.languages && project.languages.length > 0}
-          <div class="language-bar">
-            <div class="bar-track">
-              {#each project.languages as lang}
-                <div class="bar-segment" style="width: {lang.percentage}%; background: {lang.color}"></div>
-              {/each}
+          <p class="repo-desc">{@html safePreviewDescription}</p>
+
+          {#if project.preview.contributors}
+            <div class="contributors">
+              <div class="avatar-stack">
+                {#each project.preview.contributors as contributor}
+                  <div class="avatar-wrapper">
+                    <img
+                      src={contributor.avatar}
+                      alt={contributor.name}
+                      class="avatar"
+                      loading="lazy"
+                      decoding="async"
+                      width="42"
+                      height="42"
+                    />
+                    <div class="avatar-tooltip">{contributor.name}</div>
+                  </div>
+                {/each}
+              </div>
+              <span class="ctb-text">
+                {project.preview.contributors.length}
+                {project.preview.contributors.length === 1 ? 'Contributor' : 'Contributors'}
+              </span>
             </div>
-            <div class="bar-labels">
-              {#each project.languages as lang}
-                <div class="lang-label">
-                  <span class="lang-dot" style="background: {lang.color}"></span>
-                  <span class="lang-name">{lang.name}</span>
-                  <span class="lang-pct">{lang.percentage}%</span>
-                </div>
-              {/each}
+          {/if}
+
+          {#if project.languages && project.languages.length > 0}
+            <div class="language-bar">
+              <div class="bar-track">
+                {#each project.languages as lang}
+                  <div class="bar-segment" style="width: {lang.percentage}%; background: {lang.color}"></div>
+                {/each}
+              </div>
+              <div class="bar-labels">
+                {#each project.languages as lang}
+                  <div class="lang-label">
+                    <span class="lang-dot" style="background: {lang.color}"></span>
+                    <span class="lang-name">{lang.name}</span>
+                    <span class="lang-pct">{lang.percentage}%</span>
+                  </div>
+                {/each}
+              </div>
             </div>
-          </div>
-        {/if}
+          {/if}
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -101,16 +106,68 @@
     box-shadow: 0 16px 48px var(--shadow-medium);
   }
 
+  .terminal-hero-wrap {
+    position: relative;
+    border-radius: 20px;
+    padding: var(--terminal-frost-padding);
+  }
+
+  .terminal-backdrop {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+    background: color-mix(in srgb, var(--terminal-frost-bg) 66%, transparent);
+    border: 1px solid var(--terminal-frost-border);
+    backdrop-filter: blur(var(--terminal-frost-blur)) saturate(155%);
+    -webkit-backdrop-filter: blur(var(--terminal-frost-blur)) saturate(155%);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.65) inset,
+      0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  :global(.Latte) .terminal-backdrop {
+    background: color-mix(in srgb, var(--terminal-frost-bg) 78%, transparent);
+    border-color: rgba(0, 0, 0, 0.09);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+      0 8px 32px rgba(0, 0, 0, 0.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .terminal-backdrop {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: var(--terminal-frost-bg);
+    }
+
+    :global(.Latte) .terminal-backdrop {
+      background: var(--terminal-frost-bg);
+    }
+  }
+
+  .terminal-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
   .terminal-preview {
+    position: relative;
+    width: 100%;
+    max-width: min(100%, 45.5rem);
+    margin-inline: auto;
     background: var(--terminal-bg);
     border: 1px solid var(--border-medium);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
   }
 
   .terminal-header {
     background: var(--overlay-light);
-    padding: 0.75rem 1.25rem;
+    padding: 0.6rem 1.08rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -118,12 +175,12 @@
 
   .dots {
     display: flex;
-    gap: 6px;
+    gap: 5px;
   }
 
   .dot {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
   }
 
@@ -142,12 +199,12 @@
   .private-badge {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
-    font-size: 0.75rem;
+    gap: 0.3rem;
+    font-size: 0.68rem;
     color: var(--text-muted);
     background: var(--overlay-medium);
     border: 1px solid var(--border-medium);
-    padding: 0.25rem 0.65rem;
+    padding: 0.2rem 0.52rem;
     border-radius: 6px;
     font-family: var(--font-mono);
   }
@@ -155,20 +212,20 @@
   .stars-badge {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.8rem;
+    gap: 0.32rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
   }
 
   .terminal-body {
-    padding: 2rem;
+    padding: 1.52rem 1.68rem;
   }
 
   .repo-info {
     font-family: var(--font-mono);
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.22rem;
+    margin-bottom: 0.58rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -191,9 +248,9 @@
 
   .repo-desc {
     color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    font-size: 0.96rem;
+    line-height: 1.57;
+    margin-bottom: 1.1rem;
   }
 
   .contributors {
@@ -268,8 +325,8 @@
   }
 
   .avatar {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 2px solid var(--terminal-bg);
     display: block;
@@ -277,7 +334,7 @@
   }
 
   .ctb-text {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
     opacity: 0.8;
@@ -285,14 +342,14 @@
   }
 
   .language-bar {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
+    margin-top: 1rem;
+    padding-top: 0.72rem;
     border-top: 1px solid var(--border-subtle);
   }
 
   .bar-track {
     display: flex;
-    height: 8px;
+    height: 7px;
     border-radius: 4px;
     overflow: hidden;
     gap: 2px;
@@ -306,21 +363,21 @@
   .bar-labels {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 0.75rem;
+    gap: 0.65rem 0.85rem;
+    margin-top: 0.55rem;
   }
 
   .lang-label {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.8rem;
+    gap: 0.32rem;
+    font-size: 0.72rem;
     font-family: var(--font-mono);
   }
 
   .lang-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -344,16 +401,16 @@
     }
 
     .terminal-body {
-      padding: 1.25rem;
+      padding: 1.22rem 1.32rem;
     }
 
     .repo-info {
-      font-size: 1.1rem;
+      font-size: 1.06rem;
     }
 
     .repo-desc {
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+      font-size: 0.88rem;
+      margin-bottom: 0.9rem;
     }
   }
 
@@ -369,25 +426,25 @@
     }
 
     .terminal-body {
-      padding: 1rem;
+      padding: 0.9rem 1rem;
     }
 
     .repo-info {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       flex-wrap: wrap;
     }
 
     .repo-desc {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     .avatar {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
 
     .bar-track {
-      height: 6px;
+      height: 5px;
     }
 
     .bar-labels {

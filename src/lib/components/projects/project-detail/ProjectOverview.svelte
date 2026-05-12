@@ -1,34 +1,9 @@
 <script lang="ts">
   import type { Project } from '$lib/data/projects';
-  import {
-    Calendar,
-    Github,
-    Star,
-    Globe,
-    ExternalLink,
-    Users,
-    Shield,
-    Cpu,
-    Database,
-    Key,
-    Server,
-    Smartphone,
-    Layout,
-    Terminal as TerminalIcon,
-    FileCode,
-    Activity,
-    CircuitBoard,
-    Hash,
-    Cable,
-    Flame,
-    Zap,
-    Cloud,
-    Boxes,
-    Triangle,
-    Hexagon
-  } from 'lucide-svelte';
+  import { Calendar, Github, Star, Globe, ExternalLink, Users } from 'lucide-svelte';
   import { fly, fade } from 'svelte/transition';
   import { backOut } from 'svelte/easing';
+  import ProjectTechTags from '$lib/components/projects/ProjectTechTags.svelte';
 
   interface Props {
     project: Project;
@@ -37,39 +12,6 @@
   }
 
   let { project, safeLongDescription, safeStory }: Props = $props();
-
-  const getIcon = (tagName: string) => {
-    const lower = tagName.toLowerCase();
-
-    if (lower.includes('next')) return Triangle;
-    if (lower.includes('svelte')) return Flame;
-    if (lower.includes('react')) return Zap;
-    if (lower.includes('vite')) return Zap;
-
-    if (lower.includes('typescript') || lower.includes('javascript')) return FileCode;
-    if (lower.includes('python')) return TerminalIcon;
-    if (lower.includes('assembly') || lower.includes('x86')) return CircuitBoard;
-    if (lower.includes('html') || lower.includes('css')) return Layout;
-
-    if (lower.includes('nest')) return Hexagon;
-    if (lower.includes('flask') || lower.includes('fastapi')) return Server;
-    if (lower.includes('cloudflare')) return Cloud;
-    if (lower.includes('docker')) return Boxes;
-
-    if (lower.includes('better') || lower.includes('auth') || lower.includes('jwt')) return Key;
-    if (lower.includes('security') || lower.includes('shield')) return Shield;
-
-    if (lower.includes('supabase') || lower.includes('sql') || lower.includes('postgre')) return Database;
-    if (lower.includes('websocket') || lower.includes('cable')) return Cable;
-
-    if (lower.includes('pwa')) return Smartphone;
-    if (lower.includes('ai') || lower.includes('groq')) return Cpu;
-    if (lower.includes('monitoring')) return Activity;
-    if (lower.includes('low-level')) return CircuitBoard;
-    if (lower.includes('web') || lower.includes('site')) return Globe;
-
-    return Hash;
-  };
 </script>
 
 <div class="info-section" in:fly={{ y: 30, duration: 600, delay: 200, easing: backOut }}>
@@ -101,14 +43,9 @@
     {/if}
   </div>
 
-  <div class="tags" in:fade={{ delay: 350, duration: 400 }}>
-    {#each project.tags as tag}
-      {@const Icon = getIcon(tag.name)}
-      <div class="tag" style="--tag-color: {tag.color || 'var(--accent-orange)'}">
-        <Icon size={12} />
-        <span>{tag.name}</span>
-      </div>
-    {/each}
+  <div class="tech-stack-section" in:fade={{ delay: 300, duration: 400 }}>
+    <h2 class="tech-stack-heading">Tech stack</h2>
+    <ProjectTechTags tags={project.tags} variant="panel" />
   </div>
 
   <div class="actions" in:fade={{ delay: 400, duration: 400 }}>
@@ -183,30 +120,21 @@
     font-family: var(--font-mono);
   }
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
+  .tech-stack-section {
     margin-bottom: 2rem;
   }
 
-  .tag {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: var(--overlay-light);
-    border: 1px solid var(--border-medium);
-    padding: 0.4rem 0.85rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-    transition: all 0.2s ease;
+  .tech-stack-section :global(.tech-tags.panel) {
+    margin-top: 0.75rem;
   }
 
-  .tag:hover {
-    border-color: var(--tag-color);
-    background: var(--overlay-medium);
+  .tech-stack-heading {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
   }
 
   .actions {
@@ -379,16 +307,6 @@
       align-items: flex-start;
       gap: 0.75rem;
       margin-bottom: 1.5rem;
-    }
-
-    .tags {
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      padding: 0.3rem 0.65rem;
     }
 
     .actions {
