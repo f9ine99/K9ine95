@@ -33,6 +33,55 @@
     width: 95%;
     max-width: 1200px;
     margin: 6rem auto;
+    --terminal-preview-min-h: clamp(13.35rem, 37vw, 16rem);
+  }
+
+  /* Frost layer (2nd): slightly taller top/bottom, same sides as before */
+  .featured-projects :global(.terminal-wrap) {
+    padding: clamp(1.05rem, 3.65vw, 1.58rem) clamp(0.72rem, 2.8vw, 1.2rem);
+  }
+
+  .featured-projects :global(.project-card) {
+    background: transparent;
+    border: none;
+    padding: 0.55rem 0.72rem;
+    box-shadow: none;
+  }
+
+  .featured-projects :global(.card-link) {
+    gap: 1.1rem;
+  }
+
+  /* Drop frost panel stroke so only the terminal chrome reads as an edge */
+  .featured-projects :global(.terminal-backdrop) {
+    border: none;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+      0 10px 36px rgba(0, 0, 0, 0.08);
+  }
+
+  .featured-projects :global(.terminal-wrap.card-hovered .terminal-backdrop) {
+    border: none;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.42) inset,
+      0 12px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  :global(.Latte) .featured-projects :global(.terminal-backdrop),
+  :global(.Latte) .featured-projects :global(.terminal-wrap.card-hovered .terminal-backdrop) {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.85) inset,
+      0 8px 28px rgba(0, 0, 0, 0.04);
+  }
+
+  .featured-projects :global(.project-card:hover) {
+    background: color-mix(in srgb, var(--card-bg) 22%, transparent);
+    border: none;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  }
+
+  :global(.Latte) .featured-projects :global(.project-card:hover) {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
   }
 
   .header {
