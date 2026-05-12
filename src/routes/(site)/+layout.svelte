@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
+  import { afterNavigate } from '$app/navigation';
   import Lenis from 'lenis';
   import 'lenis/dist/lenis.css';
   import { themeState, loadSavedTheme } from '$lib/stores/theme.svelte';
@@ -8,6 +9,8 @@
   import Footer from '$lib/components/layout/Footer.svelte';
   let { children } = $props();
 
+  let lenis = $state<InstanceType<typeof Lenis> | null>(null);
+
   onMount(() => {
     loadSavedTheme();
 
@@ -15,15 +18,25 @@
       return;
     }
 
-    const lenis = new Lenis({
+    lenis = new Lenis({
       autoRaf: true,
       anchors: true,
       stopInertiaOnNavigate: true
     });
 
     return () => {
-      lenis.destroy();
+      lenis?.destroy();
+      lenis = null;
     };
+  });
+
+  afterNavigate(async (navigation) => {
+    await tick();
+    if (!lenis) return;
+    lenis.resize();
+    if (navigation.type !== 'popstate') {
+      lenis.scrollTo(0, { immediate: true });
+    }
   });
 
   // Apply background effect class to body
