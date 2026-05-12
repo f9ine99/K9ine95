@@ -21,7 +21,7 @@
 
 {#if project}
   <main class="project-detail">
-    <div class="container">
+    <div class="project-detail__column">
       <ProjectBackLink />
       <ProjectHeroCard {project} {safePreviewDescription} />
       <ProjectOverview {project} {safeLongDescription} {safeStory} />
@@ -47,6 +47,27 @@
   @media (max-width: 480px) {
     .project-detail {
       padding: 9.5rem 1rem 5rem;
+    }
+  }
+
+  .project-detail__column {
+    width: 100%;
+    max-width: var(--terminal-detail-frost-max-w);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project-detail__column :global(.back-link) {
+    align-self: flex-start;
+    padding-left: 0;
+    margin-bottom: 1.75rem;
+  }
+
+  @media (max-width: 480px) {
+    .project-detail__column :global(.back-link) {
+      margin-bottom: 1.35rem;
     }
   }
 </style>

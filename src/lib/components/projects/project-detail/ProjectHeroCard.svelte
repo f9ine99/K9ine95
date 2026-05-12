@@ -13,8 +13,7 @@
 </script>
 
 <div class="hero" in:fly={{ y: 30, duration: 600, easing: backOut }}>
-  <div class="terminal-card">
-    <div class="terminal-hero-wrap">
+  <div class="terminal-hero-wrap">
       <div class="terminal-backdrop" aria-hidden="true"></div>
       <div class="terminal-inner">
         <div class="terminal-preview">
@@ -26,13 +25,13 @@
           </div>
           {#if project.isPrivate}
             <div class="private-badge">
-              <Lock size={11} />
+              <Lock size={10} />
               <span>Private</span>
             </div>
           {:else if project.preview.stars}
             <div class="stars-badge">
               <span>{project.preview.stars}</span>
-              <Star size={11} fill="currentColor" />
+              <Star size={10} fill="currentColor" />
             </div>
           {/if}
         </div>
@@ -57,8 +56,8 @@
                       class="avatar"
                       loading="lazy"
                       decoding="async"
-                      width="42"
-                      height="42"
+                      width="34"
+                      height="34"
                     />
                     <div class="avatar-tooltip">{contributor.name}</div>
                   </div>
@@ -93,23 +92,19 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 
 <style>
-  .terminal-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-subtle);
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 3rem;
-    box-shadow: 0 16px 48px var(--shadow-medium);
+  .hero {
+    margin-bottom: 2.5rem;
   }
 
   .terminal-hero-wrap {
     position: relative;
-    border-radius: 20px;
-    padding: var(--terminal-frost-padding);
+    width: 100%;
+    border-radius: 16px;
+    padding: clamp(0.95rem, 3.8vw, 1.65rem);
+    box-shadow: 0 8px 32px var(--shadow-medium);
   }
 
   .terminal-backdrop {
@@ -156,18 +151,18 @@
   .terminal-preview {
     position: relative;
     width: 100%;
-    max-width: min(100%, 45.5rem);
+    max-width: 100%;
     margin-inline: auto;
     background: var(--terminal-bg);
     border: 1px solid var(--border-medium);
-    border-radius: 10px;
+    border-radius: 9px;
     overflow: hidden;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
   }
 
   .terminal-header {
     background: var(--overlay-light);
-    padding: 0.6rem 1.08rem;
+    padding: 0.48rem 0.92rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -179,8 +174,8 @@
   }
 
   .dot {
-    width: 9px;
-    height: 9px;
+    width: 7.5px;
+    height: 7.5px;
     border-radius: 50%;
   }
 
@@ -199,12 +194,12 @@
   .private-badge {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 0.68rem;
+    gap: 0.26rem;
+    font-size: 0.62rem;
     color: var(--text-muted);
     background: var(--overlay-medium);
     border: 1px solid var(--border-medium);
-    padding: 0.2rem 0.52rem;
+    padding: 0.16rem 0.45rem;
     border-radius: 6px;
     font-family: var(--font-mono);
   }
@@ -212,20 +207,20 @@
   .stars-badge {
     display: flex;
     align-items: center;
-    gap: 0.32rem;
-    font-size: 0.72rem;
+    gap: 0.28rem;
+    font-size: 0.66rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
   }
 
   .terminal-body {
-    padding: 1.52rem 1.68rem;
+    padding: 1.12rem 1.28rem;
   }
 
   .repo-info {
     font-family: var(--font-mono);
-    font-size: 1.22rem;
-    margin-bottom: 0.58rem;
+    font-size: 1.04rem;
+    margin-bottom: 0.48rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -248,15 +243,15 @@
 
   .repo-desc {
     color: var(--text-muted);
-    font-size: 0.96rem;
-    line-height: 1.57;
-    margin-bottom: 1.1rem;
+    font-size: 0.84rem;
+    line-height: 1.52;
+    margin-bottom: 0.9rem;
   }
 
   .contributors {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.62rem;
   }
 
   .avatar-stack {
@@ -325,8 +320,8 @@
   }
 
   .avatar {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     border: 2px solid var(--terminal-bg);
     display: block;
@@ -334,7 +329,7 @@
   }
 
   .ctb-text {
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
     opacity: 0.8;
@@ -342,14 +337,14 @@
   }
 
   .language-bar {
-    margin-top: 1rem;
-    padding-top: 0.72rem;
+    margin-top: 0.82rem;
+    padding-top: 0.58rem;
     border-top: 1px solid var(--border-subtle);
   }
 
   .bar-track {
     display: flex;
-    height: 7px;
+    height: 5.5px;
     border-radius: 4px;
     overflow: hidden;
     gap: 2px;
@@ -363,21 +358,21 @@
   .bar-labels {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65rem 0.85rem;
-    margin-top: 0.55rem;
+    gap: 0.52rem 0.7rem;
+    margin-top: 0.45rem;
   }
 
   .lang-label {
     display: flex;
     align-items: center;
-    gap: 0.32rem;
-    font-size: 0.72rem;
+    gap: 0.28rem;
+    font-size: 0.65rem;
     font-family: var(--font-mono);
   }
 
   .lang-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -394,57 +389,63 @@
   }
 
   @media (max-width: 768px) {
-    .terminal-card {
-      padding: 1.25rem;
-      border-radius: 16px;
-      margin-bottom: 2.5rem;
-    }
-
-    .terminal-body {
-      padding: 1.22rem 1.32rem;
-    }
-
-    .repo-info {
-      font-size: 1.06rem;
-    }
-
-    .repo-desc {
-      font-size: 0.88rem;
-      margin-bottom: 0.9rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .terminal-card {
-      padding: 0.75rem;
-      border-radius: 12px;
+    .hero {
       margin-bottom: 2rem;
     }
 
-    .terminal-header {
-      padding: 0.6rem 1rem;
+    .terminal-hero-wrap {
+      border-radius: 14px;
+      padding: clamp(0.85rem, 3.2vw, 1.35rem);
     }
 
     .terminal-body {
-      padding: 0.9rem 1rem;
+      padding: 1rem 1.08rem;
     }
 
     .repo-info {
-      font-size: 0.88rem;
-      flex-wrap: wrap;
+      font-size: 0.96rem;
     }
 
     .repo-desc {
       font-size: 0.8rem;
+      margin-bottom: 0.78rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      margin-bottom: 1.65rem;
+    }
+
+    .terminal-hero-wrap {
+      border-radius: 12px;
+      padding: 0.65rem 0.72rem;
+    }
+
+    .terminal-header {
+      padding: 0.45rem 0.82rem;
+    }
+
+    .terminal-body {
+      padding: 0.78rem 0.85rem;
+    }
+
+    .repo-info {
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+    }
+
+    .repo-desc {
+      font-size: 0.74rem;
     }
 
     .avatar {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
     }
 
     .bar-track {
-      height: 5px;
+      height: 4px;
     }
 
     .bar-labels {

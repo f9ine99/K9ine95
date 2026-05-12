@@ -33,6 +33,8 @@
     --terminal-frost-blur: 26px;
     --terminal-frost-border: rgba(20, 20, 28, 0.1);
     --terminal-frost-border-hover: rgba(20, 20, 28, 0.14);
+    /* Project detail: max width of frosted terminal frame + aligned overview column */
+    --terminal-detail-frost-max-w: 31.5rem;
     --inset-highlight: rgba(255, 255, 255, 0.05);
     --shadow-color: rgba(0, 0, 0, 0.7);
     --shadow-medium: rgba(0, 0, 0, 0.2);

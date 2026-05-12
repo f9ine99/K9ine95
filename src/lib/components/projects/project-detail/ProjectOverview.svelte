@@ -21,13 +21,13 @@
 
   <div class="meta-row">
     <div class="meta-item">
-      <Calendar size={16} />
+      <Calendar size={14} />
       <span>{project.date}</span>
     </div>
 
     {#if project.preview.contributors}
       <div class="meta-item">
-        <Users size={16} />
+        <Users size={14} />
         <span>
           {project.preview.contributors.length}
           {project.preview.contributors.length === 1 ? 'Contributor' : 'Contributors'}
@@ -37,7 +37,7 @@
 
     {#if project.preview.stars}
       <div class="meta-item">
-        <Star size={16} />
+        <Star size={14} />
         <span>{project.preview.stars} stars</span>
       </div>
     {/if}
@@ -51,17 +51,17 @@
   <div class="actions" in:fade={{ delay: 400, duration: 400 }}>
     {#if project.githubUrl && !project.isPrivate}
       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="action-btn github">
-        <Github size={18} />
+        <Github size={16} />
         <span>View Source</span>
-        <ExternalLink size={14} class="ext-icon" />
+        <ExternalLink size={12} class="ext-icon" />
       </a>
     {/if}
 
     {#if project.demoUrl}
       <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="action-btn demo">
-        <Globe size={18} />
+        <Globe size={16} />
         <span>Live Demo</span>
-        <ExternalLink size={14} class="ext-icon" />
+        <ExternalLink size={12} class="ext-icon" />
       </a>
     {/if}
   </div>
@@ -83,11 +83,12 @@
 
 <style>
   .info-section {
-    margin-bottom: 4rem;
+    width: 100%;
+    margin-bottom: 3rem;
   }
 
   .project-title {
-    font-size: 3rem;
+    font-size: 2.35rem;
     font-weight: 700;
     margin: 0;
     letter-spacing: -0.03em;
@@ -99,37 +100,44 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1.35rem;
+    margin-bottom: 1.35rem;
     flex-wrap: wrap;
   }
 
   .meta-row {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    margin-bottom: 1.75rem;
+    gap: 1.35rem;
+    margin-bottom: 1.35rem;
   }
 
   .meta-item {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.45rem;
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     font-family: var(--font-mono);
   }
 
   .tech-stack-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .tech-stack-section :global(.tech-tags.panel) {
-    margin-top: 0.75rem;
+    margin-top: 0.55rem;
+    gap: 0.45rem;
+  }
+
+  .tech-stack-section :global(.tech-tags.panel .tag) {
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
   }
 
   .tech-stack-heading {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 600;
     margin: 0;
     color: var(--text-primary);
@@ -139,17 +147,18 @@
 
   .actions {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 3rem;
+    gap: 0.65rem;
+    margin-bottom: 2.25rem;
+    flex-wrap: wrap;
   }
 
   .action-btn {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
-    padding: 0.85rem 1.5rem;
-    border-radius: 12px;
-    font-size: 0.9rem;
+    gap: 0.5rem;
+    padding: 0.62rem 1.1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
     font-weight: 600;
     font-family: var(--font-mono);
     text-decoration: none;
@@ -206,23 +215,23 @@
       var(--border-subtle),
       transparent
     );
-    margin-bottom: 3rem;
+    margin-bottom: 2.25rem;
   }
 
   .section-heading {
-    font-size: 1.5rem;
+    font-size: 1.22rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
     color: var(--text-primary);
     opacity: 0.9;
   }
 
   .long-description {
-    font-size: 1.1rem;
-    line-height: 1.9;
+    font-size: 0.98rem;
+    line-height: 1.75;
     color: var(--text-muted);
-    max-width: 800px;
-    margin-bottom: 3rem;
+    max-width: 100%;
+    margin-bottom: 2.25rem;
   }
 
   .long-description :global(a),
@@ -241,13 +250,13 @@
   }
 
   .details-section {
-    margin-top: 3rem;
+    margin-top: 2.25rem;
   }
 
   .subsection-heading {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
     color: var(--text-primary);
     display: flex;
     align-items: center;
@@ -255,27 +264,31 @@
   }
 
   .project-story {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 0.92rem;
+    line-height: 1.72;
     color: var(--text-muted);
     font-style: italic;
     border-left: 2px solid var(--accent-orange);
-    padding-left: 1.5rem;
-    margin-top: 0.5rem;
+    padding-left: 1.1rem;
+    margin-top: 0.4rem;
     opacity: 0.9;
   }
 
   @media (max-width: 768px) {
+    .info-section {
+      margin-bottom: 2.5rem;
+    }
+
     .project-title {
-      font-size: 2.25rem;
+      font-size: 1.95rem;
     }
 
     .meta-row {
-      gap: 1.25rem;
+      gap: 1rem;
     }
 
     .meta-item {
-      font-size: 0.85rem;
+      font-size: 0.78rem;
     }
 
     .actions {
@@ -287,49 +300,54 @@
     }
 
     .section-heading {
-      font-size: 1.3rem;
+      font-size: 1.12rem;
     }
 
     .long-description {
-      font-size: 1rem;
-      line-height: 1.75;
+      font-size: 0.93rem;
+      line-height: 1.72;
     }
   }
 
   @media (max-width: 480px) {
     .project-title {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
+      font-size: 1.65rem;
+      margin-bottom: 0.85rem;
     }
 
     .meta-row {
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
     }
 
     .actions {
-      margin-bottom: 2rem;
+      margin-bottom: 1.65rem;
     }
 
     .action-btn {
-      font-size: 0.85rem;
-      padding: 0.75rem 1.25rem;
+      font-size: 0.78rem;
+      padding: 0.58rem 1rem;
     }
 
     .divider {
-      margin-bottom: 2rem;
+      margin-bottom: 1.65rem;
     }
 
     .section-heading {
-      font-size: 1.15rem;
-      margin-bottom: 1rem;
+      font-size: 1.02rem;
+      margin-bottom: 0.85rem;
     }
 
     .long-description {
-      font-size: 0.95rem;
-      line-height: 1.7;
+      font-size: 0.88rem;
+      line-height: 1.68;
+    }
+
+    .tech-stack-section :global(.tech-tags.panel .tag) {
+      font-size: 0.66rem;
+      padding: 0.26rem 0.55rem;
     }
   }
 </style>
