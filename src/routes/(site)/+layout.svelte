@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Lenis from 'lenis';
+  import 'lenis/dist/lenis.css';
   import { themeState, loadSavedTheme } from '$lib/stores/theme.svelte';
   import '../../app.css';
   import Navbar from '$lib/components/layout/Navbar.svelte';
@@ -8,6 +10,20 @@
 
   onMount(() => {
     loadSavedTheme();
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    const lenis = new Lenis({
+      autoRaf: true,
+      anchors: true,
+      stopInertiaOnNavigate: true
+    });
+
+    return () => {
+      lenis.destroy();
+    };
   });
 
   // Apply background effect class to body
