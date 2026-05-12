@@ -45,7 +45,7 @@
         </p>
 
         <p class="bio-text">
-          A few of the projects I’m especially proud of include <a href="/projects/impact" class="link accent">Impact</a>, <a href="/projects/furi-cadaster" class="link accent">Furi Cadaster</a>, <a href="/projects/mufti-dawud-charity" class="link accent">Mufti Dawud Charity</a>, and <a href="/projects/termus-melesu" class="link accent">Termus-Melesu (Retra)</a> — each of which reflects my passion for building useful and meaningful digital solutions.
+          A few of the projects I’m especially proud of include <a href="/projects/impactis" class="link accent">Impactis</a>, <a href="/projects/furi-cadaster" class="link accent">Furi Cadaster</a>, <a href="/projects/mufti-dawud-charity" class="link accent">Mufti Dawud Charity</a>, and <a href="/projects/termus-melesu" class="link accent">Termus-Melesu (Retra)</a> — each of which reflects my passion for building useful and meaningful digital solutions.
         </p>
 
         <p class="bio-text">

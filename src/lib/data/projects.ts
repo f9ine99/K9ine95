@@ -48,41 +48,37 @@ export interface Project {
 
 export const projects: Project[] = [
     {
-        slug: "impact",
-        title: "Impact",
-        date: "March 22, 2026",
-        description: "A collaborative project with <a href=\"https://github.com/RasAbrish\" target=\"_blank\">Abrham</a>, <a href=\"https://github.com/amegi123\" target=\"_blank\">Amanuel</a>, and <strong>Yonas</strong> under HamerAI—a private hub for investors, startups, and advisors.",
-        longDescription: "Impact represents a strategic evolution in professional networking, developed under the internal HamerAI organization. In a high-stakes collaboration with <a href=\"https://github.com/RasAbrish\" target=\"_blank\">Abrham (@RasAbrish)</a>, <a href=\"https://github.com/amegi123\" target=\"_blank\">Amanuel (@amegi123)</a>, and <strong>Yonas</strong>, we engineered a unified ecosystem designed to bridge the gap between visionary startups, strategic investors, and specialized advisors. By streamlining resource sharing and direct communication, Impact serves as a secure, private catalyst for investment coordination and startup growth.",
+        slug: "impactis",
+        title: "Impactis",
+        date: "Testing — 2026",
+        description: "A collaborative project with <a href=\"https://github.com/RasAbrish\" target=\"_blank\">Abrham</a>, <a href=\"https://github.com/amegi123\" target=\"_blank\">Amanuel</a>, and <strong>Yonas</strong> under HamerAI—<strong>Impactis</strong> (<a href=\"https://skiwai.com\" target=\"_blank\" rel=\"noopener noreferrer\">skiwai.com</a>) connects startups with investors and advisors, and vice versa, in an AI-assisted marketplace. Currently in testing.",
+        longDescription: "<strong>Impactis</strong>, served at <a href=\"https://skiwai.com\" target=\"_blank\" rel=\"noopener noreferrer\">skiwai.com</a>, is the evolved HamerAI platform that links startups, investors, and advisors in one place so each side can discover and work with the others. The team is shipping an AI-powered core on top of a TypeScript stack. I contributed the initial system architecture and built the admin module: identity and access management, routing operational traffic through admin-facing APIs, loading and aggregating data for dashboards, and the surrounding admin workflows that keep the product observable and manageable while we harden it in testing.",
         features: [
-            "One-stop hub for investors, startups, and advisors",
-            "Collaborative workspace under HamerAI organization",
-            "Next.js based frontend with Next.js App Router",
-            "Scalable NestJS backend architecture for API services",
-            "Secure session management with Better Auth integration",
-            "Postgres database for robust data persistence",
-            "Cloudflare R2 for scalable asset and object storage",
-            "Containerized deployment using Docker"
+            "Three-sided marketplace connecting startups, investors, and advisors",
+            "AI-assisted flows powered by OpenAI and pgvector-backed retrieval on Postgres",
+            "Admin console with IAM and centralized access to platform APIs",
+            "Data fetching, aggregation, and reporting for operational and product insights",
+            "End-to-end TypeScript with NestJS APIs and a Next.js frontend",
+            "Testing and iteration phase ahead of broader rollout"
         ],
         technicalHighlights: [
-            "Backend developed with NestJS for a structured and scalable codebase",
-            "Frontend built using Next.js for high-performance user interfaces",
-            "Secure and modern authentication powered by Better Auth",
-            "Reliable and performant data management with PostgreSQL",
-            "Optimized asset storage and distribution via Cloudflare R2",
-            "Streamlined deployment and environment consistency with Docker"
+            "PostgreSQL with pgvector for embeddings and semantic search workloads",
+            "OpenAI API integrated into product and admin intelligence paths",
+            "NestJS backend and Next.js frontend with Better Auth for secure access",
+            "Cloudflare at the edge, Vercel for the web app, Railway for services, Docker for portability"
         ],
         tags: [
             { name: "NestJS", color: "#E0234E" },
             { name: "Next.js", color: "#000000" },
+            { name: "TypeScript", color: "#3178c6" },
+            { name: "pgvector", color: "#6366f1" },
+            { name: "OpenAI", color: "#10a37f" },
             { name: "Better Auth", color: "#5A0FC8" },
-            { name: "Postgres", color: "#336791" },
-            { name: "Cloudflare", color: "#F38020" },
-            { name: "Docker", color: "#2496ED" },
             { name: "HamerAI", color: "#3178c6" }
         ],
         preview: {
-            repo: "impact",
-            description: "A unified hub for investors, startups, and advisors built with NestJS and Next.js",
+            repo: "impactis",
+            description: "Startup–investor–advisor marketplace with AI and a full admin plane",
             stars: 0,
             contributors: [
                 { name: "Firaol", avatar: "/images/firaol.jpg" },
@@ -92,7 +88,45 @@ export const projects: Project[] = [
             ]
         },
         isPrivate: true,
+        demoUrl: "https://skiwai.com",
         githubUrl: "https://github.com/f9ine99/impact"
+    },
+    {
+        slug: "ethiohamerai",
+        title: "EthioHamerAI",
+        date: "Ongoing — May 2026",
+        description: "An ongoing HamerAI initiative in the waitlist and landing-page phase: a business audit experience that surfaces problems clearly and guides teams toward fixes—with a FastAPI and Next.js stack.",
+        longDescription: "EthioHamerAI extends the HamerAI vision with a dedicated audit surface for businesses. The product is currently focused on waitlist capture and a polished landing experience while the core engine takes shape behind the scenes. My work centers on the audit system itself—structuring how businesses are evaluated, how findings are framed in a constructive tone, and how a prompt pipeline turns raw inputs into consistent, actionable guidance rather than generic AI output.",
+        features: [
+            "Business audit flow designed to uncover operational and strategic gaps",
+            "Clear, constructive reporting so teams understand what to fix and why",
+            "Prompt pipeline architecture for reliable, repeatable audit outputs",
+            "Waitlist and landing experience (in progress) ahead of full product launch"
+        ],
+        technicalHighlights: [
+            "FastAPI backend for audit APIs and orchestration",
+            "Next.js frontend with Tailwind CSS for the marketing and app shell",
+            "Dockerized services for consistent local and deployment workflows",
+            "Backend on Render, frontend on Vercel, transactional email via Resend"
+        ],
+        tags: [
+            { name: "FastAPI", color: "#05998b" },
+            { name: "Next.js", color: "#000000" },
+            { name: "Tailwind CSS", color: "#38bdf8" },
+            { name: "Docker", color: "#2496ED" },
+            { name: "Render", color: "#46e3b4" },
+            { name: "Vercel", color: "#000000" },
+            { name: "Resend", color: "#1F2937" },
+            { name: "HamerAI", color: "#3178c6" }
+        ],
+        preview: {
+            repo: "ethiohamerai",
+            description: "Business audit platform with structured findings and prompt pipeline",
+            stars: 0,
+            contributors: [{ name: "Firaol", avatar: "/images/firaol.jpg" }]
+        },
+        demoUrl: "https://ethiohamerai.vercel.app",
+        isPrivate: true
     },
     {
         slug: "furi-cadaster",

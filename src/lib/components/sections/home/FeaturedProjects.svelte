@@ -3,8 +3,8 @@
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
 
   import { projects } from '$lib/data/projects';
-  const featuredProjects = projects.filter(p => 
-    ['termus-melesu', 'mufti-dawud-charity'].includes(p.slug)
+  const featuredProjects = projects.filter(p =>
+    ['termus-melesu', 'impactis'].includes(p.slug)
   );
 </script>
 
