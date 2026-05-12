@@ -1,7 +1,7 @@
 
 export const themeState = $state({
     currentTheme: 'Macchiato',
-    currentAccentColor: '#f5a97f',
+    currentAccentColor: '#f0ede5',
     bgEffect: true
 });
 
@@ -26,7 +26,7 @@ export const themePalettes: Record<string, Record<string, string>> = {
         '--card-bg-elevated': '#1e2030',
         '--text-primary': '#cad3f5',
         '--text-muted': '#8087a2',
-        '--accent-orange': '#f5a97f',
+        '--accent-orange': '#f0ede5',
         '--accent-blue': '#8aadf4',
         '--accent-purple': '#c6a0f6',
         '--selection-bg': '#363a4f',
@@ -67,6 +67,7 @@ export const themePalettes: Record<string, Record<string, string>> = {
 export const themes = ['Latte', 'Frappe', 'Macchiato', 'Mocha'];
 
 export const colors = [
+    '#f0ede5',
     '#cba6f7',
     '#fab387',
     '#f9e2af',
@@ -75,8 +76,7 @@ export const colors = [
     '#89dceb',
     '#74c7ec',
     '#89b4fa',
-    '#b4befe',
-    '#f0ede5'
+    '#b4befe'
 ];
 
 export function applyTheme(themeName: string, persist = true) {
