@@ -78,7 +78,7 @@ export const projects: Project[] = [
         ],
         preview: {
             repo: "impactis",
-            description: "Three-sided marketplace linking startups, investors, and advisors—AI-assisted matching, semantic search, and a full admin stack with IAM.",
+            description: "Three-sided marketplace linking startups, investors, and advisors—AI-assisted matching.",
             stars: 0,
             contributors: [
                 { name: "Firaol", avatar: "/images/firaol.jpg" },
