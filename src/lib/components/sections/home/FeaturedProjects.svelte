@@ -31,7 +31,7 @@
 <style>
   .featured-projects {
     width: 95%;
-    max-width: 1200px;
+    max-width: 1080px;
     margin: 6rem auto;
     --terminal-preview-min-h: clamp(13.35rem, 37vw, 16rem);
   }
