@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Github, Linkedin, Instagram, Mail, Send } from 'lucide-svelte';
+  import { Github, Linkedin, Mail, Send } from 'lucide-svelte';
   
   let name = "Firaol Gemeda";
   let handle = "@f9ine99";
@@ -45,7 +45,7 @@
         </p>
 
         <p class="bio-text">
-          Feel free to <a href="mailto:f9ine99@gmail.com" class="link">send me an email</a> if you’d like to connect or chat.
+          Feel free to <a href="mailto:firaolgemedabuliye@gmail.com" class="link">send me an email</a> if you’d like to connect or chat.
         </p>
       </div>
 
@@ -65,7 +65,7 @@
           <span>Telegram</span>
         </a>
         <span class="divider">★</span>
-        <a href="mailto:f9ine99@gmail.com" class="social-item" title="f9ine99@gmail.com">
+        <a href="mailto:firaolgemedabuliye@gmail.com" class="social-item" title="firaolgemedabuliye@gmail.com">
           <Mail size={18} />
           <span>Email</span>
         </a>

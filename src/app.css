@@ -42,34 +42,6 @@
     --heading-color: #fff;
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --bg-color: #eff1f5;
-        --card-bg: #e6e9ef;
-        --card-bg-elevated: #dce0e8;
-        --text-primary: #4c4f69;
-        --text-muted: #6c6f85;
-        --selection-bg: #acb0be;
-        --nav-pill-bg: rgba(255, 255, 255, 0.85);
-        --nav-pill-border: rgba(0, 0, 0, 0.1);
-        --nav-active-bg: rgba(0, 0, 0, 0.06);
-        --subtle-bg: rgba(0, 0, 0, 0.02);
-        --border-subtle: rgba(0, 0, 0, 0.06);
-        --border-medium: rgba(0, 0, 0, 0.1);
-        --overlay-light: rgba(0, 0, 0, 0.03);
-        --overlay-medium: rgba(0, 0, 0, 0.05);
-        --overlay-heavy: rgba(0, 0, 0, 0.08);
-        --terminal-bg: #dce0e8;
-        --inset-highlight: rgba(255, 255, 255, 0.7);
-        --shadow-color: rgba(0, 0, 0, 0.08);
-        --shadow-medium: rgba(0, 0, 0, 0.06);
-        --tag-bg: rgba(0, 0, 0, 0.05);
-        --heading-color: #4c4f69;
-        --card-hover: rgba(0, 0, 0, 0.04);
-    }
-}
-
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -169,37 +141,4 @@ main>.bento-stats {
     max-width: 1210px;
     /* Slightly wider as requested */
     width: 95%;
-}
-
-/* Animated Grid Background Effect */
-body.bg-effect-on::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-        linear-gradient(var(--selection-bg) 1px, transparent 1px),
-        linear-gradient(90deg, var(--selection-bg) 1px, transparent 1px);
-    background-size: 50px 50px;
-    mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
-    opacity: 0.15;
-    animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-    from {
-        background-position: 0 0;
-    }
-
-    to {
-        background-position: 50px 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    body.bg-effect-on::before {
-        background-size: 30px 30px;
-    }
 }

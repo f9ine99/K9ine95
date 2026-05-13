@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Palette } from 'lucide-svelte';
   import { fade } from 'svelte/transition';
-  import { themeState, themes, colors, applyTheme, setAccentColor, setBgEffect } from '$lib/stores/theme.svelte';
+  import { themeState, themes, colors, applyTheme, setAccentColor } from '$lib/stores/theme.svelte';
 </script>
 
 <div class="bento-card theme-card" in:fade={{ duration: 400, delay: 100 }}>
@@ -27,18 +27,6 @@
         aria-label="Set accent color to {color}"
       ></button>
     {/each}
-  </div>
-
-  <div class="effect-toggle">
-    <label class="toggle">
-      <input
-        type="checkbox"
-        checked={themeState.bgEffect}
-        onchange={(event) => setBgEffect((event.currentTarget as HTMLInputElement).checked)}
-      />
-      <span class="checkmark"></span>
-      <span class="label-text">Background effect: {themeState.bgEffect ? 'on' : 'off'}</span>
-    </label>
   </div>
 </div>
 
@@ -71,9 +59,11 @@
     background: var(--card-bg-elevated);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    padding: 0.4rem;
+    padding: 0.4rem 0.3rem;
     color: var(--text-muted);
-    font-size: 0.7rem;
+    font-size: 0.62rem;
+    line-height: 1.2;
+    text-align: center;
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -112,43 +102,6 @@
     outline-offset: 3px;
     box-shadow: 0 0 4px 1px var(--glow-color, currentColor), 0 0 8px 2px var(--glow-color, currentColor);
     animation: color-glow-pulse 2s ease-in-out infinite;
-  }
-
-  .toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    font-size: 0.85rem;
-    color: var(--text-primary);
-  }
-
-  .toggle input {
-    display: none;
-  }
-
-  .checkmark {
-    width: 18px;
-    height: 18px;
-    background: var(--card-bg-elevated);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    position: relative;
-  }
-
-  .toggle input:checked + .checkmark {
-    background: var(--accent-orange);
-    border-color: var(--accent-orange);
-  }
-
-  .toggle input:checked + .checkmark::after {
-    content: '✓';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #000;
-    font-size: 10px;
   }
 
   @keyframes color-glow-pulse {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Palette } from 'lucide-svelte';
-  import { themeState, applyTheme, setAccentColor, setBgEffect, themes, colors } from '$lib/stores/theme.svelte';
+  import { themeState, applyTheme, setAccentColor, themes, colors } from '$lib/stores/theme.svelte';
 </script>
 
 <div class="drawer-section">
@@ -33,18 +33,6 @@
       ></button>
     {/each}
   </div>
-</div>
-
-<div class="drawer-section effect-toggle">
-  <label class="toggle">
-    <input
-      type="checkbox"
-      checked={themeState.bgEffect}
-      onchange={(event) => setBgEffect((event.currentTarget as HTMLInputElement).checked)}
-    />
-    <span class="checkmark"></span>
-    <span class="label-text">Grid background <span class="status">{themeState.bgEffect ? 'on' : 'off'}</span></span>
-  </label>
 </div>
 
 <style>
@@ -138,52 +126,6 @@
     height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
-  }
-
-  .effect-toggle {
-    margin-top: 0.5rem;
-  }
-
-  .toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    cursor: pointer;
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-
-  .toggle input {
-    display: none;
-  }
-
-  .checkmark {
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    position: relative;
-  }
-
-  .toggle input:checked + .checkmark {
-    background: var(--accent-orange);
-    border-color: var(--accent-orange);
-  }
-
-  .toggle input:checked + .checkmark::after {
-    content: '✓';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #000;
-    font-size: 12px;
-  }
-
-  .status {
-    color: var(--accent-orange);
-    font-weight: 600;
   }
 
 </style>

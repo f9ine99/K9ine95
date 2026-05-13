@@ -3,7 +3,7 @@
   import { afterNavigate } from '$app/navigation';
   import Lenis from 'lenis';
   import 'lenis/dist/lenis.css';
-  import { themeState, loadSavedTheme } from '$lib/stores/theme.svelte';
+  import { loadSavedTheme } from '$lib/stores/theme.svelte';
   import '../../app.css';
   import Navbar from '$lib/components/layout/Navbar.svelte';
   import Footer from '$lib/components/layout/Footer.svelte';
@@ -36,15 +36,6 @@
     lenis.resize();
     if (navigation.type !== 'popstate') {
       lenis.scrollTo(0, { immediate: true });
-    }
-  });
-
-  // Apply background effect class to body
-  $effect(() => {
-    if (themeState.bgEffect) {
-      document.body.classList.add('bg-effect-on');
-    } else {
-      document.body.classList.remove('bg-effect-on');
     }
   });
 </script>
