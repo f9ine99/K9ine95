@@ -41,10 +41,6 @@
         </p>
 
         <p class="bio-text">
-          Beyond the tech world, I enjoy watching and playing football, and I have a deep interest in religion, ideas, and questions that go beyond the surface.
-        </p>
-
-        <p class="bio-text">
           A few of the projects I’m especially proud of include <a href="/projects/impactis" class="link accent">Impactis</a>, <a href="/projects/furi-cadaster" class="link accent">Furi Cadaster</a>, <a href="/projects/mufti-dawud-charity" class="link accent">Mufti Dawud Charity</a>, and <a href="/projects/termus-melesu" class="link accent">Termus-Melesu (Retra)</a> — each of which reflects my passion for building useful and meaningful digital solutions.
         </p>
 
