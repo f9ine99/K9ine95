@@ -25,7 +25,7 @@
 
 <div class="bento-card location-card" in:fade={{ duration: 400, delay: 300 }}>
   <div class="card-header">
-    <MapPin size={18} class="header-icon" />
+    <MapPin size={17} class="header-icon" />
     <h3>Currently Based In 📍</h3>
   </div>
 
@@ -36,7 +36,7 @@
   <div class="location-footer">
     <span class="city">Bole Medhanialem, Addis Ababa</span>
     <div class="local-time">
-      <Clock size={14} />
+      <Clock size={13} />
       <span>{time}</span>
     </div>
   </div>
@@ -46,7 +46,7 @@
   .card-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     width: 100%;
   }
 
@@ -55,15 +55,15 @@
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin: 0;
     color: var(--text-primary);
     font-weight: 500;
   }
 
   .map-container {
-    height: 200px;
-    border-radius: 12px;
+    height: 176px;
+    border-radius: 11px;
     overflow: hidden;
     position: relative;
     background: var(--bg-color);
@@ -74,7 +74,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     margin-top: -0.5rem;
     color: var(--text-muted);
   }

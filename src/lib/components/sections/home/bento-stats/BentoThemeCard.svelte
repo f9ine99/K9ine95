@@ -6,7 +6,7 @@
 
 <div class="bento-card theme-card" in:fade={{ duration: 400, delay: 100 }}>
   <div class="card-header">
-    <Palette size={18} class="header-icon" />
+    <Palette size={17} class="header-icon" />
     <h3>Theme</h3>
   </div>
 
@@ -34,7 +34,7 @@
   .card-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     width: 100%;
   }
 
@@ -43,7 +43,7 @@
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin: 0;
     color: var(--text-primary);
     font-weight: 500;
@@ -52,16 +52,16 @@
   .theme-options {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .theme-btn {
     background: var(--card-bg-elevated);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 0.4rem 0.3rem;
+    border-radius: 7px;
+    padding: 0.35rem 0.26rem;
     color: var(--text-muted);
-    font-size: 0.62rem;
+    font-size: 0.58rem;
     line-height: 1.2;
     text-align: center;
     cursor: pointer;
@@ -77,7 +77,7 @@
   .color-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
 
   .color-circle {

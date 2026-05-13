@@ -37,10 +37,10 @@
 
 <div class="bento-card commits-card" in:fade={{ duration: 400, delay: 500 }}>
   <div class="card-header">
-    <GitBranch size={18} class="header-icon" />
+    <GitBranch size={17} class="header-icon" />
     <h3>Recent Commits</h3>
     {#if isLoadingCommits}
-      <Loader2 size={14} class="animate-spin header-tag" />
+      <Loader2 size={13} class="animate-spin header-tag" />
     {:else}
       <span class="header-tag">[{error ? 'error' : 'info'}]</span>
     {/if}
@@ -80,7 +80,7 @@
 
   <div class="commits-footer">
     <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" class="github-link">
-      View on GitHub <ExternalLink size={14} />
+      View on GitHub <ExternalLink size={13} />
     </a>
 
     <div class="lang-bar-wrapper">
@@ -115,7 +115,7 @@
   .card-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.6rem;
     width: 100%;
   }
 
@@ -124,7 +124,7 @@
   }
 
   h3 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     margin: 0;
     color: var(--text-primary);
     font-weight: 500;
@@ -133,7 +133,7 @@
   .header-tag {
     margin-left: auto;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--accent-orange);
     opacity: 0.85;
     letter-spacing: 0.02em;
@@ -142,17 +142,19 @@
   .commits-list {
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 0.65rem;
+    min-width: 0;
+    width: 100%;
   }
 
   .commit-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.65rem;
     font-family: var(--font-mono);
-    font-size: 0.9rem;
-    line-height: 1.4;
+    font-size: 0.85rem;
+    line-height: 1.38;
     color: var(--text-primary);
   }
 
@@ -172,10 +174,10 @@
   .commit-stats {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.22rem;
     white-space: nowrap;
-    margin-left: 1rem;
-    font-size: 0.95em;
+    margin-left: 0.85rem;
+    font-size: 0.92em;
   }
 
   .add {
@@ -188,8 +190,8 @@
 
   .commit-date {
     color: var(--text-muted);
-    margin-left: 0.45rem;
-    font-size: 0.72rem;
+    margin-left: 0.4rem;
+    font-size: 0.68rem;
     opacity: 0.75;
   }
 
@@ -207,15 +209,17 @@
   .commits-footer {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.85rem;
     margin-top: auto;
+    min-width: 0;
+    width: 100%;
   }
 
   .github-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    gap: 0.42rem;
+    font-size: 0.85rem;
     color: var(--accent-orange);
     text-decoration: none;
     width: fit-content;
@@ -266,7 +270,7 @@
 
   .activity-bar {
     display: flex;
-    height: 8px;
+    height: 7px;
     border-radius: 4px;
     overflow: hidden;
     width: 100%;
@@ -319,11 +323,12 @@
   @media (max-width: 600px) {
     .commits-footer {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
     .lang-bar-wrapper {
       width: 100%;
+      max-width: 100%;
     }
 
     .commit-item {

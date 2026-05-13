@@ -138,7 +138,7 @@ main>* {
 }
 
 main>.bento-stats {
-    max-width: 1210px;
+    max-width: 1120px;
     /* Slightly wider as requested */
     width: 95%;
 }
