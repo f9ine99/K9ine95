@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import { afterNavigate } from '$app/navigation';
+  import { page } from '$app/state';
   import Lenis from 'lenis';
   import 'lenis/dist/lenis.css';
   import { loadSavedTheme } from '$lib/stores/theme.svelte';
@@ -21,7 +22,8 @@
     lenis = new Lenis({
       autoRaf: true,
       anchors: true,
-      stopInertiaOnNavigate: true
+      stopInertiaOnNavigate: true,
+      allowNestedScroll: true
     });
 
     return () => {
@@ -30,12 +32,40 @@
     };
   });
 
+  const hashScrollOffset = 96;
+
   afterNavigate(async (navigation) => {
     await tick();
-    if (!lenis) return;
-    lenis.resize();
-    if (navigation.type !== 'popstate') {
-      lenis.scrollTo(0, { immediate: true });
+
+    const hash = page.url.hash;
+    if (hash) {
+      const id = decodeURIComponent(hash.slice(1));
+      await tick();
+      const el = id ? document.getElementById(id) : null;
+      if (el) {
+        if (lenis) {
+          lenis.resize();
+          lenis.scrollTo(el, {
+            offset: -hashScrollOffset,
+            immediate: navigation.type === 'popstate'
+          });
+        } else {
+          el.scrollIntoView({
+            block: 'start',
+            behavior: navigation.type === 'popstate' ? 'instant' : 'smooth'
+          });
+        }
+      }
+      return;
+    }
+
+    if (lenis) {
+      lenis.resize();
+      if (navigation.type !== 'popstate') {
+        lenis.scrollTo(0, { immediate: true });
+      }
+    } else if (navigation.type !== 'popstate') {
+      window.scrollTo(0, 0);
     }
   });
 </script>

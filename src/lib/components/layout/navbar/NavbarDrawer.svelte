@@ -14,12 +14,20 @@
 <!-- Overlay -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="drawer-overlay" onclick={onCloseDrawer} transition:fade={{ duration: 200 }}></div>
+<div class="drawer-overlay" data-lenis-prevent onclick={onCloseDrawer} transition:fade={{ duration: 200 }}></div>
 
 <!-- Drawer -->
-<div class="drawer" transition:fly={{ x: 240, duration: 260, opacity: 1 }}>
+<div
+  id="site-nav-drawer"
+  class="drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="site-nav-drawer-title"
+  data-lenis-prevent
+  transition:fly={{ x: 240, duration: 260, opacity: 1 }}
+>
   <div class="drawer-header">
-    <h2 class="drawer-title">Menu</h2>
+    <h2 id="site-nav-drawer-title" class="drawer-title">Menu</h2>
     <button type="button" class="close-btn" onclick={onCloseDrawer} aria-label="Close menu">
       <X size={20} />
     </button>
@@ -35,18 +43,30 @@
         href="/projects"
         class:active={currentPathname === '/projects' || currentPathname.startsWith('/projects/')}
         onclick={onCloseDrawer}>Projects</a>
+      <a href="/pics" class:active={currentPathname === '/pics'} onclick={onCloseDrawer}>Pics</a>
+      <a href="/more" class:active={currentPathname === '/more'} onclick={onCloseDrawer}>More</a>
     </div>
+
+    {#if currentPathname === '/'}
+      <div class="drawer-section on-page-section">
+        <div class="more-label">On this page</div>
+        <a href="/#work" onclick={onCloseDrawer}>Work</a>
+        <a href="/#projects" onclick={onCloseDrawer}>Featured projects</a>
+        <a href="/#stats" onclick={onCloseDrawer}>Theme &amp; activity</a>
+        <a href="/#typing" onclick={onCloseDrawer}>Typing</a>
+      </div>
+    {/if}
 
     <div class="drawer-section more-links">
       <div class="more-label">Links</div>
-      <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" onclick={onCloseDrawer}>
         <Github size={16} />
         <span>GitHub</span>
         <span class="ext-icon">
           <ExternalLink size={12} />
         </span>
       </a>
-      <a href="https://linkedin.com/in/k9ine95" target="_blank" rel="noopener noreferrer">
+      <a href="https://linkedin.com/in/k9ine95" target="_blank" rel="noopener noreferrer" onclick={onCloseDrawer}>
         <Linkedin size={16} />
         <span>LinkedIn</span>
         <span class="ext-icon">
@@ -68,6 +88,7 @@
     background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(2px);
     z-index: 2000;
+    overscroll-behavior: none;
   }
 
   .drawer {
@@ -76,6 +97,7 @@
     right: 0;
     bottom: 0;
     width: min(280px, 92vw);
+    max-height: 100dvh;
     background: var(--bg-color);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -83,6 +105,7 @@
     z-index: 2001;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     box-shadow: -6px 0 24px rgba(0, 0, 0, 0.35);
   }
 
@@ -123,9 +146,13 @@
   }
 
   .drawer-content {
-    flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
-    padding: 1rem 1.1rem 1.25rem;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    padding: 1rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -183,6 +210,16 @@
 
   .drawer-section a.active {
     color: var(--accent-orange);
+  }
+
+  .on-page-section {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 0.85rem;
+  }
+
+  .on-page-section a {
+    font-size: 0.875rem;
+    opacity: 0.88;
   }
 
   .more-links {

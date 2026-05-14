@@ -8,11 +8,46 @@
   let isScrolled = $state(false);
   let isDrawerOpen = $state(false);
   let scrollRaf = 0;
+  /** Preserve window scroll when the drawer uses body { position: fixed } lock */
+  let drawerScrollLockY = 0;
+
+  function applyDrawerScrollLock(locked: boolean) {
+    if (typeof document === 'undefined') return;
+
+    if (locked) {
+      drawerScrollLockY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${drawerScrollLockY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, drawerScrollLockY);
+    }
+  }
+
+  function toggleDrawer() {
+    isDrawerOpen = !isDrawerOpen;
+    applyDrawerScrollLock(isDrawerOpen);
+  }
+
+  function closeDrawer() {
+    if (!isDrawerOpen) return;
+    isDrawerOpen = false;
+    applyDrawerScrollLock(false);
+  }
 
   let currentPath = $derived.by(() => {
     const path = page.url.pathname;
     if (path === '/') return 'Home/Firaol';
-    
+
     return path
       .split('/')
       .filter(Boolean)
@@ -23,16 +58,6 @@
       })
       .join('/');
   });
-
-  function toggleDrawer() {
-    isDrawerOpen = !isDrawerOpen;
-    document.body.style.overflow = isDrawerOpen ? 'hidden' : '';
-  }
-
-  function closeDrawer() {
-    isDrawerOpen = false;
-    document.body.style.overflow = '';
-  }
 
   onMount(() => {
     const updateScrollState = () => {
@@ -53,7 +78,10 @@
         window.cancelAnimationFrame(scrollRaf);
       }
       window.removeEventListener('scroll', handleScroll);
-      document.body.style.overflow = '';
+      if (typeof document !== 'undefined' && document.body.style.position === 'fixed') {
+        isDrawerOpen = false;
+        applyDrawerScrollLock(false);
+      }
     };
   });
 </script>

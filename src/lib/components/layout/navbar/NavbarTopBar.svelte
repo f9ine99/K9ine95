@@ -30,6 +30,19 @@
           >Projects</a
         >
       </li>
+      <li><a href="/pics" class:active={currentPathname === '/pics'}>Pics</a></li>
+      <li>
+        <button
+          type="button"
+          class="nav-more-trigger"
+          class:active={isDrawerOpen}
+          aria-expanded={isDrawerOpen}
+          aria-haspopup="dialog"
+          onclick={onToggleDrawer}
+        >
+          More
+        </button>
+      </li>
     </ul>
 
     <button
@@ -158,6 +171,42 @@
     opacity: 0.75;
   }
 
+  .nav-more-trigger {
+    display: inline-block;
+    background: none;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    opacity: 0.55;
+    padding: 0.4rem 0.15rem;
+    cursor: pointer;
+    transition: color 0.15s ease, opacity 0.15s ease;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-more-trigger:active {
+    opacity: 0.75;
+  }
+
+  .nav-more-trigger:hover,
+  .nav-more-trigger.active {
+    opacity: 1;
+    color: var(--accent-orange);
+  }
+
+  .nav-more-trigger:focus {
+    outline: none;
+  }
+
+  .nav-more-trigger:focus-visible {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
   .nav-links a:hover,
   .nav-links a.active {
     opacity: 1;
@@ -188,6 +237,20 @@
 
     .menu-toggle {
       display: block;
+    }
+  }
+
+  @media (min-width: 801px) and (max-width: 980px) {
+    .nav-links {
+      gap: 0.85rem;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+    }
+
+    .nav-more-trigger {
+      font-size: 0.8rem;
     }
   }
 </style>
