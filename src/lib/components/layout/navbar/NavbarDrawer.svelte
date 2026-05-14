@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition';
-  import { ExternalLink, Github, Instagram, Linkedin, X } from 'lucide-svelte';
+  import { ExternalLink, Github, Linkedin, Mail, X } from 'lucide-svelte';
   import NavbarThemeControls from '$lib/components/layout/navbar/NavbarThemeControls.svelte';
 
   interface Props {
@@ -53,12 +53,9 @@
           <ExternalLink size={12} />
         </span>
       </a>
-      <a href="https://instagram.com/f9ine99" target="_blank" rel="noopener noreferrer">
-        <Instagram size={16} />
-        <span>Instagram</span>
-        <span class="ext-icon">
-          <ExternalLink size={12} />
-        </span>
+      <a href="mailto:firaolgemedabuliye@gmail.com" title="firaolgemedabuliye@gmail.com" onclick={onCloseDrawer}>
+        <Mail size={16} />
+        <span>Email</span>
       </a>
     </div>
   </div>
