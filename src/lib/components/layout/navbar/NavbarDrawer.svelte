@@ -43,7 +43,6 @@
         href="/projects"
         class:active={currentPathname === '/projects' || currentPathname.startsWith('/projects/')}
         onclick={onCloseDrawer}>Projects</a>
-      <a href="/pics" class:active={currentPathname === '/pics'} onclick={onCloseDrawer}>Pics</a>
       <a href="/more" class:active={currentPathname === '/more'} onclick={onCloseDrawer}>More</a>
     </div>
 
@@ -76,6 +75,9 @@
       <a href="mailto:firaolgemedabuliye@gmail.com" title="firaolgemedabuliye@gmail.com" onclick={onCloseDrawer}>
         <Mail size={16} />
         <span>Email</span>
+        <span class="ext-icon">
+          <ExternalLink size={12} />
+        </span>
       </a>
     </div>
   </div>

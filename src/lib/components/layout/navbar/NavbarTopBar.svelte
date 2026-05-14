@@ -30,7 +30,6 @@
           >Projects</a
         >
       </li>
-      <li><a href="/pics" class:active={currentPathname === '/pics'}>Pics</a></li>
       <li>
         <button
           type="button"
