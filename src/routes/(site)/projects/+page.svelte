@@ -65,8 +65,44 @@
 
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    /* Smaller cards on this page only (detail views keep global sizing). */
+    --terminal-frost-padding: clamp(1.05rem, 4vw, 1.85rem);
+    --terminal-preview-min-h: clamp(10.25rem, 30vw, 12.75rem);
+  }
+
+  .projects-grid :global(.project-card) {
+    padding: 1.1rem;
+    gap: 1.1rem;
+    border-radius: 14px;
+  }
+
+  .projects-grid :global(.card-link) {
+    gap: 1.1rem;
+  }
+
+  .projects-grid :global(.preview-container) {
+    max-width: min(100%, 23.5rem);
+  }
+
+  .projects-grid :global(.project-card .title) {
+    font-size: 1.12rem;
+  }
+
+  .projects-grid :global(.project-card .date) {
+    font-size: 0.68rem;
+  }
+
+  .projects-grid :global(.project-card .description) {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .projects-grid :global(.demo-link) {
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    border-radius: 10px;
   }
 
   @media (max-width: 768px) {
