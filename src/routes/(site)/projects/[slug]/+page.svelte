@@ -6,18 +6,43 @@
   import ProjectHeroCard from '$lib/components/projects/project-detail/ProjectHeroCard.svelte';
   import ProjectOverview from '$lib/components/projects/project-detail/ProjectOverview.svelte';
   import ProjectNotFound from '$lib/components/projects/project-detail/ProjectNotFound.svelte';
+  import SeoHead from '$lib/components/seo/SeoHead.svelte';
+  import { breadcrumbSchema, projectSchema } from '$lib/seo/jsonld';
+  import { metaDescription } from '$lib/seo/meta';
 
   const slug = page.params.slug;
   const project = projects.find((p) => p.slug === slug);
   const safePreviewDescription = $derived(project ? sanitizeRichText(project.preview.description) : '');
   const safeLongDescription = $derived(project ? sanitizeRichText(project.longDescription) : '');
   const safeStory = $derived(project?.story ? sanitizeRichText(project.story) : '');
+
+  const seoDescription = $derived(
+    project
+      ? metaDescription(project.preview.description, project.description, project.longDescription)
+      : 'Project not found on this portfolio.'
+  );
+
+  const seoJsonLd = $derived(
+    project
+      ? [
+          projectSchema(project),
+          breadcrumbSchema([
+            { name: 'Home', path: '/' },
+            { name: 'Projects', path: '/projects' },
+            { name: project.title, path: `/projects/${project.slug}` }
+          ])
+        ]
+      : undefined
+  );
 </script>
 
-<svelte:head>
-  <title>{project?.title || 'Project'} | Firaol Gemeda</title>
-  <meta name="description" content={project?.longDescription?.slice(0, 160) || 'Project details'} />
-</svelte:head>
+<SeoHead
+  title={project?.title ?? 'Project not found'}
+  description={seoDescription}
+  path={project ? `/projects/${project.slug}` : '/projects'}
+  noindex={!project}
+  jsonLd={seoJsonLd}
+/>
 
 {#if project}
   <main class="project-detail">

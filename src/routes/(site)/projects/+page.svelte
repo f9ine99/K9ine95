@@ -3,11 +3,13 @@
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
   import { fade } from 'svelte/transition';
   import { projects } from '$lib/data/projects';
+  import SeoHead from '$lib/components/seo/SeoHead.svelte';
+
+  const description =
+    'Selected software projects by Firaol Gemeda — marketplaces, charity platforms, security tooling, and full-stack web applications.';
 </script>
 
-<svelte:head>
-  <title>Projects | Firaol Gemeda</title>
-</svelte:head>
+<SeoHead title="Projects" description={description} path="/projects" />
 
 <div class="projects-page" in:fade={{ duration: 600 }}>
   <header class="page-header">
