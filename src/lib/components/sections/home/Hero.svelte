@@ -1,16 +1,24 @@
 <script lang="ts">
   let name = "Firaol Gemeda";
   let isHovered = $state(false);
+  let showHighlight = $state(false);
+  let interactionTimeout: ReturnType<typeof setTimeout> | undefined;
   let waveCount = $state(0);
   let floatingPlusOnes = $state<{ id: number; x: number; emoji: string }[]>([]);
   let nextId = 0;
 
   function handleEnter() {
     isHovered = true;
+    clearTimeout(interactionTimeout);
+    interactionTimeout = setTimeout(() => {
+      if (isHovered) showHighlight = true;
+    }, 1000);
   }
 
   function handleLeave() {
     isHovered = false;
+    showHighlight = false;
+    clearTimeout(interactionTimeout);
   }
 
   const emojis = ['✨', '🎉', '🔥', '👏', '💯', '+1'];
@@ -72,7 +80,7 @@
     </div>
   </div>
   <p class="bio">
-    <span class="highlight-group">
+    <span class="highlight-group {showHighlight ? 'active' : ''}">
       <span>Co-Founder of <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer">HamerAI</a> | Software Engineer & Cybersecurity Analyst</span>
     </span>
     <br />
@@ -268,7 +276,15 @@
   }
 
   .highlight-group {
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: all 0.4s ease;
     display: inline-block;
+  }
+
+  .highlight-group.active {
+    background: rgba(255, 158, 100, 0.2);
+    color: var(--accent-orange);
   }
 
   .bio a {
