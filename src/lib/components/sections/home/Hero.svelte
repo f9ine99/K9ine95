@@ -1,24 +1,16 @@
 <script lang="ts">
   let name = "Firaol Gemeda";
   let isHovered = $state(false);
-  let showSunglasses = $state(false);
-  let interactionTimeout: any;
   let waveCount = $state(0);
   let floatingPlusOnes = $state<{ id: number; x: number; emoji: string }[]>([]);
   let nextId = 0;
 
   function handleEnter() {
     isHovered = true;
-    clearTimeout(interactionTimeout);
-    interactionTimeout = setTimeout(() => {
-      if (isHovered) showSunglasses = true;
-    }, 1000);
   }
 
   function handleLeave() {
     isHovered = false;
-    showSunglasses = false;
-    clearTimeout(interactionTimeout);
   }
 
   const emojis = ['✨', '🎉', '🔥', '👏', '💯', '+1'];
@@ -63,22 +55,6 @@
           decoding="async"
           fetchpriority="high"
         />
-        {#if showSunglasses}
-          <div class="sunglasses">
-            <svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
-              <!-- Lenses with Curves (Black) -->
-              <path d="M5 10 Q 5 5 15 5 L 45 5 Q 45 35 25 35 Q 5 35 5 10" fill="#000000" />
-              <path d="M55 5 L 85 5 Q 95 5 95 10 Q 95 35 75 35 Q 55 35 55 5" fill="#000000" />
-              
-              <!-- Lens Highlights -->
-              <path d="M10 10 Q 10 8 15 8 L 25 8" fill="none" stroke="white" stroke-width="1" opacity="0.3" stroke-linecap="round" />
-              <path d="M60 8 L 70 8 Q 75 8 75 10" fill="none" stroke="white" stroke-width="1" opacity="0.3" stroke-linecap="round" />
-
-              <!-- Professional Frame -->
-              <path d="M2 10 Q 2 2 15 2 L 45 2 Q 50 2 50 8 L 50 2 Q 55 2 85 2 Q 98 2 98 10 L 98 12 Q 98 38 75 38 Q 55 38 52 12 Q 50 12 48 12 Q 45 38 25 38 Q 2 38 2 12 Z" fill="black" fill-rule="evenodd" />
-            </svg>
-          </div>
-        {/if}
       </div>
     </div>
     <div class="intro">
@@ -96,7 +72,7 @@
     </div>
   </div>
   <p class="bio">
-    <span class="highlight-group {showSunglasses ? 'active' : ''}">
+    <span class="highlight-group">
       <span>Co-Founder of <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer">HamerAI</a> | Software Engineer & Cybersecurity Analyst</span>
     </span>
     <br />
@@ -202,21 +178,6 @@
     box-shadow: 0 0 0 4px rgba(245, 169, 127, 0.18);
   }
 
-  .sunglasses {
-    position: absolute;
-    top: 38%;
-    left: 25%;
-    width: 50%;
-    z-index: 20;
-    pointer-events: none;
-    animation: slideDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
-
-  @keyframes slideDown {
-    from { transform: translateY(-30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
   .intro {
     display: flex;
     flex-direction: column;
@@ -307,15 +268,7 @@
   }
 
   .highlight-group {
-    padding: 2px 4px;
-    border-radius: 4px;
-    transition: all 0.4s ease;
     display: inline-block;
-  }
-
-  .highlight-group.active {
-    background: rgba(255, 158, 100, 0.2);
-    color: var(--accent-orange);
   }
 
   .bio a {
