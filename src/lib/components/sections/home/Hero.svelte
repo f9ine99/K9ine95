@@ -1,5 +1,6 @@
 <script lang="ts">
   let name = "Firaol Gemeda";
+  const statusLabel = "Available for work";
   let isHovered = $state(false);
   let showHighlight = $state(false);
   let interactionTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -64,6 +65,12 @@
           fetchpriority="high"
         />
       </div>
+      {#if showHighlight}
+        <div class="status-badge" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-label">{statusLabel}</span>
+        </div>
+      {/if}
     </div>
     <div class="intro">
       <h1 class="greeting">
@@ -186,6 +193,57 @@
     box-shadow: 0 0 0 4px rgba(245, 169, 127, 0.18);
   }
 
+  .status-badge {
+    position: absolute;
+    bottom: -0.65rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-medium);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 6px 18px var(--shadow-medium);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    white-space: nowrap;
+    pointer-events: none;
+    animation: badgeIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgba(166, 218, 149, 0.45);
+    animation: statusPulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes badgeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(6px) scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+  }
+
+  @keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.85); }
+  }
+
   .intro {
     display: flex;
     flex-direction: column;
@@ -300,6 +358,12 @@
 
     .hero {
       padding-top: 8rem;
+    }
+
+    .status-badge {
+      font-size: 0.58rem;
+      padding: 0.24rem 0.5rem;
+      bottom: -0.75rem;
     }
     
     .bio {
