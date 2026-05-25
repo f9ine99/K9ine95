@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition';
-  import { ExternalLink, Github, Linkedin, Mail, X } from 'lucide-svelte';
+  import { Download, ExternalLink, Github, Linkedin, Mail, X } from 'lucide-svelte';
   import NavbarThemeControls from '$lib/components/layout/navbar/NavbarThemeControls.svelte';
 
   interface Props {
@@ -9,6 +9,7 @@
   }
 
   let { currentPathname, onCloseDrawer }: Props = $props();
+  const resumeUrl = 'https://example.com/firaol-gemeda-resume.pdf';
 </script>
 
 <!-- Overlay -->
@@ -43,7 +44,6 @@
         href="/projects"
         class:active={currentPathname === '/projects' || currentPathname.startsWith('/projects/')}
         onclick={onCloseDrawer}>Projects</a>
-      <a href="/more" class:active={currentPathname === '/more'} onclick={onCloseDrawer}>More</a>
     </div>
 
     {#if currentPathname === '/'}
@@ -58,6 +58,19 @@
 
     <div class="drawer-section more-links">
       <div class="more-label">Links</div>
+      <a
+        href={resumeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="resume-link"
+        onclick={onCloseDrawer}
+      >
+        <Download size={16} />
+        <span>Resume / CV</span>
+        <span class="ext-icon">
+          <ExternalLink size={12} />
+        </span>
+      </a>
       <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" onclick={onCloseDrawer}>
         <Github size={16} />
         <span>GitHub</span>
@@ -242,6 +255,20 @@
   .more-links a {
     font-size: 0.875rem;
     opacity: 0.85;
+  }
+
+  .more-links a.resume-link {
+    margin-bottom: 0.25rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--border-medium);
+    border-radius: 10px;
+    background: var(--card-bg);
+    color: var(--accent-orange);
+    opacity: 1;
+  }
+
+  .more-links a.resume-link:hover {
+    padding-left: 0.95rem;
   }
 
   .ext-icon {
