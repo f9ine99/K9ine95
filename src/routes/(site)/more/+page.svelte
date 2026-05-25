@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Download, ExternalLink, FileText } from 'lucide-svelte';
-  import UnderConstruction from '$lib/components/sections/misc/UnderConstruction.svelte';
   import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
   const resumeUrl = 'https://example.com/firaol-gemeda-resume.pdf';
@@ -37,8 +36,6 @@
       </a>
     </div>
   </section>
-
-  <UnderConstruction title="Resources & Links" />
 </main>
 
 <style>
