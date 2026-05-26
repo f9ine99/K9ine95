@@ -9,7 +9,7 @@
   }
 
   let { currentPathname, onCloseDrawer }: Props = $props();
-  const resumeUrl = 'https://example.com/firaol-gemeda-resume.pdf';
+  const resumeUrl = 'https://assets.firaol.xyz/resume/Fira-resume.pdf';
 </script>
 
 <!-- Overlay -->
