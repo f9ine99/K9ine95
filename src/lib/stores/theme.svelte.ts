@@ -147,6 +147,11 @@ export const colors = [
     '#f4dbd6'
 ];
 
+function updateThemeColorMeta(color: string) {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', color);
+}
+
 export function applyTheme(themeName: string, persist = true) {
     themeState.currentTheme = themeName;
     const palette = themePalettes[themeName];
@@ -156,6 +161,7 @@ export function applyTheme(themeName: string, persist = true) {
             document.documentElement.style.setProperty(key, value);
         });
         document.documentElement.classList.toggle('Latte', themeName === 'Latte');
+        updateThemeColorMeta(palette['--bg-color']);
     } else {
         document.documentElement.classList.remove('Latte');
     }

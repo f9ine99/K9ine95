@@ -84,8 +84,7 @@ export const projects: Project[] = [
                 { name: "Firaol", avatar: "/images/firaol.jpg" },
                 { name: "Abrham", avatar: "https://github.com/RasAbrish.png" },
                 { name: "Amanuel", avatar: "https://github.com/amegi123.png" },
-                { name: "Biruk", avatar: "https://github.com/BirukW-23.png" },
-                { name: "GitHub Contributor", avatar: "https://github.com/github.png" }
+                { name: "Biruk", avatar: "https://github.com/BirukW-23.png" }
             ]
         },
         languages: [
@@ -138,7 +137,7 @@ export const projects: Project[] = [
             { name: "CSS", color: "#563d7c", percentage: 8.9 },
             { name: "HTML", color: "#e34c26", percentage: 3.5 }
         ],
-        demoUrl: "https://ethiohamerai.vercel.app",
+        demoUrl: "https://ethiohamerai.com",
         isPrivate: true
     },
     {
@@ -266,7 +265,7 @@ export const projects: Project[] = [
         demoUrl: "https://mufti-dawud.vercel.app/"
     },
     {
-        slug: "nyx-portfolio",
+        slug: "fira-portfolio",
         title: "Fira-portfolio",
         date: "March 19, 2026",
         description: "The website you're currently browsing! A premium, terminal-inspired portfolio built with SvelteKit and glassmorphism UI.",
@@ -306,7 +305,7 @@ export const projects: Project[] = [
         slug: "detectify",
         title: "Detectify",
         date: "April 19, 2024",
-        description: "A collaborative security project with <a href=\"#\" target=\"_blank\">Eyosiyas</a> at INSA—a robust website defacement monitoring system designed to safeguard online integrity.",
+        description: "A collaborative security project with <strong>Eyosiyas</strong> at INSA—a robust website defacement monitoring system designed to safeguard online integrity.",
         longDescription: "Detectify was developed at INSA in collaboration with Eyosiyas as a specialized website defacement monitoring system. It leverages advanced scanning engines to detect unauthorized changes to web content in real-time, providing an essential layer of security for critical digital assets. The project integrates an automated uptime checker and a comprehensive alerting system, ensuring that any compromise or downtime is identified and addressed immediately.",
         features: [
             "Advanced website defacement detection engine",
@@ -331,8 +330,7 @@ export const projects: Project[] = [
             description: "Website defacement monitoring system (INSA Colab)",
             stars: 0,
             contributors: [
-                { name: "Firaol", avatar: "/images/firaol.jpg" },
-                { name: "GitHub Contributor", avatar: "https://github.com/github.png" }
+                { name: "Firaol", avatar: "/images/firaol.jpg" }
             ]
         },
         languages: [
