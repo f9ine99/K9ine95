@@ -55,6 +55,7 @@
   let activePaw = $state('none');
   let charElements = $state<HTMLElement[]>([]);
   let inputElement = $state<HTMLInputElement | null>(null);
+  let isFocused = $state(false);
 
 
   let lastTapTime = 0;
@@ -77,7 +78,9 @@
   }
 
   function handleGlobalKeydown(e: KeyboardEvent) {
-    if (e.key === 'Tab') {
+    // Only hijack Tab while the test is focused, so it never breaks
+    // keyboard navigation for the rest of the page.
+    if (isFocused && e.key === 'Tab') {
       e.preventDefault();
       reset(true);
     }
@@ -104,12 +107,12 @@
   });
 
 
-  function handleInput(e: any) {
+  function handleInput(e: Event & { currentTarget: HTMLInputElement }) {
     if (isFinished) return;
     
     if (startTime === 0) startTime = Date.now();
     
-    const newVal = e.target.value;
+    const newVal = e.currentTarget.value;
     const lastChar = newVal[newVal.length - 1];
     const targetChar = targetText[newVal.length - 1];
 
@@ -206,6 +209,9 @@
         bind:value={userInput} 
         bind:this={inputElement}
         oninput={handleInput}
+        onfocus={() => (isFocused = true)}
+        onblur={() => (isFocused = false)}
+        onpaste={(e) => e.preventDefault()}
         class="typing-input"
         autocomplete="off"
         autocorrect="off"
