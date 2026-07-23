@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
+  import { slide } from 'svelte/transition';
   import TypingStatsHeader from '$lib/components/sections/home/typing-test/TypingStatsHeader.svelte';
   import TypingBongoCat from '$lib/components/sections/home/typing-test/TypingBongoCat.svelte';
   import TypingVictoryScreen from '$lib/components/sections/home/typing-test/TypingVictoryScreen.svelte';
@@ -59,6 +60,18 @@
 
   let lastTapTime = 0;
   let mistakes = $state(0);
+  let isOpen = $state(false);
+
+  async function toggleOpen() {
+    isOpen = !isOpen;
+    if (isOpen) {
+      reset(false);
+      await tick();
+      inputElement?.focus();
+    } else {
+      isFocused = false;
+    }
+  }
 
   function reset(shouldFocus = false) {
     targetText = sentences[Math.floor(Math.random() * sentences.length)];
@@ -166,52 +179,77 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
   class="typing-test"
+  class:is-open={isOpen}
   id="typing"
   role="region"
   aria-labelledby="typing-play-heading"
-  onclick={() => inputElement?.focus()}
+  onclick={() => isOpen && inputElement?.focus()}
 >
   <header class="typing-intro">
-    <h2 id="typing-play-heading" class="typing-intro-heading">If you love typing</h2>
-    <p class="typing-intro-copy">
-      Click, type the gray line. New line: <kbd class="typing-kbd">Tab</kbd> or
-      <span class="typing-intro-action">Reset</span>.
-    </p>
+    <div class="typing-intro-text">
+      <h2 id="typing-play-heading" class="typing-intro-heading">If you love typing</h2>
+      <p class="typing-intro-copy">
+        {#if isOpen}
+          Click, type the gray line. New line: <kbd class="typing-kbd">Tab</kbd> or
+          <span class="typing-intro-action">Reset</span>.
+        {:else}
+          Flip the switch to play a quick typing game.
+        {/if}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="typing-switch"
+      role="switch"
+      aria-checked={isOpen}
+      aria-label="Toggle typing game"
+      onclick={(e) => {
+        e.stopPropagation();
+        toggleOpen();
+      }}
+    >
+      <span class="typing-switch-track">
+        <span class="typing-switch-thumb"></span>
+      </span>
+    </button>
   </header>
 
-  <TypingStatsHeader {wpm} {accuracy} onReset={() => reset(true)} />
+  {#if isOpen}
+    <div class="typing-body" transition:slide={{ duration: 260 }}>
+      <TypingStatsHeader {wpm} {accuracy} onReset={() => reset(true)} />
 
-  <TypingBongoCat {isFinished} {accuracy} {mistakes} {activePaw} {eyeTransform} />
+      <TypingBongoCat {isFinished} {accuracy} {mistakes} {activePaw} {eyeTransform} />
 
-  <div class="test-area">
-    {#if isFinished}
-      <TypingVictoryScreen {wpm} {accuracy} onRetry={() => reset(true)} />
-    {:else}
-      <div class="target-text">
-        {#if !isFinished}
-          <div class="caret" class:blinking={userInput.length === 0} style={caretStyle}></div>
+      <div class="test-area">
+        {#if isFinished}
+          <TypingVictoryScreen {wpm} {accuracy} onRetry={() => reset(true)} />
+        {:else}
+          <div class="target-text">
+            <div class="caret" class:blinking={userInput.length === 0} style={caretStyle}></div>
+            {#each targetText.split('') as char, i (i)}
+              <span bind:this={charElements[i]} class={getCharClass(char, i)}>{char}</span>
+            {/each}
+          </div>
+
+          <input
+            type="text"
+            bind:value={userInput}
+            bind:this={inputElement}
+            oninput={handleInput}
+            onfocus={() => (isFocused = true)}
+            onblur={() => (isFocused = false)}
+            onpaste={(e) => e.preventDefault()}
+            class="typing-input"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          />
         {/if}
-        {#each targetText.split('') as char, i (i)}
-          <span bind:this={charElements[i]} class={getCharClass(char, i)}>{char}</span>
-        {/each}
       </div>
-
-      <input
-        type="text"
-        bind:value={userInput}
-        bind:this={inputElement}
-        oninput={handleInput}
-        onfocus={() => (isFocused = true)}
-        onblur={() => (isFocused = false)}
-        onpaste={(e) => e.preventDefault()}
-        class="typing-input"
-        autocomplete="off"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
-      />
-    {/if}
-  </div>
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -223,7 +261,7 @@
     margin: 2rem auto;
     max-width: min(48rem, 100%);
     position: relative;
-    cursor: pointer;
+    cursor: default;
     box-shadow: none;
     transition:
       border-color 0.22s ease,
@@ -265,10 +303,74 @@
     }
   }
 
+  .typing-test.is-open {
+    cursor: pointer;
+  }
+
   .typing-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .typing-test.is-open .typing-intro {
     margin-bottom: 1rem;
     padding-bottom: 0.875rem;
     border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .typing-intro-text {
+    min-width: 0;
+  }
+
+  .typing-switch {
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .typing-switch-track {
+    display: inline-flex;
+    align-items: center;
+    width: 2.6rem;
+    height: 1.45rem;
+    padding: 0.15rem;
+    border-radius: 999px;
+    background: var(--subtle-bg);
+    border: 1px solid var(--border-medium);
+    transition:
+      background-color 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .typing-switch[aria-checked='true'] .typing-switch-track {
+    background: color-mix(in srgb, var(--accent-orange) 30%, transparent);
+    border-color: var(--accent-orange);
+  }
+
+  .typing-switch-thumb {
+    width: 1.05rem;
+    height: 1.05rem;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition:
+      transform 0.22s cubic-bezier(0.19, 1, 0.22, 1),
+      background-color 0.22s ease;
+  }
+
+  .typing-switch[aria-checked='true'] .typing-switch-thumb {
+    transform: translateX(1.15rem);
+    background: var(--accent-orange);
+  }
+
+  .typing-switch:focus-visible .typing-switch-track {
+    outline: 2px solid var(--accent-orange);
+    outline-offset: 2px;
   }
 
   .typing-intro-heading {
@@ -308,6 +410,11 @@
     border-radius: 4px;
     border: 1px solid var(--border-medium);
     background: var(--subtle-bg);
+  }
+
+  .typing-body {
+    display: flex;
+    flex-direction: column;
   }
 
   .test-area {
