@@ -21,7 +21,7 @@ export function personSchema() {
     worksFor: {
       '@type': 'Organization',
       name: 'HamerAI',
-      url: 'https://ethiohamerai.com'
+      url: 'https://ethiohamerai.vercel.app'
     },
     email: `mailto:${SITE.email}`,
     sameAs: SITE.sameAs,

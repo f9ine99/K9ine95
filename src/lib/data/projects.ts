@@ -135,7 +135,7 @@ export const projects: Project[] = [
       { name: 'CSS', color: '#563d7c', percentage: 8.9 },
       { name: 'HTML', color: '#e34c26', percentage: 3.5 }
     ],
-    demoUrl: 'https://ethiohamerai.com',
+    demoUrl: 'https://ethiohamerai.vercel.app',
     isPrivate: true
   },
   {
