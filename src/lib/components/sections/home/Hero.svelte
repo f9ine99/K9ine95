@@ -1,4 +1,9 @@
 <script lang="ts">
+  import { Mail, FileText } from 'lucide-svelte';
+
+  const email = 'firaolgemedabuliye@gmail.com';
+  const resumeUrl = 'https://assets.firaol.xyz/resume/Fira-resume.pdf';
+
   let name = 'Firaol Gemeda';
   const statusLabel = 'Available for work';
   let isHovered = $state(false);
@@ -90,6 +95,17 @@
     <br />
     Building secure, scalable systems and solving real-world cybersecurity challenges.
   </p>
+
+  <div class="hero-cta">
+    <a class="cta-primary" href="mailto:{email}">
+      <Mail size={17} />
+      Get in touch
+    </a>
+    <a class="cta-secondary" href={resumeUrl} target="_blank" rel="noopener noreferrer">
+      <FileText size={16} />
+      Résumé
+    </a>
+  </div>
 </header>
 
 <style>
@@ -353,6 +369,55 @@
     line-height: 1.8;
     opacity: 0.9;
     margin-top: 1rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.15rem;
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      background-color 0.18s ease,
+      border-color 0.18s ease,
+      color 0.18s ease;
+  }
+
+  .cta-primary {
+    background: var(--accent-orange);
+    color: var(--bg-color);
+    border: 1px solid var(--accent-orange);
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-medium);
+  }
+
+  .cta-secondary {
+    background: var(--subtle-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-medium);
+  }
+
+  .cta-secondary:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
   }
 
   .highlight-group {
