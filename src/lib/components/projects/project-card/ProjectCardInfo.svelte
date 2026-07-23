@@ -61,11 +61,17 @@
   }
 
   .description :global(a) {
-    color: var(--accent-orange);
+    color: color-mix(in srgb, var(--accent-orange) 55%, var(--text-primary));
     text-decoration: none;
-    border-bottom: 1px dotted color-mix(in srgb, var(--accent-orange) 42%, transparent);
+    font-weight: 600;
+    border-bottom: 1px dotted color-mix(in srgb, var(--accent-orange) 55%, transparent);
     padding-bottom: 1px;
     transition: all 0.2s ease;
+  }
+
+  :global(.Latte) .description :global(a) {
+    color: color-mix(in srgb, var(--accent-orange) 70%, #111);
+    border-bottom-color: color-mix(in srgb, var(--accent-orange) 70%, #111);
   }
 
   .description :global(a:hover) {

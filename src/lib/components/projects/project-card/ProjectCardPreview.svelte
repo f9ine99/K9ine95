@@ -206,8 +206,15 @@
     background: var(--terminal-bg);
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+    /* Keep terminal text readable even when the page is in light mode. */
+    --text-primary: #cdd6f4;
+    --text-muted: #8b92a8;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-medium: rgba(255, 255, 255, 0.12);
+    --overlay-light: rgba(255, 255, 255, 0.05);
+    --heading-color: #fff;
   }
 
   .terminal-header {
