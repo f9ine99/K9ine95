@@ -147,3 +147,31 @@ main > .bento-stats {
   /* Slightly wider as requested */
   width: 95%;
 }
+
+/* View Transitions: gentle cross-page fade */
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out 0.18s ease both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in 0.28s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

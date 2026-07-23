@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
-  import { afterNavigate } from '$app/navigation';
+  import { afterNavigate, onNavigate } from '$app/navigation';
   import { page } from '$app/state';
   import Lenis from 'lenis';
   import 'lenis/dist/lenis.css';
@@ -30,6 +30,19 @@
       lenis?.destroy();
       lenis = null;
     };
+  });
+
+  // Smooth cross-page morphs via the View Transitions API where supported.
+  onNavigate((navigation) => {
+    if (!document.startViewTransition) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    return new Promise((resolve) => {
+      document.startViewTransition(async () => {
+        resolve();
+        await navigation.complete;
+      });
+    });
   });
 
   const hashScrollOffset = 96;
