@@ -52,7 +52,12 @@
     if (lower.includes('better') || lower.includes('auth') || lower.includes('jwt')) return Key;
     if (lower.includes('security') || lower.includes('shield')) return Shield;
 
-    if (lower.includes('supabase') || lower.includes('sql') || lower.includes('postgre') || lower.includes('pgvector'))
+    if (
+      lower.includes('supabase') ||
+      lower.includes('sql') ||
+      lower.includes('postgre') ||
+      lower.includes('pgvector')
+    )
       return Database;
     if (lower.includes('websocket') || lower.includes('cable')) return Cable;
 
@@ -69,7 +74,7 @@
 </script>
 
 <div class="tech-tags {variant} {className}">
-  {#each tags as tag}
+  {#each tags as tag (tag.name)}
     {@const TagIcon = tag.icon || getIcon(tag.name)}
     <div class="tag" style="--tag-color: {tag.color || 'var(--accent-orange)'}">
       <TagIcon size={iconSize} />

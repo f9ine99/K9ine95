@@ -69,7 +69,9 @@
     font-size: 0.72rem;
     font-family: var(--font-mono);
     cursor: pointer;
-    transition: color 0.2s, border-color 0.2s;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
   }
 
   .retry-btn:hover {

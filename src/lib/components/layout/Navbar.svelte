@@ -51,9 +51,11 @@
     return path
       .split('/')
       .filter(Boolean)
-      .map(part => {
-        const project = projects.find(p => p.slug === part);
-        const name = project ? project.title : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, ' ');
+      .map((part) => {
+        const project = projects.find((p) => p.slug === part);
+        const name = project
+          ? project.title
+          : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, ' ');
         return name.length > 12 ? name.slice(0, 10) + '..' : name;
       })
       .join('/');

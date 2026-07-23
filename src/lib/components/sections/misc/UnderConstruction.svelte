@@ -1,6 +1,6 @@
 <script>
   import { HardHat, Terminal, ChevronRight } from 'lucide-svelte';
-  let { title = "Section Under Construction" } = $props();
+  let { title = 'Section Under Construction' } = $props();
 </script>
 
 <div class="under-construction">
@@ -13,34 +13,32 @@
       </div>
       <div class="title-text">system_status.sh</div>
     </div>
-    
+
     <div class="terminal-body">
       <div class="line">
         <ChevronRight size={14} class="prompt-icon" />
         <span class="command">access_module --name "{title.toLowerCase().replace(/ /g, '_')}"</span>
       </div>
-      
+
       <div class="output warning">
         <HardHat size={20} />
         <span>[WARNING] Module is currently under development.</span>
       </div>
-      
+
       <div class="output info">
         <Terminal size={14} />
         <span>Estimated completion: Q3 2026</span>
       </div>
-      
+
       <div class="line active">
         <ChevronRight size={14} class="prompt-icon" />
         <span class="cursor"></span>
       </div>
     </div>
   </div>
-  
+
   <div class="actions">
-    <a href="/" class="back-link">
-      &larr; Return to Home Base
-    </a>
+    <a href="/" class="back-link"> &larr; Return to Home Base </a>
   </div>
 </div>
 
@@ -85,9 +83,15 @@
     border-radius: 50%;
   }
 
-  .red { background: #ff5f56; }
-  .yellow { background: #ffbd2e; }
-  .green { background: #27c93f; }
+  .red {
+    background: #ff5f56;
+  }
+  .yellow {
+    background: #ffbd2e;
+  }
+  .green {
+    background: #27c93f;
+  }
 
   .title-text {
     flex-grow: 1;
@@ -146,7 +150,9 @@
   }
 
   @keyframes blink {
-    50% { opacity: 0; }
+    50% {
+      opacity: 0;
+    }
   }
 
   .back-link {

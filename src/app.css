@@ -1,51 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-color: #1e2030;
-    --card-bg: #24273a;
-    --card-bg-elevated: #1e2030;
-    --text-primary: #cad3f5;
-    --text-muted: #8087a2;
-    --selection-bg: #363a4f;
-    --accent-orange: #f0ede5;
-    --accent-blue: #8aadf4;
-    --accent-purple: #c6a0f6;
-    --accent-red: #ed8796;
-    --accent-green: #a6da95;
-    --font-mono: 'Fira Code', monospace;
-    --scrollbar-thumb: #5b6078;
-    --card-hover: rgba(255, 255, 255, 0.04);
-    --nav-pill-bg: rgba(30, 32, 48, 0.75);
-    --nav-pill-border: rgba(255, 255, 255, 0.06);
-    --nav-active-bg: rgba(255, 255, 255, 0.06);
-    --subtle-bg: rgba(255, 255, 255, 0.03);
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-medium: rgba(255, 255, 255, 0.08);
-    --overlay-light: rgba(255, 255, 255, 0.04);
-    --overlay-medium: rgba(255, 255, 255, 0.06);
-    --overlay-heavy: rgba(255, 255, 255, 0.12);
-    --terminal-bg: #1e1e2e;
-    /* Terminal frost frame: wider frosted ring, shorter min terminal body on cards */
-    --terminal-frost-padding: clamp(1.45rem, 5.5vw, 2.65rem);
-    --terminal-preview-min-h: clamp(12.75rem, 35vw, 15.35rem);
-    --terminal-frost-bg: #fefefa;
-    --terminal-frost-bg-hover: #f4f4f0;
-    --terminal-frost-blur: 26px;
-    --terminal-frost-border: rgba(20, 20, 28, 0.1);
-    --terminal-frost-border-hover: rgba(20, 20, 28, 0.14);
-    /* Project detail: max width of frosted terminal frame + aligned overview column */
-    --terminal-detail-frost-max-w: 31.5rem;
-    --inset-highlight: rgba(255, 255, 255, 0.05);
-    --shadow-color: rgba(0, 0, 0, 0.7);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
-    --tag-bg: rgba(0, 0, 0, 0.2);
-    --heading-color: #fff;
+  --bg-color: #1e2030;
+  --card-bg: #24273a;
+  --card-bg-elevated: #1e2030;
+  --text-primary: #cad3f5;
+  --text-muted: #8087a2;
+  --selection-bg: #363a4f;
+  --accent-orange: #f0ede5;
+  --accent-blue: #8aadf4;
+  --accent-purple: #c6a0f6;
+  --accent-red: #ed8796;
+  --accent-green: #a6da95;
+  --font-mono: 'Fira Code', monospace;
+  --scrollbar-thumb: #5b6078;
+  --card-hover: rgba(255, 255, 255, 0.04);
+  --nav-pill-bg: rgba(30, 32, 48, 0.75);
+  --nav-pill-border: rgba(255, 255, 255, 0.06);
+  --nav-active-bg: rgba(255, 255, 255, 0.06);
+  --subtle-bg: rgba(255, 255, 255, 0.03);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --overlay-light: rgba(255, 255, 255, 0.04);
+  --overlay-medium: rgba(255, 255, 255, 0.06);
+  --overlay-heavy: rgba(255, 255, 255, 0.12);
+  --terminal-bg: #1e1e2e;
+  /* Terminal frost frame: wider frosted ring, shorter min terminal body on cards */
+  --terminal-frost-padding: clamp(1.45rem, 5.5vw, 2.65rem);
+  --terminal-preview-min-h: clamp(12.75rem, 35vw, 15.35rem);
+  --terminal-frost-bg: #fefefa;
+  --terminal-frost-bg-hover: #f4f4f0;
+  --terminal-frost-blur: 26px;
+  --terminal-frost-border: rgba(20, 20, 28, 0.1);
+  --terminal-frost-border-hover: rgba(20, 20, 28, 0.14);
+  /* Project detail: max width of frosted terminal frame + aligned overview column */
+  --terminal-detail-frost-max-w: 31.5rem;
+  --inset-highlight: rgba(255, 255, 255, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.7);
+  --shadow-medium: rgba(0, 0, 0, 0.2);
+  --tag-bg: rgba(0, 0, 0, 0.2);
+  --heading-color: #fff;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 a,
@@ -53,46 +53,53 @@ button,
 input,
 textarea,
 select {
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, outline-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    outline-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 /* Custom Scrollbar */
 html,
 body {
-    width: 100%;
-    overflow-x: clip;
-    scrollbar-color: var(--accent-orange) var(--bg-color);
-    scrollbar-width: thin;
+  width: 100%;
+  overflow-x: clip;
+  scrollbar-color: var(--accent-orange) var(--bg-color);
+  scrollbar-width: thin;
 }
 
 ::-webkit-scrollbar {
-    width: 3px;
-    height: 5px;
+  width: 3px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color);
+  background: var(--bg-color);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--accent-orange);
-    border-radius: 10px;
-    border: 1px solid var(--bg-color);
-    opacity: 0.8;
+  background: var(--accent-orange);
+  border-radius: 10px;
+  border: 1px solid var(--bg-color);
+  opacity: 0.8;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-orange);
-    opacity: 1;
+  background: var(--accent-orange);
+  opacity: 1;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -101,44 +108,42 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--heading-color);
-    font-weight: 600;
+  color: var(--heading-color);
+  font-weight: 600;
 }
 
 a {
-    color: var(--accent-blue);
-    text-decoration: none;
-    transition: color 0.2s ease;
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-    color: var(--accent-orange);
+  color: var(--accent-orange);
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 button {
-    font-family: inherit;
+  font-family: inherit;
 }
 
 ::selection {
-    background-color: var(--selection-bg);
-    color: #fff;
+  background-color: var(--selection-bg);
+  color: #fff;
 }
 
-
-
-main>* {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 95%;
+main > * {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
 }
 
-main>.bento-stats {
-    max-width: 1120px;
-    /* Slightly wider as requested */
-    width: 95%;
+main > .bento-stats {
+  max-width: 1120px;
+  /* Slightly wider as requested */
+  width: 95%;
 }

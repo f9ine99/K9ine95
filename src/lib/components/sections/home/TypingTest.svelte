@@ -5,45 +5,45 @@
   import TypingVictoryScreen from '$lib/components/sections/home/typing-test/TypingVictoryScreen.svelte';
 
   const sentences = [
-    "ship it and fix it later",
-    "code all day, debug all night",
-    "it works on my machine",
-    "one more commit before bed",
-    "clean code is happy code",
-    "coffee first, then code",
-    "built with love and caffeine",
-    "keep it simple and ship it",
-    "make it work, make it right, make it fast",
-    "hello world is just the beginning",
-    "done is better than perfect",
-    "push to main and pray",
-    "bugs are just surprise features",
-    "think twice, code once",
-    "building cool things on the internet",
-    "less is more, always",
-    "learn, build, break, repeat",
-    "stay curious, keep building",
-    "deploy to vercel and chill",
-    "docker makes everything portable",
-    "kubernetes keeps it all running",
-    "ollama brings ai to your laptop",
-    "open source changed the world",
-    "linux is home for developers",
-    "rag makes ai actually useful",
-    "svelte makes the web feel fast",
-    "rust is the future of systems",
-    "postgres is the goat of databases",
-    "tailwind makes styling fun again",
-    "the terminal is my happy place",
-    "better auth keeps sign in simple",
-    "supabase makes postgres even more fun",
-    "aws powers apps at global scale",
-    "serverless helps teams ship faster",
-    "convex keeps realtime data in sync",
-    "cloudflare keeps latency low at the edge",
-    "llms turn prompts into working products",
-    "great llm apps need strong context",
-    "small models can still solve big problems"
+    'ship it and fix it later',
+    'code all day, debug all night',
+    'it works on my machine',
+    'one more commit before bed',
+    'clean code is happy code',
+    'coffee first, then code',
+    'built with love and caffeine',
+    'keep it simple and ship it',
+    'make it work, make it right, make it fast',
+    'hello world is just the beginning',
+    'done is better than perfect',
+    'push to main and pray',
+    'bugs are just surprise features',
+    'think twice, code once',
+    'building cool things on the internet',
+    'less is more, always',
+    'learn, build, break, repeat',
+    'stay curious, keep building',
+    'deploy to vercel and chill',
+    'docker makes everything portable',
+    'kubernetes keeps it all running',
+    'ollama brings ai to your laptop',
+    'open source changed the world',
+    'linux is home for developers',
+    'rag makes ai actually useful',
+    'svelte makes the web feel fast',
+    'rust is the future of systems',
+    'postgres is the goat of databases',
+    'tailwind makes styling fun again',
+    'the terminal is my happy place',
+    'better auth keeps sign in simple',
+    'supabase makes postgres even more fun',
+    'aws powers apps at global scale',
+    'serverless helps teams ship faster',
+    'convex keeps realtime data in sync',
+    'cloudflare keeps latency low at the edge',
+    'llms turn prompts into working products',
+    'great llm apps need strong context',
+    'small models can still solve big problems'
   ];
 
   let targetText = $state(sentences[0]);
@@ -57,7 +57,6 @@
   let inputElement = $state<HTMLInputElement | null>(null);
   let isFocused = $state(false);
 
-
   let lastTapTime = 0;
   let mistakes = $state(0);
 
@@ -69,7 +68,7 @@
     accuracy = 100;
     isFinished = false;
     mistakes = 0;
-    
+
     if (shouldFocus) {
       setTimeout(() => {
         inputElement?.focus();
@@ -92,26 +91,26 @@
 
   const caretStyle = $derived.by(() => {
     if (userInput.length === 0) return 'left: 0; top: 0.28rem;';
-    
+
     // Position at the NEXT character to type
     if (userInput.length < targetText.length) {
       const el = charElements[userInput.length];
       if (el) return `left: ${el.offsetLeft}px; top: ${el.offsetTop + 4}px;`;
     }
-    
+
     // If at the very end
     const lastEl = charElements[targetText.length - 1];
-    if (lastEl) return `left: ${lastEl.offsetLeft + lastEl.offsetWidth}px; top: ${lastEl.offsetTop + 4}px;`;
-    
+    if (lastEl)
+      return `left: ${lastEl.offsetLeft + lastEl.offsetWidth}px; top: ${lastEl.offsetTop + 4}px;`;
+
     return 'left: 0; top: 0.28rem;';
   });
 
-
   function handleInput(e: Event & { currentTarget: HTMLInputElement }) {
     if (isFinished) return;
-    
+
     if (startTime === 0) startTime = Date.now();
-    
+
     const newVal = e.currentTarget.value;
     const lastChar = newVal[newVal.length - 1];
     const targetChar = targetText[newVal.length - 1];
@@ -155,15 +154,15 @@
     const progress = userInput.length / targetText.length;
     // Map progress (0-1) to eye movement
     // x: -3px to +3px, y: stays looking down slightly
-    const x = (progress * 6) - 3;
-    const y = 2; 
+    const x = progress * 6 - 3;
+    const y = 2;
     return `translate(${x}px, ${y}px)`;
   });
 </script>
+
 <svelte:window onkeydown={handleGlobalKeydown} />
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
   class="typing-test"
@@ -175,7 +174,8 @@
   <header class="typing-intro">
     <h2 id="typing-play-heading" class="typing-intro-heading">If you love typing</h2>
     <p class="typing-intro-copy">
-      Click, type the gray line. New line: <kbd class="typing-kbd">Tab</kbd> or <span class="typing-intro-action">Reset</span>.
+      Click, type the gray line. New line: <kbd class="typing-kbd">Tab</kbd> or
+      <span class="typing-intro-action">Reset</span>.
     </p>
   </header>
 
@@ -189,24 +189,16 @@
     {:else}
       <div class="target-text">
         {#if !isFinished}
-          <div 
-            class="caret" 
-            class:blinking={userInput.length === 0}
-            style={caretStyle}
-          ></div>
+          <div class="caret" class:blinking={userInput.length === 0} style={caretStyle}></div>
         {/if}
-        {#each targetText.split('') as char, i}
-          <span 
-            bind:this={charElements[i]}
-            class={getCharClass(char, i)}
-          >{char}</span>
+        {#each targetText.split('') as char, i (i)}
+          <span bind:this={charElements[i]} class={getCharClass(char, i)}>{char}</span>
         {/each}
       </div>
 
-
-      <input 
-        type="text" 
-        bind:value={userInput} 
+      <input
+        type="text"
+        bind:value={userInput}
         bind:this={inputElement}
         oninput={handleInput}
         onfocus={() => (isFocused = true)}
@@ -218,8 +210,6 @@
         autocapitalize="off"
         spellcheck="false"
       />
-
-
     {/if}
   </div>
 </div>
@@ -352,14 +342,17 @@
     top: 0.28rem;
   }
 
-
   .caret.blinking {
     animation: blink 1s infinite alternate;
   }
 
   @keyframes blink {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 
   .char-pending {
@@ -378,7 +371,6 @@
     background: rgba(247, 118, 142, 0.15);
     border-radius: 2px;
   }
-
 
   @media (max-width: 768px) {
     .typing-intro {

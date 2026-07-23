@@ -5,8 +5,8 @@
   import 'leaflet/dist/leaflet.css';
 
   let mapContainer: HTMLElement;
-  let L: any;
-  let map: any;
+  let L: typeof import('leaflet');
+  let map: import('leaflet').Map;
 
   onMount(async () => {
     if (!browser) return;
@@ -29,7 +29,6 @@
       doubleClickZoom: true,
       boxZoom: true
     });
-
 
     // Premium Dark Theme tiles
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -109,7 +108,13 @@
     width: 120px;
     height: 3px;
     border-radius: 2px;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 0.1) 70%, transparent);
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.4) 30%,
+      rgba(255, 255, 255, 0.1) 70%,
+      transparent
+    );
     filter: blur(1px);
     animation: trail-breathe 2s ease-in-out infinite alternate;
     right: 28px;
@@ -124,20 +129,40 @@
   }
 
   @keyframes trail-breathe {
-    0%   { width: 120px; opacity: 0.9; filter: blur(1px); }
-    100% { width: 100px; opacity: 0.7; filter: blur(1.5px); }
+    0% {
+      width: 120px;
+      opacity: 0.9;
+      filter: blur(1px);
+    }
+    100% {
+      width: 100px;
+      opacity: 0.7;
+      filter: blur(1.5px);
+    }
   }
-
-
-
 
   @keyframes fly-across {
-    0% { left: -50px; top: 80%; transform: rotate(-21deg); opacity: 0; }
-    5% { transform: rotate(-21deg); opacity: 1; }
-    95% { transform: rotate(-21deg); opacity: 1; }
-    100% { left: 110%; top: 20%; transform: rotate(-21deg); opacity: 0; }
+    0% {
+      left: -50px;
+      top: 80%;
+      transform: rotate(-21deg);
+      opacity: 0;
+    }
+    5% {
+      transform: rotate(-21deg);
+      opacity: 1;
+    }
+    95% {
+      transform: rotate(-21deg);
+      opacity: 1;
+    }
+    100% {
+      left: 110%;
+      top: 20%;
+      transform: rotate(-21deg);
+      opacity: 0;
+    }
   }
-
 
   .map-hud {
     position: absolute;
@@ -178,4 +203,3 @@
     margin-bottom: 4px !important;
   }
 </style>
-

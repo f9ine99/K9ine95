@@ -15,7 +15,12 @@
 <!-- Overlay -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="drawer-overlay" data-lenis-prevent onclick={onCloseDrawer} transition:fade={{ duration: 200 }}></div>
+<div
+  class="drawer-overlay"
+  data-lenis-prevent
+  onclick={onCloseDrawer}
+  transition:fade={{ duration: 200 }}
+></div>
 
 <!-- Drawer -->
 <div
@@ -43,7 +48,8 @@
       <a
         href="/projects"
         class:active={currentPathname === '/projects' || currentPathname.startsWith('/projects/')}
-        onclick={onCloseDrawer}>Projects</a>
+        onclick={onCloseDrawer}>Projects</a
+      >
     </div>
 
     {#if currentPathname === '/'}
@@ -71,21 +77,35 @@
           <ExternalLink size={12} />
         </span>
       </a>
-      <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" onclick={onCloseDrawer}>
+      <a
+        href="https://github.com/f9ine99"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick={onCloseDrawer}
+      >
         <Github size={16} />
         <span>GitHub</span>
         <span class="ext-icon">
           <ExternalLink size={12} />
         </span>
       </a>
-      <a href="https://linkedin.com/in/k9ine95" target="_blank" rel="noopener noreferrer" onclick={onCloseDrawer}>
+      <a
+        href="https://linkedin.com/in/k9ine95"
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick={onCloseDrawer}
+      >
         <Linkedin size={16} />
         <span>LinkedIn</span>
         <span class="ext-icon">
           <ExternalLink size={12} />
         </span>
       </a>
-      <a href="mailto:firaolgemedabuliye@gmail.com" title="firaolgemedabuliye@gmail.com" onclick={onCloseDrawer}>
+      <a
+        href="mailto:firaolgemedabuliye@gmail.com"
+        title="firaolgemedabuliye@gmail.com"
+        onclick={onCloseDrawer}
+      >
         <Mail size={16} />
         <span>Email</span>
         <span class="ext-icon">
@@ -192,7 +212,9 @@
     color: var(--text-primary);
     text-decoration: none;
     padding: 0.4rem 0;
-    transition: color 0.15s ease, padding-left 0.15s ease;
+    transition:
+      color 0.15s ease,
+      padding-left 0.15s ease;
     font-family: var(--font-mono, monospace);
     -webkit-tap-highlight-color: transparent;
     position: relative;

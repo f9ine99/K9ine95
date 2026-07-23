@@ -50,7 +50,12 @@
 
   <div class="actions" in:fade={{ delay: 400, duration: 400 }}>
     {#if project.githubUrl && !project.isPrivate}
-      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="action-btn github">
+      <a
+        href={project.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="action-btn github"
+      >
         <Github size={16} />
         <span>View Source</span>
         <ExternalLink size={12} class="ext-icon" />

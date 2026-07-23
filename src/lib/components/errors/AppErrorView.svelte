@@ -168,7 +168,9 @@
     opacity: 0.1;
   }
   .error-500 .glitch {
-    text-shadow: 2px 0 var(--accent-orange), -2px 0 var(--accent-purple);
+    text-shadow:
+      2px 0 var(--accent-orange),
+      -2px 0 var(--accent-purple);
   }
   .error-500 :global(.error-icon) {
     color: var(--accent-red);
@@ -211,7 +213,9 @@
     position: relative;
     display: inline-block;
     color: #fff;
-    text-shadow: 2px 0 var(--accent-red), -2px 0 var(--accent-blue);
+    text-shadow:
+      2px 0 var(--accent-red),
+      -2px 0 var(--accent-blue);
   }
 
   .icon-wrapper {

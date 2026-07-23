@@ -1,16 +1,14 @@
 <script lang="ts">
   import { Github, Linkedin, Mail, Send } from 'lucide-svelte';
-  
-  let name = "Firaol Gemeda";
-  let handle = "@f9ine99";
-  let role = "Software Engineer & Cybersecurity Analyst";
-  let company = "HamerAI";
-  let location = "Addis Ababa, Ethiopia";
+
+  let name = 'Firaol Gemeda';
+  let role = 'Software Engineer & Cybersecurity Analyst';
+  let company = 'HamerAI';
 </script>
 
 <div class="about-section">
   <h1 class="about-title">About Me</h1>
-  
+
   <div class="about-container">
     <div class="avatar-column">
       <div class="avatar-frame">
@@ -25,47 +23,84 @@
         />
       </div>
     </div>
-    
+
     <div class="content-column">
       <div class="bio-content">
         <p class="bio-text">
-          Hey! I’m <span class="link accent">{name}</span> — a {role} at <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer" class="link">{company}</a> with a strong passion for exploring complex systems, solving meaningful problems, and understanding the deeper principles behind how things work.
-        </p>
-        
-        <p class="bio-text">
-          My interest in technology started early. As a kid, I loved spending time around laptops and tech gadgets, and I was especially inspired by hacking and tech-related movies. That early curiosity eventually grew into a real passion for software engineering and cybersecurity.
-        </p>
-        
-        <p class="bio-text">
-          I’m currently a third-year Computer Science student at <span class="link accent">Hope University College</span>, where I’m continuously building my knowledge and sharpening my skills in both development and security.
+          Hey! I’m <span class="link accent">{name}</span> — a {role} at
+          <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer" class="link"
+            >{company}</a
+          > with a strong passion for exploring complex systems, solving meaningful problems, and understanding
+          the deeper principles behind how things work.
         </p>
 
         <p class="bio-text">
-          A few of the projects I’m especially proud of include <a href="/projects/impactis" class="link accent">Impactis</a>, <a href="/projects/furi-cadaster" class="link accent">Furi Cadaster</a>, <a href="/projects/mufti-dawud-charity" class="link accent">Mufti Dawud Charity</a>, and <a href="/projects/termus-melesu" class="link accent">Termus-Melesu (Retra)</a> — each of which reflects my passion for building useful and meaningful digital solutions.
+          My interest in technology started early. As a kid, I loved spending time around laptops
+          and tech gadgets, and I was especially inspired by hacking and tech-related movies. That
+          early curiosity eventually grew into a real passion for software engineering and
+          cybersecurity.
         </p>
 
         <p class="bio-text">
-          Feel free to <a href="mailto:firaolgemedabuliye@gmail.com" class="link">send me an email</a> if you’d like to connect or chat.
+          I’m currently a third-year Computer Science student at <span class="link accent"
+            >Hope University College</span
+          >, where I’m continuously building my knowledge and sharpening my skills in both
+          development and security.
+        </p>
+
+        <p class="bio-text">
+          A few of the projects I’m especially proud of include <a
+            href="/projects/impactis"
+            class="link accent">Impactis</a
+          >, <a href="/projects/furi-cadaster" class="link accent">Furi Cadaster</a>,
+          <a href="/projects/mufti-dawud-charity" class="link accent">Mufti Dawud Charity</a>, and
+          <a href="/projects/termus-melesu" class="link accent">Termus-Melesu (Retra)</a> — each of which
+          reflects my passion for building useful and meaningful digital solutions.
+        </p>
+
+        <p class="bio-text">
+          Feel free to <a href="mailto:firaolgemedabuliye@gmail.com" class="link"
+            >send me an email</a
+          > if you’d like to connect or chat.
         </p>
       </div>
 
       <div class="social-footer">
-        <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" class="social-item">
+        <a
+          href="https://github.com/f9ine99"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-item"
+        >
           <Github size={18} />
           <span>GitHub</span>
         </a>
         <span class="divider">★</span>
-        <a href="https://linkedin.com/in/k9ine95" target="_blank" rel="noopener noreferrer" class="social-item">
+        <a
+          href="https://linkedin.com/in/k9ine95"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-item"
+        >
           <Linkedin size={18} />
           <span>LinkedIn</span>
         </a>
         <span class="divider">★</span>
-        <a href="https://t.me/K9ine95" target="_blank" rel="noopener noreferrer" class="social-item">
+        <a
+          href="https://t.me/K9ine95"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-item"
+        >
           <Send size={18} />
           <span>Telegram</span>
         </a>
         <span class="divider">★</span>
-        <a href="mailto:firaolgemedabuliye@gmail.com" class="social-item" title="firaolgemedabuliye@gmail.com">
+        <a
+          href="mailto:firaolgemedabuliye@gmail.com"
+          class="social-item"
+          title="firaolgemedabuliye@gmail.com"
+        >
           <Mail size={18} />
           <span>Email</span>
         </a>

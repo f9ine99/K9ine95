@@ -3,9 +3,7 @@
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
 
   import { projects } from '$lib/data/projects';
-  const featuredProjects = projects.filter(p =>
-    ['hamerai', 'impactis'].includes(p.slug)
-  );
+  const featuredProjects = projects.filter((p) => ['hamerai', 'impactis'].includes(p.slug));
 </script>
 
 <section class="featured-projects" id="projects">
@@ -16,9 +14,9 @@
     </div>
     <a href="/projects" class="view-all desktop-only">View all &rarr;</a>
   </div>
-  
+
   <div class="projects-grid">
-    {#each featuredProjects as project}
+    {#each featuredProjects as project (project.slug)}
       <ProjectCard {...project} />
     {/each}
   </div>

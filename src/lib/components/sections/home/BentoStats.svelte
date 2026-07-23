@@ -17,7 +17,11 @@
     color: string;
   }
 
-  let { commits = [], languages = [], error = '' } = $props<{ commits?: Commit[]; languages?: Language[]; error?: string }>();
+  let {
+    commits = [],
+    languages = [],
+    error = ''
+  } = $props<{ commits?: Commit[]; languages?: Language[]; error?: string }>();
 </script>
 
 <section class="bento-stats" id="stats">
@@ -65,7 +69,6 @@
     transform: translateY(-2px);
     background: var(--card-hover);
   }
-
 
   :global(.theme-card) {
     grid-column: span 2;

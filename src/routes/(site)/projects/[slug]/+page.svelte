@@ -12,7 +12,9 @@
 
   const slug = page.params.slug;
   const project = projects.find((p) => p.slug === slug);
-  const safePreviewDescription = $derived(project ? sanitizeRichText(project.preview.description) : '');
+  const safePreviewDescription = $derived(
+    project ? sanitizeRichText(project.preview.description) : ''
+  );
   const safeLongDescription = $derived(project ? sanitizeRichText(project.longDescription) : '');
   const safeStory = $derived(project?.story ? sanitizeRichText(project.story) : '');
 

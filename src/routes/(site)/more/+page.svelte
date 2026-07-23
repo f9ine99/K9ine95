@@ -21,9 +21,7 @@
     <div class="resume-copy">
       <p class="eyebrow">Resume / CV</p>
       <h1 id="resume-title">Download my resume</h1>
-      <p>
-        A quick overview of my software engineering, cybersecurity, and product-building work.
-      </p>
+      <p>A quick overview of my software engineering, cybersecurity, and product-building work.</p>
     </div>
 
     <div class="resume-actions">
@@ -118,7 +116,9 @@
     color: var(--bg-color);
     background: var(--accent-orange);
     font-weight: 700;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .resume-button:hover {

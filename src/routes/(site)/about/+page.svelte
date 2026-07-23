@@ -7,7 +7,7 @@
     'About Firaol Gemeda — software engineer and cybersecurity analyst at HamerAI, based in Addis Ababa. Background in full-stack development, security, and computer science.';
 </script>
 
-<SeoHead title="About" description={description} path="/about" jsonLd={personSchema()} />
+<SeoHead title="About" {description} path="/about" jsonLd={personSchema()} />
 
 <div class="about-page">
   <About />

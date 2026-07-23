@@ -10,8 +10,14 @@
     onCloseDrawer: () => void;
   }
 
-  let { currentPath, currentPathname, isDrawerOpen, isScrolled, onToggleDrawer, onCloseDrawer }: Props =
-    $props();
+  let {
+    currentPath,
+    currentPathname,
+    isDrawerOpen,
+    isScrolled,
+    onToggleDrawer,
+    onCloseDrawer
+  }: Props = $props();
 </script>
 
 <div class="navbar-wrapper" class:scrolled={isScrolled}>
@@ -159,7 +165,9 @@
     color: var(--text-primary);
     opacity: 0.55;
     padding: 0.4rem 0.15rem;
-    transition: color 0.15s ease, opacity 0.15s ease;
+    transition:
+      color 0.15s ease,
+      opacity 0.15s ease;
     text-decoration: none;
     white-space: nowrap;
     font-family: var(--font-mono);
@@ -181,7 +189,9 @@
     opacity: 0.55;
     padding: 0.4rem 0.15rem;
     cursor: pointer;
-    transition: color 0.15s ease, opacity 0.15s ease;
+    transition:
+      color 0.15s ease,
+      opacity 0.15s ease;
     white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
   }

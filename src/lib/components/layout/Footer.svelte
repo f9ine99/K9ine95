@@ -3,7 +3,7 @@
   import { Github, Linkedin, Mail, Clock3 } from 'lucide-svelte';
 
   let time = $state('');
-  // @ts-ignore
+  // @ts-expect-error injected at build time by Vite define
   let commitHash = typeof __COMMIT_HASH__ !== 'undefined' ? __COMMIT_HASH__ : 'dev';
 
   let isOnline = $state(true);
@@ -39,7 +39,9 @@
       <span class="separator">-</span>
       <div class="status" class:offline={!isOnline}>
         <span class="status-dot"></span>
-        <span class="status-text">{isOnline ? 'All Systems Nominal' : 'Connection Interrupted'}</span>
+        <span class="status-text"
+          >{isOnline ? 'All Systems Nominal' : 'Connection Interrupted'}</span
+        >
       </div>
     </div>
 
@@ -50,31 +52,57 @@
           {time}
         </span>
         <a
-          href={`https://github.com/f9ine99/K9ine95/commit/${commitHash}`} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+          href={`https://github.com/f9ine99/K9ine95/commit/${commitHash}`}
+          target="_blank"
+          rel="noopener noreferrer"
           class="commit"
           title="View commit on GitHub"
         >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="4"/><line x1="1.05" y1="12" x2="7" y2="12"/><line x1="17.01" y1="12" x2="22.96" y2="12"/>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="4" /><line x1="1.05" y1="12" x2="7" y2="12" /><line
+              x1="17.01"
+              y1="12"
+              x2="22.96"
+              y2="12"
+            />
           </svg>
           {commitHash}
         </a>
       </div>
-      
+
       <span class="separator">-</span>
-      
+
       <div class="footer-socials">
-        <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <a
+          href="https://github.com/f9ine99"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="GitHub"
+        >
           <Github size={20} />
         </a>
-        <a href="https://linkedin.com/in/k9ine95" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <a
+          href="https://linkedin.com/in/k9ine95"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="LinkedIn"
+        >
           <Linkedin size={20} />
         </a>
         <a href="https://x.com/k9ineP" target="_blank" rel="noopener noreferrer" title="X">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153ZM17.61 20.644h2.039L6.486 3.24H4.298L17.61 20.644Z" />
+            <path
+              d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153ZM17.61 20.644h2.039L6.486 3.24H4.298L17.61 20.644Z"
+            />
           </svg>
         </a>
         <a href="mailto:firaolgemedabuliye@gmail.com" title="firaolgemedabuliye@gmail.com">
@@ -112,7 +140,11 @@
     letter-spacing: -0.01em;
   }
 
-  .left-section, .right-section, .stats, .footer-socials, .status {
+  .left-section,
+  .right-section,
+  .stats,
+  .footer-socials,
+  .status {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -139,15 +171,25 @@
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.85); }
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.85);
+    }
   }
 
   .stats {
     gap: 1.25rem;
   }
 
-  .status-text, .copyright, .time, .commit {
+  .status-text,
+  .copyright,
+  .time,
+  .commit {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -186,12 +228,14 @@
       text-align: center;
       min-height: auto;
     }
-    
+
     .separator {
       display: none;
     }
 
-    .left-section, .right-section, .stats {
+    .left-section,
+    .right-section,
+    .stats {
       flex-direction: column;
       gap: 0.8rem;
       align-items: center;

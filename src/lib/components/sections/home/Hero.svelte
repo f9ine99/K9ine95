@@ -1,10 +1,9 @@
 <script lang="ts">
-  let name = "Firaol Gemeda";
-  const statusLabel = "Available for work";
+  let name = 'Firaol Gemeda';
+  const statusLabel = 'Available for work';
   let isHovered = $state(false);
   let showHighlight = $state(false);
   let interactionTimeout: ReturnType<typeof setTimeout> | undefined;
-  let waveCount = $state(0);
   let floatingPlusOnes = $state<{ id: number; x: number; emoji: string }[]>([]);
   let nextId = 0;
 
@@ -25,21 +24,20 @@
   const emojis = ['✨', '🎉', '🔥', '👏', '💯', '+1'];
 
   function handleWaveClick() {
-    waveCount++;
     const id = nextId++;
     const x = Math.random() * 60 - 30;
     const emoji = emojis[Math.floor(Math.random() * emojis.length)];
     floatingPlusOnes = [...floatingPlusOnes, { id, x, emoji }];
     setTimeout(() => {
-      floatingPlusOnes = floatingPlusOnes.filter(p => p.id !== id);
+      floatingPlusOnes = floatingPlusOnes.filter((p) => p.id !== id);
     }, 1200);
   }
 </script>
 
 <header class="hero" id="home">
   <div class="profile-row">
-    <div 
-      class="avatar-container" 
+    <div
+      class="avatar-container"
       onmouseenter={handleEnter}
       onmouseleave={handleLeave}
       ontouchstart={handleEnter}
@@ -49,10 +47,7 @@
       tabindex="0"
     >
       <svg class="circle-svg" viewBox="0 0 100 100">
-        <circle 
-          cx="50" cy="50" r="48" 
-          class="circle-path {isHovered ? 'animate' : ''}" 
-        />
+        <circle cx="50" cy="50" r="48" class="circle-path {isHovered ? 'animate' : ''}" />
       </svg>
       <div class="image-wrapper">
         <img
@@ -76,9 +71,7 @@
       <h1 class="greeting">
         Hey! I'm <span class="name">{name}</span>
         <span class="wave-wrapper">
-          <button class="wave-btn" onclick={handleWaveClick} aria-label="Wave">
-            👋🏻
-          </button>
+          <button class="wave-btn" onclick={handleWaveClick} aria-label="Wave"> 👋🏻 </button>
           {#each floatingPlusOnes as plusOne (plusOne.id)}
             <span class="floating-plus" style="--x: {plusOne.x}px">{plusOne.emoji}</span>
           {/each}
@@ -88,7 +81,11 @@
   </div>
   <p class="bio">
     <span class="highlight-group {showHighlight ? 'active' : ''}">
-      <span>Co-Founder of <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer">HamerAI</a> | Software Engineer & Cybersecurity Analyst</span>
+      <span
+        >Co-Founder of <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer"
+          >HamerAI</a
+        > | Software Engineer & Cybersecurity Analyst</span
+      >
     </span>
     <br />
     Building secure, scalable systems and solving real-world cybersecurity challenges.
@@ -158,7 +155,9 @@
   }
 
   @keyframes drawCircle {
-    to { stroke-dashoffset: 0; }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   .image-wrapper {
@@ -170,7 +169,10 @@
     border: 2px solid var(--selection-bg);
     background: var(--bg-color);
     z-index: 5;
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
   }
 
   .avatar {
@@ -240,8 +242,15 @@
   }
 
   @keyframes statusPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.55; transform: scale(0.85); }
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.55;
+      transform: scale(0.85);
+    }
   }
 
   .intro {
@@ -292,7 +301,9 @@
     pointer-events: none;
     animation: floatUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     transform: translateX(calc(-50% + var(--x)));
-    text-shadow: 0 0 12px var(--accent-orange), 0 0 4px var(--accent-orange);
+    text-shadow:
+      0 0 12px var(--accent-orange),
+      0 0 4px var(--accent-orange);
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
   }
 
@@ -312,11 +323,22 @@
   }
 
   @keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    20% { transform: rotate(-10deg); }
-    40% { transform: rotate(10deg); }
-    60% { transform: rotate(-10deg); }
-    80% { transform: rotate(10deg); }
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    20% {
+      transform: rotate(-10deg);
+    }
+    40% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(-10deg);
+    }
+    80% {
+      transform: rotate(10deg);
+    }
   }
 
   .name {
@@ -365,7 +387,7 @@
       padding: 0.24rem 0.5rem;
       bottom: -0.75rem;
     }
-    
+
     .bio {
       font-size: 1rem;
     }

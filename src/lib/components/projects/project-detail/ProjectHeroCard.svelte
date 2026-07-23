@@ -14,9 +14,9 @@
 
 <div class="hero" in:fly={{ y: 30, duration: 600, easing: backOut }}>
   <div class="terminal-hero-wrap">
-      <div class="terminal-backdrop" aria-hidden="true"></div>
-      <div class="terminal-inner">
-        <div class="terminal-preview">
+    <div class="terminal-backdrop" aria-hidden="true"></div>
+    <div class="terminal-inner">
+      <div class="terminal-preview">
         <div class="terminal-header">
           <div class="dots">
             <span class="dot red"></span>
@@ -48,7 +48,7 @@
           {#if project.preview.contributors}
             <div class="contributors">
               <div class="avatar-stack">
-                {#each project.preview.contributors as contributor}
+                {#each project.preview.contributors as contributor (contributor.name)}
                   <div class="avatar-wrapper">
                     <img
                       src={contributor.avatar}
@@ -73,12 +73,15 @@
           {#if project.languages && project.languages.length > 0}
             <div class="language-bar">
               <div class="bar-track">
-                {#each project.languages as lang}
-                  <div class="bar-segment" style="width: {lang.percentage}%; background: {lang.color}"></div>
+                {#each project.languages as lang (lang.name)}
+                  <div
+                    class="bar-segment"
+                    style="width: {lang.percentage}%; background: {lang.color}"
+                  ></div>
                 {/each}
               </div>
               <div class="bar-labels">
-                {#each project.languages as lang}
+                {#each project.languages as lang (lang.name)}
                   <div class="lang-label">
                     <span class="lang-dot" style="background: {lang.color}"></span>
                     <span class="lang-name">{lang.name}</span>
@@ -89,9 +92,9 @@
             </div>
           {/if}
         </div>
-        </div>
       </div>
     </div>
+  </div>
 </div>
 
 <style>

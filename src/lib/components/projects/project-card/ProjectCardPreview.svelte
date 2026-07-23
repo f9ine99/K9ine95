@@ -17,90 +17,105 @@
   <div class="terminal-backdrop" aria-hidden="true"></div>
   <div class="terminal-inner">
     <div class="preview-container">
-  <div class="terminal-header">
-    <div class="dots">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-    </div>
+      <div class="terminal-header">
+        <div class="dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
 
-    {#if isPrivate}
-      <div class="private-badge">
-        <Lock size={11} />
-        <span>Private</span>
-      </div>
-    {:else if slug === 'termus-melesu'}
-      <div class="public-badge">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="os-icon-enhanced">
-          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-          <path d="m3.3 7 8.7 5 8.7-5" class="inner-path"/>
-          <path d="M12 22V12" class="inner-path"/>
-          <path d="m10 14-2 2 2 2" class="code-symbol"/>
-          <path d="m14 18 2-2-2-2" class="code-symbol"/>
-        </svg>
-        <span>Open Source</span>
-      </div>
-    {:else if preview.stars}
-      <div class="stars">
-        <span>{preview.stars}</span>
-        <Star size={12} fill="currentColor" />
-      </div>
-    {/if}
-  </div>
-
-  <div class="terminal-body">
-    <div class="repo-info">
-      <span class="owner">f9ine99</span>
-      <span class="separator">/</span>
-      <span class="name">{preview.repo}</span>
-    </div>
-
-    <p class="repo-desc">{preview.description}</p>
-
-    {#if preview.contributors}
-      <div class="contributors">
-        <div class="avatar-stack">
-          {#each preview.contributors as contributor}
-            <div class="avatar-wrapper">
-              <img
-                src={contributor.avatar}
-                alt={contributor.name}
-                class="mini-avatar"
-                loading="lazy"
-                decoding="async"
-                width="32"
-                height="32"
+        {#if isPrivate}
+          <div class="private-badge">
+            <Lock size={11} />
+            <span>Private</span>
+          </div>
+        {:else if slug === 'termus-melesu'}
+          <div class="public-badge">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="os-icon-enhanced"
+            >
+              <path
+                d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
               />
-              <div class="avatar-tooltip">{contributor.name}</div>
-            </div>
-          {/each}
-        </div>
-        <span class="ctb-count">
-          {preview.contributors.length}
-          {preview.contributors.length === 1 ? 'Contributor' : 'Contributors'}
-        </span>
+              <path d="m3.3 7 8.7 5 8.7-5" class="inner-path" />
+              <path d="M12 22V12" class="inner-path" />
+              <path d="m10 14-2 2 2 2" class="code-symbol" />
+              <path d="m14 18 2-2-2-2" class="code-symbol" />
+            </svg>
+            <span>Open Source</span>
+          </div>
+        {:else if preview.stars}
+          <div class="stars">
+            <span>{preview.stars}</span>
+            <Star size={12} fill="currentColor" />
+          </div>
+        {/if}
       </div>
-    {/if}
 
-    {#if languages && languages.length > 0}
-      <div class="language-bar">
-        <div class="bar-track">
-          {#each languages as lang}
-            <div class="bar-segment" style="width: {lang.percentage}%; background: {lang.color}"></div>
-          {/each}
+      <div class="terminal-body">
+        <div class="repo-info">
+          <span class="owner">f9ine99</span>
+          <span class="separator">/</span>
+          <span class="name">{preview.repo}</span>
         </div>
-        <div class="bar-labels">
-          {#each languages as lang}
-            <div class="lang-label">
-              <span class="lang-dot" style="background: {lang.color}"></span>
-              <span class="lang-name">{lang.name}</span>
-              <span class="lang-pct">{lang.percentage}%</span>
+
+        <p class="repo-desc">{preview.description}</p>
+
+        {#if preview.contributors}
+          <div class="contributors">
+            <div class="avatar-stack">
+              {#each preview.contributors as contributor (contributor.name)}
+                <div class="avatar-wrapper">
+                  <img
+                    src={contributor.avatar}
+                    alt={contributor.name}
+                    class="mini-avatar"
+                    loading="lazy"
+                    decoding="async"
+                    width="32"
+                    height="32"
+                  />
+                  <div class="avatar-tooltip">{contributor.name}</div>
+                </div>
+              {/each}
             </div>
-          {/each}
-        </div>
+            <span class="ctb-count">
+              {preview.contributors.length}
+              {preview.contributors.length === 1 ? 'Contributor' : 'Contributors'}
+            </span>
+          </div>
+        {/if}
+
+        {#if languages && languages.length > 0}
+          <div class="language-bar">
+            <div class="bar-track">
+              {#each languages as lang (lang.name)}
+                <div
+                  class="bar-segment"
+                  style="width: {lang.percentage}%; background: {lang.color}"
+                ></div>
+              {/each}
+            </div>
+            <div class="bar-labels">
+              {#each languages as lang (lang.name)}
+                <div class="lang-label">
+                  <span class="lang-dot" style="background: {lang.color}"></span>
+                  <span class="lang-name">{lang.name}</span>
+                  <span class="lang-pct">{lang.percentage}%</span>
+                </div>
+              {/each}
+            </div>
+          </div>
+        {/if}
       </div>
-    {/if}
-  </div>
     </div>
   </div>
 </div>

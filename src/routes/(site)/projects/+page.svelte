@@ -9,7 +9,7 @@
     'Selected software projects by Firaol Gemeda — marketplaces, charity platforms, security tooling, and full-stack web applications.';
 </script>
 
-<SeoHead title="Projects" description={description} path="/projects" />
+<SeoHead title="Projects" {description} path="/projects" />
 
 <div class="projects-page" in:fade={{ duration: 600 }}>
   <header class="page-header">
@@ -21,7 +21,7 @@
   </header>
 
   <div class="projects-grid">
-    {#each projects as project}
+    {#each projects as project (project.slug)}
       <ProjectCard {...project} />
     {/each}
   </div>

@@ -67,9 +67,12 @@ export function sanitizeRichText(input: string): string {
   working = working.replace(/<\s*script[\s\S]*?>[\s\S]*?<\s*\/\s*script\s*>/gi, '');
   working = working.replace(/<\s*style[\s\S]*?>[\s\S]*?<\s*\/\s*style\s*>/gi, '');
 
-  working = working.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (_match, attrs: string, text: string) => {
-    return pushToken(sanitizeAnchor(attrs ?? '', text ?? ''));
-  });
+  working = working.replace(
+    /<a\b([^>]*)>([\s\S]*?)<\/a>/gi,
+    (_match, attrs: string, text: string) => {
+      return pushToken(sanitizeAnchor(attrs ?? '', text ?? ''));
+    }
+  );
 
   working = working.replace(/<\s*strong\s*>/gi, () => pushToken('<strong>'));
   working = working.replace(/<\s*\/\s*strong\s*>/gi, () => pushToken('</strong>'));

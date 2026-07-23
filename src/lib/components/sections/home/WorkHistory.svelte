@@ -1,14 +1,29 @@
 <script>
   const history = [
-    { name: 'HamerAI', image: '/images/hamerAI.jpg', current: true, link: 'https://ethiohamerai.com' },
-    { name: 'INSA', image: '/images/insa-icon.png', current: false, link: 'https://www.insa.gov.et/' },
-    { name: 'Alx Ethiopia', image: '/images/alx-pic.webp', current: false, invert: true, link: 'https://www.alxafrica.com/' }
+    {
+      name: 'HamerAI',
+      image: '/images/hamerAI.jpg',
+      current: true,
+      link: 'https://ethiohamerai.com'
+    },
+    {
+      name: 'INSA',
+      image: '/images/insa-icon.png',
+      current: false,
+      link: 'https://www.insa.gov.et/'
+    },
+    {
+      name: 'Alx Ethiopia',
+      image: '/images/alx-pic.webp',
+      current: false,
+      invert: true,
+      link: 'https://www.alxafrica.com/'
+    }
   ];
-
 </script>
 
 <div class="work-history" id="work">
-  {#each history as item, i}
+  {#each history as item, i (item.name)}
     <a href={item.link} target="_blank" rel="noopener noreferrer" class="item-link">
       <div class="item">
         {#if item.image}
@@ -98,8 +113,6 @@
     filter: brightness(0) invert(1);
     opacity: 0.9;
   }
-
-
 
   .name {
     font-weight: 500;

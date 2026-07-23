@@ -9,8 +9,12 @@
     <span>Theme</span>
   </div>
   <div class="flavor-grid">
-    {#each themes as theme}
-      <button class="flavor-btn" class:active={themeState.currentTheme === theme} onclick={() => applyTheme(theme)}>
+    {#each themes as theme (theme)}
+      <button
+        class="flavor-btn"
+        class:active={themeState.currentTheme === theme}
+        onclick={() => applyTheme(theme)}
+      >
         {theme}
       </button>
     {/each}
@@ -23,7 +27,7 @@
     <span>Accent</span>
   </div>
   <div class="color-grid">
-    {#each colors as color}
+    {#each colors as color (color)}
       <button
         class="color-circle"
         style="background: {color}; --glow-color: {color}"
@@ -102,7 +106,11 @@
     outline: 2px solid transparent;
     outline-offset: 3px;
     cursor: pointer;
-    transition: transform 0.25s ease, opacity 0.25s ease, outline-color 0.25s ease, box-shadow 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease,
+      outline-color 0.25s ease,
+      box-shadow 0.25s ease;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -127,5 +135,4 @@
     border-radius: 50%;
     flex-shrink: 0;
   }
-
 </style>

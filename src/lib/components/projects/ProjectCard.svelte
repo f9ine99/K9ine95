@@ -22,10 +22,7 @@
   let isHovered = $state(false);
 </script>
 
-<div
-  class="project-card"
-  in:fade={{ duration: 400 }}
->
+<div class="project-card" in:fade={{ duration: 400 }}>
   <a
     href="/projects/{slug}"
     class="card-link"

@@ -11,9 +11,7 @@
     loadSavedTheme();
   });
 
-  const headTitle = $derived(
-    page.status === 404 ? 'Page not found' : `Error ${page.status}`
-  );
+  const headTitle = $derived(page.status === 404 ? 'Page not found' : `Error ${page.status}`);
 </script>
 
 <svelte:head>

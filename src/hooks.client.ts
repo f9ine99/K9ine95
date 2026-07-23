@@ -2,20 +2,20 @@ import type { HandleClientError } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 
 export const handleError: HandleClientError = ({ error, event, status, message }) => {
-	const path = event.url?.pathname ?? '';
-	const cause = error instanceof Error ? error : new Error(String(error));
+  const path = event.url?.pathname ?? '';
+  const cause = error instanceof Error ? error : new Error(String(error));
 
-	console.error(`[handleError:client] ${status} ${path}`, message, cause);
+  console.error(`[handleError:client] ${status} ${path}`, message, cause);
 
-	if (dev) {
-		return { message: cause.message || message };
-	}
+  if (dev) {
+    return { message: cause.message || message };
+  }
 
-	if (status === 404) {
-		return { message: 'Page not found' };
-	}
+  if (status === 404) {
+    return { message: 'Page not found' };
+  }
 
-	return {
-		message: status >= 500 ? 'Something went wrong' : message || 'Something went wrong'
-	};
+  return {
+    message: status >= 500 ? 'Something went wrong' : message || 'Something went wrong'
+  };
 };

@@ -11,15 +11,18 @@
   </div>
 
   <div class="theme-options">
-    {#each themes as theme}
-      <button class="theme-btn {themeState.currentTheme === theme ? 'active' : ''}" onclick={() => applyTheme(theme)}>
+    {#each themes as theme (theme)}
+      <button
+        class="theme-btn {themeState.currentTheme === theme ? 'active' : ''}"
+        onclick={() => applyTheme(theme)}
+      >
         {theme}
       </button>
     {/each}
   </div>
 
   <div class="color-grid">
-    {#each colors as color}
+    {#each colors as color (color)}
       <button
         class="color-circle {themeState.currentAccentColor === color ? 'active' : ''}"
         style="background: {color}; --glow-color: {color}"
@@ -89,7 +92,11 @@
     outline: 2px solid transparent;
     outline-offset: 3px;
     cursor: pointer;
-    transition: transform 0.25s ease, opacity 0.25s ease, outline-color 0.25s ease, box-shadow 0.25s ease;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease,
+      outline-color 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   .color-circle:hover {
@@ -100,18 +107,24 @@
     opacity: 1;
     outline: 2px solid var(--glow-color, currentColor);
     outline-offset: 3px;
-    box-shadow: 0 0 4px 1px var(--glow-color, currentColor), 0 0 8px 2px var(--glow-color, currentColor);
+    box-shadow:
+      0 0 4px 1px var(--glow-color, currentColor),
+      0 0 8px 2px var(--glow-color, currentColor);
     animation: color-glow-pulse 2s ease-in-out infinite;
   }
 
   @keyframes color-glow-pulse {
     0%,
     100% {
-      box-shadow: 0 0 4px 1px var(--glow-color, currentColor), 0 0 8px 2px var(--glow-color, currentColor);
+      box-shadow:
+        0 0 4px 1px var(--glow-color, currentColor),
+        0 0 8px 2px var(--glow-color, currentColor);
     }
 
     50% {
-      box-shadow: 0 0 6px 2px var(--glow-color, currentColor), 0 0 12px 4px var(--glow-color, currentColor);
+      box-shadow:
+        0 0 6px 2px var(--glow-color, currentColor),
+        0 0 12px 4px var(--glow-color, currentColor);
     }
   }
 

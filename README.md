@@ -10,6 +10,7 @@ K9ine95 is my personal digital playground and the third iteration of my portfoli
 ![npm](https://img.shields.io/badge/npm-CB3837?style=flat-square&logo=npm&logoColor=white)
 
 ## Inspirations
+
 This portfolio project draws inspiration from the design principles and layout style used by [Jason Cameron](https://github.com/JasonLovesDoggo)
 
 Thank you for visiting — and please leave a ⭐ if you likey!

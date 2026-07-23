@@ -58,10 +58,11 @@
         <span class="commit-msg">Failed to fetch recent activity from GitHub.</span>
       </div>
     {:else}
-      {#each finalCommits as commit}
+      {#each finalCommits as commit, i (i)}
         <div class="commit-item" title={commit.date}>
           <span class="commit-msg">
-            <span class="repo-name">{commit.repo}:</span> {commit.msg}
+            <span class="repo-name">{commit.repo}:</span>
+            {commit.msg}
           </span>
           {#if commit.repo !== 'error'}
             <span class="commit-stats">
@@ -79,7 +80,12 @@
   </div>
 
   <div class="commits-footer">
-    <a href="https://github.com/f9ine99" target="_blank" rel="noopener noreferrer" class="github-link">
+    <a
+      href="https://github.com/f9ine99"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link"
+    >
       View on GitHub <ExternalLink size={13} />
     </a>
 
@@ -93,7 +99,7 @@
 
       <div class="activity-bar" class:loading={isLoadingCommits}>
         {#if languages && languages.length > 0}
-          {#each languages as lang}
+          {#each languages as lang (lang.name)}
             <div
               class="bar-segment"
               style="width: {lang.percent}%; background: {lang.color};"
@@ -279,7 +285,9 @@
 
   .bar-segment {
     height: 100%;
-    transition: width 0.3s, opacity 0.2s;
+    transition:
+      width 0.3s,
+      opacity 0.2s;
     cursor: pointer;
   }
 

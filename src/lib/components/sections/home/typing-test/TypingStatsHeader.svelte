@@ -21,7 +21,12 @@
     <span>{accuracy}% ACC</span>
   </div>
 
-  <button type="button" class="reset-btn" onclick={() => onReset()} title="New line (keyboard: Tab)">
+  <button
+    type="button"
+    class="reset-btn"
+    onclick={() => onReset()}
+    title="New line (keyboard: Tab)"
+  >
     <RefreshCw size={13} />
     <span class="reset-hint">Reset</span>
   </button>
@@ -59,7 +64,9 @@
     cursor: pointer;
     padding: 0.25rem 0.45rem;
     border-radius: 6px;
-    transition: color 0.15s ease, background-color 0.15s ease;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
     margin-left: auto;
   }
 
