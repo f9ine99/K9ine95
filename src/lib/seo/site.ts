@@ -9,7 +9,7 @@ export const SITE = {
 	description:
 		'Portfolio of Firaol Gemeda — software engineer and cybersecurity analyst at HamerAI. Projects in full-stack development, AI platforms, and security tooling.',
 	defaultTitle: 'Firaol Gemeda — Software Engineer & Cybersecurity Analyst',
-	ogImage: '/images/firaol.jpg',
+	ogImage: '/og.png',
 	locale: 'en_US',
 	twitter: '@k9ineP',
 	email: 'firaolgemedabuliye@gmail.com',
