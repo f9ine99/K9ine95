@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Star } from 'lucide-svelte';
+  import { ArrowRight, Star } from 'lucide-svelte';
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
 
   import { projects } from '$lib/data/projects';
@@ -12,7 +12,10 @@
       <Star size={32} />
       <h2>Featured Projects</h2>
     </div>
-    <a href="/projects" class="view-all desktop-only">View all &rarr;</a>
+    <a href="/projects" class="view-all desktop-only">
+      View all
+      <ArrowRight size={15} />
+    </a>
   </div>
 
   <div class="projects-grid">
@@ -22,7 +25,10 @@
   </div>
 
   <div class="mobile-footer">
-    <a href="/projects" class="view-all mobile-only">View all &rarr;</a>
+    <a href="/projects" class="view-all mobile-only">
+      View all
+      <ArrowRight size={15} />
+    </a>
   </div>
 </section>
 
@@ -97,9 +103,11 @@
   }
 
   .title h2 {
+    font-family: var(--font-display);
     font-size: 2.25rem;
     color: var(--text-primary);
     font-weight: 700;
+    letter-spacing: -0.03em;
   }
 
   .projects-grid {
@@ -110,17 +118,45 @@
   }
 
   .view-all {
-    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.95rem 0.55rem 1.05rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-medium);
+    background: color-mix(in srgb, var(--card-bg) 80%, transparent);
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--text-primary);
-    opacity: 0.8;
-    border-bottom: 1px dotted var(--text-muted);
-    padding-bottom: 2px;
+    text-decoration: none;
+    transition:
+      transform 0.18s ease,
+      color 0.18s ease,
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .view-all :global(svg) {
+    transition: transform 0.18s ease;
   }
 
   .view-all:hover {
-    opacity: 1;
-    color: var(--accent-orange);
-    border-bottom-color: var(--accent-orange);
+    color: var(--bg-color);
+    background: var(--accent-orange);
+    border-color: var(--accent-orange);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px var(--shadow-medium);
+  }
+
+  .view-all:hover :global(svg) {
+    transform: translateX(2px);
+  }
+
+  :global(.Latte) .view-all:hover {
+    color: #111;
   }
 
   .mobile-footer {
