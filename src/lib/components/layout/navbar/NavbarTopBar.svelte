@@ -21,26 +21,31 @@
 </script>
 
 <div class="navbar-wrapper" class:scrolled={isScrolled}>
-  <div class="navbar">
+  <nav class="navbar" aria-label="Primary">
     <a href="/" class="brand" onclick={onCloseDrawer}>
       <span class="prompt">~/{currentPath}</span>
     </a>
 
     <ul class="nav-links">
-      <li><a href="/" class:active={currentPathname === '/'}>Home</a></li>
-      <li><a href="/about" class:active={currentPathname === '/about'}>About</a></li>
+      <li>
+        <a href="/" class:active={currentPathname === '/'}>Home</a>
+      </li>
+      <li>
+        <a href="/about" class:active={currentPathname === '/about'}>About</a>
+      </li>
       <li>
         <a
           href="/projects"
           class:active={currentPathname === '/projects' || currentPathname.startsWith('/projects/')}
-          >Projects</a
         >
+          Projects
+        </a>
       </li>
       <li>
         <button
           type="button"
           class="nav-more-trigger"
-          class:active={isDrawerOpen}
+          class:active={isDrawerOpen || currentPathname === '/more'}
           aria-expanded={isDrawerOpen}
           aria-haspopup="dialog"
           onclick={onToggleDrawer}
@@ -58,12 +63,12 @@
       aria-expanded={isDrawerOpen}
     >
       {#if isDrawerOpen}
-        <X size={24} />
+        <X size={22} />
       {:else}
-        <Menu size={24} />
+        <Menu size={22} />
       {/if}
     </button>
-  </div>
+  </nav>
 </div>
 
 <style>
@@ -73,153 +78,117 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: padding 0.22s ease;
-    padding: 1.1rem 0;
+    padding: 1.15rem 0;
     pointer-events: none;
+    transition: padding 0.22s ease;
   }
 
   .navbar-wrapper.scrolled {
-    padding: 0.55rem 0;
+    padding: 0.7rem 0;
   }
 
   .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1180px;
+    gap: 1.5rem;
+    width: min(92%, 720px);
     margin: 0 auto;
-    padding: 0.7rem 1.5rem;
-    width: 94%;
+    padding: 0.72rem 1.35rem;
     pointer-events: auto;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid transparent;
-    background: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    border-radius: 16px;
+    border: 1px solid var(--border-medium);
+    background: color-mix(in srgb, var(--card-bg) 82%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 10px 28px -12px var(--shadow-medium);
     transition:
+      width 0.22s ease,
       padding 0.22s ease,
-      background 0.22s ease,
-      border-color 0.22s ease,
-      box-shadow 0.22s ease;
+      box-shadow 0.22s ease,
+      background-color 0.22s ease;
   }
 
   .navbar-wrapper.scrolled .navbar {
-    max-width: 820px;
-    background: rgba(17, 17, 27, 0.28);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 0.58rem 1.35rem;
-    box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.45);
+    width: min(92%, 640px);
+    padding: 0.62rem 1.2rem;
+    box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.45);
   }
 
-  :global(.Frappe) .navbar-wrapper.scrolled .navbar {
-    background: rgba(48, 52, 70, 0.3);
-  }
-
-  :global(.Macchiato) .navbar-wrapper.scrolled .navbar {
-    background: rgba(36, 39, 58, 0.3);
-  }
-
-  :global(.Latte) .navbar-wrapper.scrolled .navbar {
-    background: rgba(230, 233, 239, 0.45);
-    border-color: rgba(0, 0, 0, 0.06);
-    box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.08);
+  :global(.Latte) .navbar {
+    background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+    box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.08);
   }
 
   .brand {
     display: flex;
     align-items: center;
     text-decoration: none;
+    min-width: 0;
     transition: opacity 0.15s ease;
   }
 
   .brand:hover {
-    opacity: 0.88;
+    opacity: 0.85;
   }
 
   .prompt {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--accent-orange);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--text-primary);
     white-space: nowrap;
-    letter-spacing: -0.01em;
-    max-width: 240px;
+    letter-spacing: -0.02em;
+    max-width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .nav-links {
     display: flex;
-    gap: 1.25rem;
+    align-items: center;
+    gap: 1.35rem;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .nav-links a {
-    font-size: 0.85rem;
+  .nav-links a,
+  .nav-more-trigger {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
     font-weight: 500;
-    color: var(--text-primary);
-    opacity: 0.55;
-    padding: 0.4rem 0.15rem;
-    transition:
-      color 0.15s ease,
-      opacity 0.15s ease;
+    color: var(--text-muted);
+    opacity: 1;
+    padding: 0.25rem 0;
     text-decoration: none;
     white-space: nowrap;
-    font-family: var(--font-mono);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .nav-links a:active {
-    opacity: 0.75;
-  }
-
-  .nav-more-trigger {
-    display: inline-block;
     background: none;
     border: none;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    opacity: 0.55;
-    padding: 0.4rem 0.15rem;
     cursor: pointer;
-    transition:
-      color 0.15s ease,
-      opacity 0.15s ease;
-    white-space: nowrap;
+    transition: color 0.15s ease;
     -webkit-tap-highlight-color: transparent;
   }
 
-  .nav-more-trigger:active {
-    opacity: 0.75;
+  .nav-links a:hover,
+  .nav-more-trigger:hover {
+    color: var(--text-primary);
   }
 
-  .nav-more-trigger:hover,
+  .nav-links a.active,
   .nav-more-trigger.active {
-    opacity: 1;
-    color: var(--accent-orange);
+    color: var(--text-primary);
   }
 
   .nav-more-trigger:focus {
     outline: none;
   }
 
-  .nav-more-trigger:focus-visible {
+  .nav-more-trigger:focus-visible,
+  .nav-links a:focus-visible {
     outline: 2px solid var(--accent-orange);
     outline-offset: 3px;
     border-radius: 4px;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    opacity: 1;
-    color: var(--accent-orange);
   }
 
   .menu-toggle {
@@ -228,11 +197,10 @@
     border: none;
     color: var(--text-primary);
     cursor: pointer;
-    padding: 0.45rem;
-    z-index: 1001;
-    -webkit-tap-highlight-color: transparent;
-    transition: opacity 0.15s ease;
+    padding: 0.35rem;
     opacity: 0.85;
+    transition: opacity 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .menu-toggle:hover {
@@ -240,6 +208,11 @@
   }
 
   @media (max-width: 800px) {
+    .navbar {
+      width: min(94%, 520px);
+      padding: 0.65rem 1rem;
+    }
+
     .nav-links {
       display: none;
     }
@@ -247,19 +220,10 @@
     .menu-toggle {
       display: block;
     }
-  }
 
-  @media (min-width: 801px) and (max-width: 980px) {
-    .nav-links {
-      gap: 0.85rem;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-    }
-
-    .nav-more-trigger {
-      font-size: 0.8rem;
+    .prompt {
+      max-width: 200px;
+      font-size: 0.82rem;
     }
   }
 </style>
