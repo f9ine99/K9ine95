@@ -50,15 +50,45 @@ export const themePalettes: Record<string, Record<string, string>> = {
     '--bg-color': '#eff1f5',
     '--card-bg': '#e6e9ef',
     '--card-bg-elevated': '#dce0e8',
-    '--text-primary': '#4c4f69',
-    '--text-muted': '#8c8fa1',
+    '--text-primary': '#2e3150',
+    '--text-muted': '#5c607a',
+    '--heading-color': '#1e2030',
     '--accent-orange': '#fe640b',
     '--accent-blue': '#1e66f5',
     '--accent-purple': '#8839ef',
     '--selection-bg': '#ccd0da',
-    '--scrollbar-thumb': '#bcc0cc',
-    '--nav-bg': 'rgba(239, 241, 245, 0.08)',
-    '--card-hover': 'rgba(0, 0, 0, 0.03)'
+    '--scrollbar-thumb': '#9ca0b0',
+    '--nav-bg': 'rgba(239, 241, 245, 0.85)',
+    '--card-hover': 'rgba(0, 0, 0, 0.04)',
+    '--subtle-bg': 'rgba(0, 0, 0, 0.04)',
+    '--border-subtle': 'rgba(0, 0, 0, 0.08)',
+    '--border-medium': 'rgba(0, 0, 0, 0.14)',
+    '--overlay-light': 'rgba(0, 0, 0, 0.03)',
+    '--overlay-medium': 'rgba(0, 0, 0, 0.05)',
+    '--shadow-medium': 'rgba(0, 0, 0, 0.12)',
+    '--tag-bg': 'rgba(0, 0, 0, 0.06)'
+  },
+  White: {
+    '--bg-color': '#ffffff',
+    '--card-bg': '#f4f4f5',
+    '--card-bg-elevated': '#ebebed',
+    '--text-primary': '#111113',
+    '--text-muted': '#3f3f46',
+    '--heading-color': '#09090b',
+    '--accent-orange': '#c2410c',
+    '--accent-blue': '#1d4ed8',
+    '--accent-purple': '#6d28d9',
+    '--selection-bg': '#e4e4e7',
+    '--scrollbar-thumb': '#71717a',
+    '--nav-bg': 'rgba(255, 255, 255, 0.88)',
+    '--card-hover': 'rgba(0, 0, 0, 0.045)',
+    '--subtle-bg': 'rgba(0, 0, 0, 0.04)',
+    '--border-subtle': 'rgba(0, 0, 0, 0.09)',
+    '--border-medium': 'rgba(0, 0, 0, 0.16)',
+    '--overlay-light': 'rgba(0, 0, 0, 0.03)',
+    '--overlay-medium': 'rgba(0, 0, 0, 0.06)',
+    '--shadow-medium': 'rgba(0, 0, 0, 0.1)',
+    '--tag-bg': 'rgba(0, 0, 0, 0.06)'
   },
   'Rose Pine': {
     '--bg-color': '#191724',
@@ -118,16 +148,23 @@ export const themePalettes: Record<string, Record<string, string>> = {
   }
 };
 
-export const themes = [
+export const lightThemeList = ['White', 'Latte'] as const;
+
+export function isLightTheme(themeName: string) {
+  return (lightThemeList as readonly string[]).includes(themeName);
+}
+
+export const darkThemes = [
   'Macchiato',
   'Mocha',
   'Frappe',
-  'Latte',
   'Rose Pine',
   'Nord',
   'Dracula',
   'Tokyo Night'
-];
+] as const;
+
+export const themes = [...darkThemes, ...lightThemeList];
 
 export const colors = [
   '#f0ede5',
@@ -151,15 +188,33 @@ function updateThemeColorMeta(color: string) {
   if (meta) meta.setAttribute('content', color);
 }
 
+function syncLightClass(themeName: string) {
+  // Keep `.Latte` for existing light-mode CSS hooks across the site.
+  document.documentElement.classList.toggle('Latte', isLightTheme(themeName));
+}
+
+/** Shared dark UI tokens so light-mode overrides never leak after switching back. */
+const darkUiTokens: Record<string, string> = {
+  '--heading-color': '#fff',
+  '--subtle-bg': 'rgba(255, 255, 255, 0.03)',
+  '--border-subtle': 'rgba(255, 255, 255, 0.05)',
+  '--border-medium': 'rgba(255, 255, 255, 0.08)',
+  '--overlay-light': 'rgba(255, 255, 255, 0.04)',
+  '--overlay-medium': 'rgba(255, 255, 255, 0.06)',
+  '--shadow-medium': 'rgba(0, 0, 0, 0.2)',
+  '--tag-bg': 'rgba(0, 0, 0, 0.2)'
+};
+
 export function applyTheme(themeName: string, persist = true) {
   themeState.currentTheme = themeName;
   const palette = themePalettes[themeName];
   if (palette) {
     themeState.currentAccentColor = palette['--accent-orange'];
-    Object.entries(palette).forEach(([key, value]) => {
+    const tokens = isLightTheme(themeName) ? palette : { ...darkUiTokens, ...palette };
+    Object.entries(tokens).forEach(([key, value]) => {
       document.documentElement.style.setProperty(key, value);
     });
-    document.documentElement.classList.toggle('Latte', themeName === 'Latte');
+    syncLightClass(themeName);
     updateThemeColorMeta(palette['--bg-color']);
   } else {
     document.documentElement.classList.remove('Latte');

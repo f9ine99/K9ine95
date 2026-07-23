@@ -45,6 +45,7 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: auto auto;
+    align-items: start;
     gap: 1.15rem;
     width: 100%;
   }
@@ -55,13 +56,17 @@
     max-width: 100%;
     box-sizing: border-box;
     background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
     border-radius: 18px;
     padding: 1.2rem;
     display: flex;
     flex-direction: column;
     gap: 1.05rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.Latte .bento-card) {
+    border-color: rgba(0, 0, 0, 0.08);
   }
 
   :global(.bento-card:hover) {
@@ -76,6 +81,7 @@
 
   :global(.location-card) {
     grid-column: span 2;
+    height: fit-content;
   }
 
   :global(.commits-card) {

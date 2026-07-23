@@ -61,15 +61,45 @@
               '--bg-color': '#eff1f5',
               '--card-bg': '#e6e9ef',
               '--card-bg-elevated': '#dce0e8',
-              '--text-primary': '#4c4f69',
-              '--text-muted': '#8c8fa1',
+              '--text-primary': '#2e3150',
+              '--text-muted': '#5c607a',
+              '--heading-color': '#1e2030',
               '--accent-orange': '#fe640b',
               '--accent-blue': '#1e66f5',
               '--accent-purple': '#8839ef',
               '--selection-bg': '#ccd0da',
-              '--scrollbar-thumb': '#bcc0cc',
-              '--nav-bg': 'rgba(239, 241, 245, 0.08)',
-              '--card-hover': 'rgba(0, 0, 0, 0.03)'
+              '--scrollbar-thumb': '#9ca0b0',
+              '--nav-bg': 'rgba(239, 241, 245, 0.85)',
+              '--card-hover': 'rgba(0, 0, 0, 0.04)',
+              '--subtle-bg': 'rgba(0, 0, 0, 0.04)',
+              '--border-subtle': 'rgba(0, 0, 0, 0.08)',
+              '--border-medium': 'rgba(0, 0, 0, 0.14)',
+              '--overlay-light': 'rgba(0, 0, 0, 0.03)',
+              '--overlay-medium': 'rgba(0, 0, 0, 0.05)',
+              '--shadow-medium': 'rgba(0, 0, 0, 0.12)',
+              '--tag-bg': 'rgba(0, 0, 0, 0.06)'
+            },
+            White: {
+              '--bg-color': '#ffffff',
+              '--card-bg': '#f4f4f5',
+              '--card-bg-elevated': '#ebebed',
+              '--text-primary': '#111113',
+              '--text-muted': '#3f3f46',
+              '--heading-color': '#09090b',
+              '--accent-orange': '#c2410c',
+              '--accent-blue': '#1d4ed8',
+              '--accent-purple': '#6d28d9',
+              '--selection-bg': '#e4e4e7',
+              '--scrollbar-thumb': '#71717a',
+              '--nav-bg': 'rgba(255, 255, 255, 0.88)',
+              '--card-hover': 'rgba(0, 0, 0, 0.045)',
+              '--subtle-bg': 'rgba(0, 0, 0, 0.04)',
+              '--border-subtle': 'rgba(0, 0, 0, 0.09)',
+              '--border-medium': 'rgba(0, 0, 0, 0.16)',
+              '--overlay-light': 'rgba(0, 0, 0, 0.03)',
+              '--overlay-medium': 'rgba(0, 0, 0, 0.06)',
+              '--shadow-medium': 'rgba(0, 0, 0, 0.1)',
+              '--tag-bg': 'rgba(0, 0, 0, 0.06)'
             },
             'Rose Pine': {
               '--bg-color': '#191724',
@@ -135,7 +165,7 @@
           var palette = prefs && prefs.theme ? palettes[prefs.theme] : null;
           if (palette) {
             for (var key in palette) root.style.setProperty(key, palette[key]);
-            root.classList.toggle('Latte', prefs.theme === 'Latte');
+            root.classList.toggle('Latte', prefs.theme === 'Latte' || prefs.theme === 'White');
             var meta = document.querySelector('meta[name="theme-color"]');
             if (meta) meta.setAttribute('content', palette['--bg-color']);
           }

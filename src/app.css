@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
   --bg-color: #1e2030;
@@ -13,6 +13,7 @@
   --accent-red: #ed8796;
   --accent-green: #a6da95;
   --font-mono: 'Fira Code', monospace;
+  --font-display: 'Space Grotesk', sans-serif;
   --scrollbar-thumb: #5b6078;
   --card-hover: rgba(255, 255, 255, 0.04);
   --nav-pill-bg: rgba(30, 32, 48, 0.75);
@@ -100,6 +101,16 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Stronger contrast for light themes (Latte + White share this class). */
+html.Latte {
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+html.Latte body {
+  color: var(--text-primary);
 }
 
 h1,

@@ -67,7 +67,7 @@
     overflow: hidden;
     position: relative;
     background: var(--bg-color);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
   }
 
   .location-footer {
