@@ -1,400 +1,171 @@
 <script lang="ts">
-  import { Mail, FileText } from 'lucide-svelte';
+  import { Mail, FileText, ArrowUpRight, MapPin } from 'lucide-svelte';
 
   const email = 'firaolgemedabuliye@gmail.com';
   const resumeUrl = 'https://assets.firaol.xyz/resume/Fira-resume.pdf';
-
-  let name = 'Firaol Gemeda';
-  const statusLabel = 'Available for work';
-  let isHovered = $state(false);
-  let showHighlight = $state(false);
-  let interactionTimeout: ReturnType<typeof setTimeout> | undefined;
-  let floatingPlusOnes = $state<{ id: number; x: number; emoji: string }[]>([]);
-  let nextId = 0;
-
-  function handleEnter() {
-    isHovered = true;
-    clearTimeout(interactionTimeout);
-    interactionTimeout = setTimeout(() => {
-      if (isHovered) showHighlight = true;
-    }, 1000);
-  }
-
-  function handleLeave() {
-    isHovered = false;
-    showHighlight = false;
-    clearTimeout(interactionTimeout);
-  }
-
-  const emojis = ['✨', '🎉', '🔥', '👏', '💯', '+1'];
-
-  function handleWaveClick() {
-    const id = nextId++;
-    const x = Math.random() * 60 - 30;
-    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-    floatingPlusOnes = [...floatingPlusOnes, { id, x, emoji }];
-    setTimeout(() => {
-      floatingPlusOnes = floatingPlusOnes.filter((p) => p.id !== id);
-    }, 1200);
-  }
+  const name = 'Firaol Gemeda';
 </script>
 
 <header class="hero" id="home">
-  <div class="profile-row">
-    <div
-      class="avatar-container"
-      onmouseenter={handleEnter}
-      onmouseleave={handleLeave}
-      ontouchstart={handleEnter}
-      ontouchend={handleLeave}
-      ontouchcancel={handleLeave}
-      role="button"
-      tabindex="0"
-    >
-      <svg class="circle-svg" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="48" class="circle-path {isHovered ? 'animate' : ''}" />
-      </svg>
-      <div class="image-wrapper">
-        <img
-          src="/images/firaol.jpg"
-          alt={name}
-          class="avatar"
-          width="100"
-          height="100"
-          decoding="async"
-          fetchpriority="high"
-        />
-      </div>
-      {#if showHighlight}
-        <div class="status-badge" role="status" aria-live="polite">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span class="status-label">{statusLabel}</span>
-        </div>
-      {/if}
-    </div>
-    <div class="intro">
-      <h1 class="greeting">
-        Hey! I'm <span class="name">{name}</span>
-        <span class="wave-wrapper">
-          <button class="wave-btn" onclick={handleWaveClick} aria-label="Wave"> 👋🏻 </button>
-          {#each floatingPlusOnes as plusOne (plusOne.id)}
-            <span class="floating-plus" style="--x: {plusOne.x}px">{plusOne.emoji}</span>
-          {/each}
-        </span>
-      </h1>
-    </div>
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <div class="title-block">
+    <p class="hello">Hey, I'm</p>
+    <h1 class="name">{name}</h1>
+    <span class="name-underline" aria-hidden="true"></span>
   </div>
+
   <p class="bio">
-    <span class="highlight-group {showHighlight ? 'active' : ''}">
-      <span
-        >Co-Founder of <a href="https://ethiohamerai.com" target="_blank" rel="noopener noreferrer"
-          >HamerAI</a
-        > | Software Engineer & Cybersecurity Analyst</span
-      >
-    </span>
-    <br />
-    Building secure, scalable systems and solving real-world cybersecurity challenges.
+    Co-Founder of
+    <a href="https://ethiohamerai.vercel.app" target="_blank" rel="noopener noreferrer">
+      HamerAI
+      <ArrowUpRight size={13} />
+    </a>
+    — building secure, scalable systems and shipping products that solve real-world problems.
   </p>
 
   <div class="hero-cta">
     <a class="cta-primary" href="mailto:{email}">
-      <Mail size={17} />
+      <Mail size={16} />
       Get in touch
     </a>
     <a class="cta-secondary" href={resumeUrl} target="_blank" rel="noopener noreferrer">
-      <FileText size={16} />
+      <FileText size={15} />
       Résumé
     </a>
   </div>
+
+  <p class="location">
+    <MapPin size={12} aria-hidden="true" />
+    Addis Ababa · Open to remote
+  </p>
 </header>
 
 <style>
   .hero {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    padding-top: 11rem;
-  }
-
-  .profile-row {
-    display: flex;
     align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .avatar-container {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    cursor: pointer;
-    flex-shrink: 0;
-    border-radius: 50%;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    user-select: none;
-    transition: transform 0.15s ease;
-  }
-
-  .avatar-container:focus {
-    outline: none;
-  }
-
-  .avatar-container:focus-visible .image-wrapper {
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 0 4px rgba(245, 169, 127, 0.25);
-  }
-
-  .circle-svg {
-    position: absolute;
-    inset: -5px;
-    width: 110px;
-    height: 110px;
-    transform: rotate(-90deg);
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .circle-path {
-    fill: none;
-    stroke: var(--accent-orange);
-    stroke-width: 3;
-    stroke-dasharray: 302;
-    stroke-dashoffset: 302;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 1s ease-in-out;
-  }
-
-  .circle-path.animate {
-    stroke-dashoffset: 0;
-  }
-
-  @keyframes drawCircle {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  .image-wrapper {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    text-align: center;
+    gap: 1.05rem;
+    margin: 0 auto 3.5rem;
+    padding-top: 10.75rem;
+    max-width: 42rem;
     overflow: hidden;
-    position: relative;
-    border: 2px solid var(--selection-bg);
-    background: var(--bg-color);
-    z-index: 5;
-    transition:
-      transform 0.18s ease,
-      border-color 0.18s ease,
-      box-shadow 0.18s ease;
   }
 
-  .avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-  }
-
-  .avatar-container:hover .avatar {
-    transform: scale(1.05);
-  }
-
-  .avatar-container:active {
-    transform: scale(0.98);
-  }
-
-  .avatar-container:active .image-wrapper {
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 0 4px rgba(245, 169, 127, 0.18);
-  }
-
-  .status-badge {
+  .hero-glow {
     position: absolute;
-    bottom: -0.65rem;
+    top: 5.5rem;
     left: 50%;
+    width: min(28rem, 90vw);
+    height: 14rem;
     transform: translateX(-50%);
-    z-index: 25;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.28rem 0.55rem;
-    border-radius: 999px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-medium);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 6px 18px var(--shadow-medium);
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-    white-space: nowrap;
+    background: radial-gradient(
+      ellipse,
+      color-mix(in srgb, var(--accent-orange) 16%, transparent),
+      transparent 70%
+    );
     pointer-events: none;
-    animation: badgeIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    z-index: 0;
   }
 
-  .status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-green);
-    box-shadow: 0 0 8px rgba(166, 218, 149, 0.45);
-    animation: statusPulse 2.5s ease-in-out infinite;
-    flex-shrink: 0;
+  .title-block,
+  .bio,
+  .hero-cta,
+  .location {
+    position: relative;
+    z-index: 1;
   }
 
-  @keyframes badgeIn {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(6px) scale(0.92);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
-    }
-  }
-
-  @keyframes statusPulse {
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.55;
-      transform: scale(0.85);
-    }
-  }
-
-  .intro {
+  .title-block {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: center;
+    gap: 0.35rem;
+    animation: fadeUp 0.55s ease-out both;
   }
 
-  .greeting {
-    font-size: 2.5rem;
+  .hello {
     margin: 0;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  .wave-wrapper {
-    position: relative;
-    display: inline-block;
-  }
-
-  .wave-btn {
-    display: inline-block;
-    background: none;
-    border: none;
-    font-size: inherit;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    line-height: 1;
-    animation: wave 2s infinite;
-    transform-origin: 70% 70%;
-    transition: transform 0.15s;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .wave-btn:active {
-    transform: scale(1.4);
-    animation: none;
-  }
-
-  .floating-plus {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    font-size: 1.3rem;
-    font-weight: 800;
-    pointer-events: none;
-    animation: floatUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    transform: translateX(calc(-50% + var(--x)));
-    text-shadow:
-      0 0 12px var(--accent-orange),
-      0 0 4px var(--accent-orange);
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-  }
-
-  @keyframes floatUp {
-    0% {
-      opacity: 1;
-      transform: translateX(calc(-50% + var(--x))) translateY(0) scale(0.5) rotate(0deg);
-    }
-    20% {
-      opacity: 1;
-      transform: translateX(calc(-50% + var(--x))) translateY(-15px) scale(1.3) rotate(-5deg);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(calc(-50% + var(--x))) translateY(-80px) scale(0.4) rotate(10deg);
-    }
-  }
-
-  @keyframes wave {
-    0%,
-    100% {
-      transform: rotate(0deg);
-    }
-    20% {
-      transform: rotate(-10deg);
-    }
-    40% {
-      transform: rotate(10deg);
-    }
-    60% {
-      transform: rotate(-10deg);
-    }
-    80% {
-      transform: rotate(10deg);
-    }
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-muted);
   }
 
   .name {
-    color: var(--accent-orange);
-    position: relative;
+    margin: 0;
+    font-size: clamp(2.9rem, 7.5vw, 4.25rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    color: var(--text-primary);
+  }
+
+  .name-underline {
+    display: block;
+    width: 3.25rem;
+    height: 3px;
+    margin-top: 0.55rem;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-orange),
+      color-mix(in srgb, var(--accent-blue) 70%, var(--accent-orange))
+    );
   }
 
   .bio {
-    font-size: 1.15rem;
-    max-width: 800px;
+    margin: 0.2rem 0 0;
+    max-width: 33rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
     color: var(--text-primary);
-    line-height: 1.8;
-    opacity: 0.9;
-    margin-top: 1rem;
+    opacity: 0.92;
+    animation: fadeUp 0.55s ease-out 0.12s both;
+  }
+
+  .bio a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+
+  .bio a:hover {
+    color: var(--accent-orange);
   }
 
   .hero-cta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.75rem;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-top: 0.55rem;
+    animation: fadeUp 0.55s ease-out 0.18s both;
   }
 
   .cta-primary,
   .cta-secondary {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.15rem;
-    border-radius: 10px;
+    gap: 0.45rem;
+    padding: 0.76rem 1.25rem;
+    border-radius: 999px;
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     transition:
       transform 0.18s ease,
       box-shadow 0.18s ease,
-      background-color 0.18s ease,
       border-color 0.18s ease,
-      color 0.18s ease;
+      color 0.18s ease,
+      background-color 0.18s ease;
   }
 
   .cta-primary {
@@ -405,11 +176,11 @@
 
   .cta-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--shadow-medium);
+    box-shadow: 0 12px 28px var(--shadow-medium);
   }
 
   .cta-secondary {
-    background: var(--subtle-bg);
+    background: color-mix(in srgb, var(--card-bg) 65%, transparent);
     color: var(--text-primary);
     border: 1px solid var(--border-medium);
   }
@@ -420,51 +191,51 @@
     color: var(--accent-orange);
   }
 
-  .highlight-group {
-    padding: 2px 4px;
-    border-radius: 4px;
-    transition: all 0.4s ease;
-    display: inline-block;
+  .location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0.7rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    animation: fadeUp 0.55s ease-out 0.24s both;
   }
 
-  .highlight-group.active {
-    background: rgba(255, 158, 100, 0.2);
-    color: var(--accent-orange);
-  }
-
-  .bio a {
-    color: var(--accent-orange);
-    text-decoration: none;
-    opacity: 0.8;
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (max-width: 768px) {
-    .greeting {
-      font-size: 2.2rem;
-    }
-
     .hero {
-      padding-top: 8rem;
-    }
-
-    .status-badge {
-      font-size: 0.58rem;
-      padding: 0.24rem 0.5rem;
-      bottom: -0.75rem;
+      padding-top: 8.5rem;
+      gap: 0.9rem;
+      margin-bottom: 2.75rem;
     }
 
     .bio {
-      font-size: 1rem;
+      font-size: 1.02rem;
+    }
+
+    .name {
+      font-size: clamp(2.5rem, 11vw, 3.2rem);
     }
   }
 
-  @media (hover: none) and (pointer: coarse) {
-    .avatar-container:hover .avatar {
-      transform: none;
-    }
-
-    .avatar-container:active {
-      transform: scale(0.96);
+  @media (prefers-reduced-motion: reduce) {
+    .title-block,
+    .bio,
+    .hero-cta,
+    .location {
+      animation: none;
     }
   }
 </style>
