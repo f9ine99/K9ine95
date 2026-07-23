@@ -1,0 +1,21 @@
+{
+  "name": "Firaol Gemeda — Software Engineer & Cybersecurity Analyst",
+  "short_name": "Firaol Gemeda",
+  "description": "Portfolio of Firaol Gemeda — software engineer and cybersecurity analyst at HamerAI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e2030",
+  "theme_color": "#1e2030",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
