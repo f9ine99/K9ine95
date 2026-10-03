@@ -1,5 +1,6 @@
 <script lang="ts">
   import { ArrowRight, Star } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
 
   import { projects } from '$lib/data/projects';
@@ -7,7 +8,7 @@
 </script>
 
 <section class="featured-projects" id="projects">
-  <div class="header">
+  <div class="header reveal" use:reveal>
     <div class="title">
       <Star size={32} />
       <h2>Featured Projects</h2>
@@ -19,8 +20,8 @@
   </div>
 
   <div class="projects-grid">
-    {#each featuredProjects as project (project.slug)}
-      <ProjectCard {...project} />
+    {#each featuredProjects as project, i (project.slug)}
+      <ProjectCard {...project} revealDelay={i * 90} />
     {/each}
   </div>
 

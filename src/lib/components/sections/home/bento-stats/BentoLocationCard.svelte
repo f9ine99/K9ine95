@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Clock, MapPin } from 'lucide-svelte';
-  import { fade } from 'svelte/transition';
+  import { reveal } from '$lib/actions/reveal';
   import Map from '$lib/components/sections/home/Map.svelte';
 
   let time = $state('');
@@ -23,7 +23,7 @@
   });
 </script>
 
-<div class="bento-card location-card" in:fade={{ duration: 400, delay: 300 }}>
+<div class="bento-card location-card reveal" use:reveal={80}>
   <div class="card-header">
     <MapPin size={17} class="header-icon" />
     <h3>Currently Based In 📍</h3>

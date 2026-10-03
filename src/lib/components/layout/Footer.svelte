@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { Github, Linkedin, Mail, Clock3 } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
 
   let time = $state('');
   // @ts-expect-error injected at build time by Vite define
@@ -32,7 +33,7 @@
   });
 </script>
 
-<footer class="app-footer">
+<footer class="app-footer reveal" use:reveal>
   <div class="footer-content">
     <div class="left-section">
       <span class="copyright">© 2026 Firaol Gemeda</span>

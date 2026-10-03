@@ -1,6 +1,7 @@
 <script lang="ts">
   import InternshipPanel from '$lib/components/sections/intern/InternshipPanel.svelte';
   import SeoHead from '$lib/components/seo/SeoHead.svelte';
+  import { reveal } from '$lib/actions/reveal';
   import { internships } from '$lib/data/internships';
   import { personSchema } from '$lib/seo/jsonld';
 
@@ -12,7 +13,7 @@
 <SeoHead title="Internships" {description} path="/intern" jsonLd={personSchema()} />
 
 <div class="intern-page">
-  <header class="head">
+  <header class="head reveal" use:reveal>
     <h1>Internships</h1>
     <p>Where I interned, and what I worked on.</p>
   </header>

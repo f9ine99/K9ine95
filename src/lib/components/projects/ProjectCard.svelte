@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Project } from '$lib/data/projects';
   import { sanitizeRichText } from '$lib/utils/sanitizeRichText';
-  import { fade } from 'svelte/transition';
+  import { reveal } from '$lib/actions/reveal';
   import ProjectCardPreview from '$lib/components/projects/project-card/ProjectCardPreview.svelte';
   import ProjectCardInfo from '$lib/components/projects/project-card/ProjectCardInfo.svelte';
   import ProjectDemoLink from '$lib/components/projects/project-card/ProjectDemoLink.svelte';
@@ -15,14 +15,25 @@
     isPrivate?: boolean;
     demoUrl?: string;
     slug: string;
+    revealDelay?: number;
   }
 
-  let { title, date, description, preview, languages, isPrivate, demoUrl, slug }: Props = $props();
+  let {
+    title,
+    date,
+    description,
+    preview,
+    languages,
+    isPrivate,
+    demoUrl,
+    slug,
+    revealDelay = 0
+  }: Props = $props();
   const safeDescription = $derived(sanitizeRichText(description));
   let isHovered = $state(false);
 </script>
 
-<div class="project-card" in:fade={{ duration: 400 }}>
+<div class="project-card reveal" use:reveal={revealDelay}>
   <a
     href="/projects/{slug}"
     class="card-link"

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Mail, FileText, ArrowUpRight, MapPin } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
 
   const email = 'firaolgemedabuliye@gmail.com';
   const resumeUrl = 'https://assets.firaol.xyz/resume/Fira-resume.pdf';
@@ -9,13 +10,13 @@
 <header class="hero" id="home">
   <div class="hero-glow" aria-hidden="true"></div>
 
-  <div class="title-block">
+  <div class="title-block reveal" use:reveal>
     <p class="hello">Hey, I'm</p>
     <h1 class="name">{name}</h1>
     <span class="name-underline" aria-hidden="true"></span>
   </div>
 
-  <p class="bio">
+  <p class="bio reveal" use:reveal={80}>
     Co-Founder of
     <a href="https://ethiohamerai.vercel.app" target="_blank" rel="noopener noreferrer">
       HamerAI
@@ -24,7 +25,7 @@
     — building secure, scalable systems and shipping products that solve real-world problems.
   </p>
 
-  <div class="hero-cta">
+  <div class="hero-cta reveal" use:reveal={150}>
     <a class="cta-primary" href="mailto:{email}">
       <Mail size={16} />
       Get in touch
@@ -35,7 +36,7 @@
     </a>
   </div>
 
-  <p class="location">
+  <p class="location reveal" use:reveal={220}>
     <MapPin size={12} aria-hidden="true" />
     Addis Ababa · Open to remote
   </p>
@@ -52,7 +53,6 @@
     margin: 0 auto 3.5rem;
     padding-top: 10.75rem;
     max-width: 42rem;
-    overflow: hidden;
   }
 
   .hero-glow {
@@ -71,6 +71,10 @@
     z-index: 0;
   }
 
+  :global(html.js) .hero-glow {
+    opacity: 1;
+  }
+
   .title-block,
   .bio,
   .hero-cta,
@@ -84,7 +88,6 @@
     flex-direction: column;
     align-items: center;
     gap: 0.35rem;
-    animation: fadeUp 0.55s ease-out both;
   }
 
   .hello {
@@ -114,6 +117,19 @@
       var(--accent-orange),
       color-mix(in srgb, var(--accent-blue) 70%, var(--accent-orange))
     );
+    transform-origin: center;
+  }
+
+  :global(html.js) .title-block .name-underline {
+    scale: 0 1;
+  }
+
+  :global(html.js) .title-block:global(.is-visible):not(:global(.is-immediate)) .name-underline {
+    animation: draw-line 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+  }
+
+  :global(html.js) .title-block:global(.is-immediate) .name-underline {
+    scale: 1;
   }
 
   .bio {
@@ -123,7 +139,6 @@
     line-height: 1.7;
     color: var(--text-primary);
     opacity: 0.92;
-    animation: fadeUp 0.55s ease-out 0.12s both;
   }
 
   .bio a {
@@ -146,7 +161,6 @@
     justify-content: center;
     gap: 0.7rem;
     margin-top: 0.55rem;
-    animation: fadeUp 0.55s ease-out 0.18s both;
   }
 
   .cta-primary,
@@ -200,17 +214,23 @@
     font-size: 0.72rem;
     letter-spacing: 0.02em;
     color: var(--text-muted);
-    animation: fadeUp 0.55s ease-out 0.24s both;
   }
 
-  @keyframes fadeUp {
+  @keyframes draw-line {
     from {
-      opacity: 0;
-      transform: translateY(10px);
+      scale: 0 1;
     }
     to {
+      scale: 1 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glow,
+    .name-underline {
+      animation: none;
       opacity: 1;
-      transform: translateY(0);
+      scale: none;
     }
   }
 

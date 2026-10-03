@@ -4,20 +4,6 @@ export const themeState = $state({
 });
 
 export const themePalettes: Record<string, Record<string, string>> = {
-  Mocha: {
-    '--bg-color': '#11111b',
-    '--card-bg': '#1e1e2e',
-    '--card-bg-elevated': '#181825',
-    '--text-primary': '#cdd6f4',
-    '--text-muted': '#7f849c',
-    '--accent-orange': '#fab387',
-    '--accent-blue': '#89b4fa',
-    '--accent-purple': '#cba6f7',
-    '--selection-bg': '#313244',
-    '--scrollbar-thumb': '#585b70',
-    '--nav-bg': 'rgba(17, 17, 27, 0.08)',
-    '--card-hover': 'rgba(255, 255, 255, 0.03)'
-  },
   Macchiato: {
     '--bg-color': '#1e2030',
     '--card-bg': '#24273a',
@@ -32,20 +18,6 @@ export const themePalettes: Record<string, Record<string, string>> = {
     '--nav-bg': 'rgba(30, 32, 48, 0.08)',
     '--card-hover': 'rgba(255, 255, 255, 0.03)'
   },
-  Frappe: {
-    '--bg-color': '#232634',
-    '--card-bg': '#303446',
-    '--card-bg-elevated': '#292c3c',
-    '--text-primary': '#c6d0f5',
-    '--text-muted': '#838ba7',
-    '--accent-orange': '#ef9f76',
-    '--accent-blue': '#8caaee',
-    '--accent-purple': '#ca9ee6',
-    '--selection-bg': '#414559',
-    '--scrollbar-thumb': '#626880',
-    '--nav-bg': 'rgba(35, 38, 52, 0.08)',
-    '--card-hover': 'rgba(255, 255, 255, 0.03)'
-  },
   Latte: {
     '--bg-color': '#eff1f5',
     '--card-bg': '#e6e9ef',
@@ -53,7 +25,7 @@ export const themePalettes: Record<string, Record<string, string>> = {
     '--text-primary': '#2e3150',
     '--text-muted': '#5c607a',
     '--heading-color': '#1e2030',
-    '--accent-orange': '#fe640b',
+    '--accent-orange': '#89b4fa',
     '--accent-blue': '#1e66f5',
     '--accent-purple': '#8839ef',
     '--selection-bg': '#ccd0da',
@@ -90,48 +62,6 @@ export const themePalettes: Record<string, Record<string, string>> = {
     '--shadow-medium': 'rgba(0, 0, 0, 0.1)',
     '--tag-bg': 'rgba(0, 0, 0, 0.06)'
   },
-  'Rose Pine': {
-    '--bg-color': '#191724',
-    '--card-bg': '#1f1d2e',
-    '--card-bg-elevated': '#26233a',
-    '--text-primary': '#e0def4',
-    '--text-muted': '#908caa',
-    '--accent-orange': '#ebbcba',
-    '--accent-blue': '#9ccfd8',
-    '--accent-purple': '#c4a7e7',
-    '--selection-bg': '#2e2738',
-    '--scrollbar-thumb': '#6e6a86',
-    '--nav-bg': 'rgba(25, 23, 36, 0.82)',
-    '--card-hover': 'rgba(224, 222, 244, 0.05)'
-  },
-  Nord: {
-    '--bg-color': '#2e3440',
-    '--card-bg': '#3b4252',
-    '--card-bg-elevated': '#434c5e',
-    '--text-primary': '#eceff4',
-    '--text-muted': '#7b88a1',
-    '--accent-orange': '#d08770',
-    '--accent-blue': '#88c0d0',
-    '--accent-purple': '#b48ead',
-    '--selection-bg': '#4c566a',
-    '--scrollbar-thumb': '#5a6578',
-    '--nav-bg': 'rgba(46, 52, 64, 0.82)',
-    '--card-hover': 'rgba(236, 239, 244, 0.05)'
-  },
-  Dracula: {
-    '--bg-color': '#282a36',
-    '--card-bg': '#44475a',
-    '--card-bg-elevated': '#21222c',
-    '--text-primary': '#f8f8f2',
-    '--text-muted': '#6272a4',
-    '--accent-orange': '#ffb86c',
-    '--accent-blue': '#8be9fd',
-    '--accent-purple': '#bd93f9',
-    '--selection-bg': '#44475a',
-    '--scrollbar-thumb': '#6272a4',
-    '--nav-bg': 'rgba(40, 42, 54, 0.82)',
-    '--card-hover': 'rgba(248, 248, 242, 0.05)'
-  },
   'Tokyo Night': {
     '--bg-color': '#1a1b26',
     '--card-bg': '#24283b',
@@ -154,15 +84,7 @@ export function isLightTheme(themeName: string) {
   return (lightThemeList as readonly string[]).includes(themeName);
 }
 
-export const darkThemes = [
-  'Macchiato',
-  'Mocha',
-  'Frappe',
-  'Rose Pine',
-  'Nord',
-  'Dracula',
-  'Tokyo Night'
-] as const;
+export const darkThemes = ['Macchiato', 'Tokyo Night'] as const;
 
 export const themes = [...darkThemes, ...lightThemeList];
 
@@ -259,14 +181,20 @@ export function loadSavedTheme() {
       accent?: string;
     };
 
-    if (prefs.theme && themePalettes[prefs.theme]) {
-      applyTheme(prefs.theme, false);
+    const savedTheme = prefs.theme && themePalettes[prefs.theme] ? prefs.theme : null;
+
+    if (savedTheme) {
+      applyTheme(savedTheme, false);
     } else {
       applyTheme(themeState.currentTheme, false);
     }
 
     if (prefs.accent) {
       setAccentColor(prefs.accent, false);
+    }
+
+    if (!savedTheme) {
+      savePreferences();
     }
   } catch {
     applyTheme(themeState.currentTheme, false);

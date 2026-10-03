@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Download, ExternalLink, FileText } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
   import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
   const resumeUrl = 'https://assets.firaol.xyz/resume/Fira-resume.pdf';
@@ -13,7 +14,7 @@
 />
 
 <main class="more-page">
-  <section class="resume-card" aria-labelledby="resume-title">
+  <section class="resume-card reveal" aria-labelledby="resume-title" use:reveal>
     <div class="resume-icon">
       <FileText size={28} />
     </div>

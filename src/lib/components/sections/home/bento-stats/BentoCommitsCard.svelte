@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { ExternalLink, GitBranch, Loader2 } from 'lucide-svelte';
-  import { fade } from 'svelte/transition';
+  import { reveal } from '$lib/actions/reveal';
 
   interface Commit {
     repo: string;
@@ -35,7 +35,7 @@
   });
 </script>
 
-<div class="bento-card commits-card" in:fade={{ duration: 400, delay: 500 }}>
+<div class="bento-card commits-card reveal" use:reveal={140}>
   <div class="card-header">
     <GitBranch size={17} class="header-icon" />
     <h3>Recent Commits</h3>

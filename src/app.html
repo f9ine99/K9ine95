@@ -11,24 +11,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <script>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js');
+      }
+    </script>
+    <script>
       // Apply the saved theme before first paint to avoid a flash of the default theme.
       (function () {
         try {
           var palettes = {
-            Mocha: {
-              '--bg-color': '#11111b',
-              '--card-bg': '#1e1e2e',
-              '--card-bg-elevated': '#181825',
-              '--text-primary': '#cdd6f4',
-              '--text-muted': '#7f849c',
-              '--accent-orange': '#fab387',
-              '--accent-blue': '#89b4fa',
-              '--accent-purple': '#cba6f7',
-              '--selection-bg': '#313244',
-              '--scrollbar-thumb': '#585b70',
-              '--nav-bg': 'rgba(17, 17, 27, 0.08)',
-              '--card-hover': 'rgba(255, 255, 255, 0.03)'
-            },
             Macchiato: {
               '--bg-color': '#1e2030',
               '--card-bg': '#24273a',
@@ -43,20 +34,6 @@
               '--nav-bg': 'rgba(30, 32, 48, 0.08)',
               '--card-hover': 'rgba(255, 255, 255, 0.03)'
             },
-            Frappe: {
-              '--bg-color': '#232634',
-              '--card-bg': '#303446',
-              '--card-bg-elevated': '#292c3c',
-              '--text-primary': '#c6d0f5',
-              '--text-muted': '#838ba7',
-              '--accent-orange': '#ef9f76',
-              '--accent-blue': '#8caaee',
-              '--accent-purple': '#ca9ee6',
-              '--selection-bg': '#414559',
-              '--scrollbar-thumb': '#626880',
-              '--nav-bg': 'rgba(35, 38, 52, 0.08)',
-              '--card-hover': 'rgba(255, 255, 255, 0.03)'
-            },
             Latte: {
               '--bg-color': '#eff1f5',
               '--card-bg': '#e6e9ef',
@@ -64,7 +41,7 @@
               '--text-primary': '#2e3150',
               '--text-muted': '#5c607a',
               '--heading-color': '#1e2030',
-              '--accent-orange': '#fe640b',
+              '--accent-orange': '#89b4fa',
               '--accent-blue': '#1e66f5',
               '--accent-purple': '#8839ef',
               '--selection-bg': '#ccd0da',
@@ -101,48 +78,6 @@
               '--shadow-medium': 'rgba(0, 0, 0, 0.1)',
               '--tag-bg': 'rgba(0, 0, 0, 0.06)'
             },
-            'Rose Pine': {
-              '--bg-color': '#191724',
-              '--card-bg': '#1f1d2e',
-              '--card-bg-elevated': '#26233a',
-              '--text-primary': '#e0def4',
-              '--text-muted': '#908caa',
-              '--accent-orange': '#ebbcba',
-              '--accent-blue': '#9ccfd8',
-              '--accent-purple': '#c4a7e7',
-              '--selection-bg': '#2e2738',
-              '--scrollbar-thumb': '#6e6a86',
-              '--nav-bg': 'rgba(25, 23, 36, 0.82)',
-              '--card-hover': 'rgba(224, 222, 244, 0.05)'
-            },
-            Nord: {
-              '--bg-color': '#2e3440',
-              '--card-bg': '#3b4252',
-              '--card-bg-elevated': '#434c5e',
-              '--text-primary': '#eceff4',
-              '--text-muted': '#7b88a1',
-              '--accent-orange': '#d08770',
-              '--accent-blue': '#88c0d0',
-              '--accent-purple': '#b48ead',
-              '--selection-bg': '#4c566a',
-              '--scrollbar-thumb': '#5a6578',
-              '--nav-bg': 'rgba(46, 52, 64, 0.82)',
-              '--card-hover': 'rgba(236, 239, 244, 0.05)'
-            },
-            Dracula: {
-              '--bg-color': '#282a36',
-              '--card-bg': '#44475a',
-              '--card-bg-elevated': '#21222c',
-              '--text-primary': '#f8f8f2',
-              '--text-muted': '#6272a4',
-              '--accent-orange': '#ffb86c',
-              '--accent-blue': '#8be9fd',
-              '--accent-purple': '#bd93f9',
-              '--selection-bg': '#44475a',
-              '--scrollbar-thumb': '#6272a4',
-              '--nav-bg': 'rgba(40, 42, 54, 0.82)',
-              '--card-hover': 'rgba(248, 248, 242, 0.05)'
-            },
             'Tokyo Night': {
               '--bg-color': '#1a1b26',
               '--card-bg': '#24283b',
@@ -177,5 +112,34 @@
   </head>
   <body data-sveltekit-preload-data="hover">
     <div style="display: contents">%sveltekit.body%</div>
+    <script>
+      (function () {
+        if (!document.documentElement.classList.contains('js')) return;
+        var nodes = document.querySelectorAll('.reveal');
+        if (!nodes.length) return;
+        if (!('IntersectionObserver' in window)) {
+          nodes.forEach(function (node) {
+            node.classList.add('is-visible');
+          });
+          return;
+        }
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px 8% 0px' }
+        );
+        nodes.forEach(function (node) {
+          var rect = node.getBoundingClientRect();
+          var onScreen = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+          if (onScreen) node.classList.add('is-visible', 'is-immediate');
+          else observer.observe(node);
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Folder } from 'lucide-svelte';
   import ProjectCard from '$lib/components/projects/ProjectCard.svelte';
-  import { fade } from 'svelte/transition';
+  import { reveal } from '$lib/actions/reveal';
   import { projects } from '$lib/data/projects';
   import SeoHead from '$lib/components/seo/SeoHead.svelte';
 
@@ -11,8 +11,8 @@
 
 <SeoHead title="Projects" {description} path="/projects" />
 
-<div class="projects-page" in:fade={{ duration: 600 }}>
-  <header class="page-header">
+<div class="projects-page">
+  <header class="page-header reveal" use:reveal>
     <div class="header-content">
       <Folder size={32} class="header-icon" />
       <h1 class="page-title">Projects</h1>
@@ -21,8 +21,8 @@
   </header>
 
   <div class="projects-grid">
-    {#each projects as project (project.slug)}
-      <ProjectCard {...project} />
+    {#each projects as project, i (project.slug)}
+      <ProjectCard {...project} revealDelay={Math.min(i * 70, 280)} />
     {/each}
   </div>
 </div>

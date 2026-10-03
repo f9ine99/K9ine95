@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Check, Moon, Palette, Sun } from 'lucide-svelte';
-  import { fade } from 'svelte/transition';
+  import { reveal } from '$lib/actions/reveal';
   import {
     themeState,
     themePalettes,
@@ -35,7 +35,7 @@
   const active = $derived(swatch(themeState.currentTheme));
 </script>
 
-<div class="bento-card theme-card" in:fade={{ duration: 400, delay: 100 }}>
+<div class="bento-card theme-card reveal" use:reveal>
   <div class="card-header">
     <Palette size={17} class="header-icon" />
     <div class="header-text">
@@ -89,7 +89,7 @@
     </button>
   </div>
 
-  <div class="theme-options" class:light-mode={mode === 'light'}>
+  <div class="theme-options">
     {#each visibleThemes as theme (theme)}
       {@const s = swatch(theme)}
       <button
@@ -256,12 +256,8 @@
 
   .theme-options {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.45rem;
-  }
-
-  .theme-options.light-mode {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
   }
 
   .theme-btn {
@@ -411,11 +407,5 @@
   .color-circle.active {
     opacity: 1;
     outline-color: var(--glow-color, currentColor);
-  }
-
-  @media (max-width: 600px) {
-    .theme-options {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 </style>

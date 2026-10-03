@@ -1,5 +1,6 @@
 <script lang="ts">
   import { ArrowRight, ArrowUpRight } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
   import { internships } from '$lib/data/internships';
 
   type WorkItem = {
@@ -52,14 +53,14 @@
 </script>
 
 <section class="work" id="work" aria-labelledby="work-heading">
-  <div class="work-head">
+  <div class="work-head reveal" use:reveal>
     <h2 id="work-heading">Experience</h2>
     <p class="work-sub">A short trail of where I’ve built and learned.</p>
   </div>
 
   <ol class="timeline">
     {#each history as item, i (item.name)}
-      <li class="timeline-item" class:current={item.current}>
+      <li class="timeline-item reveal" class:current={item.current} use:reveal={Math.min(i * 70, 280)}>
         <div class="rail" aria-hidden="true">
           <span class="node"></span>
           {#if i < history.length - 1}
@@ -113,7 +114,7 @@
   {#if internships.length}
     <div class="intern-cards">
       {#each internships as item (item.slug)}
-        <a class="intern-card" href="/intern#{item.slug}">
+        <a class="intern-card reveal" href="/intern#{item.slug}" use:reveal>
           <span class="intern-glow" aria-hidden="true"></span>
           <img
             src={item.image}

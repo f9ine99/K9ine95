@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
+  import { reveal } from '$lib/actions/reveal';
   import { slide } from 'svelte/transition';
   import TypingStatsHeader from '$lib/components/sections/home/typing-test/TypingStatsHeader.svelte';
   import TypingBongoCat from '$lib/components/sections/home/typing-test/TypingBongoCat.svelte';
@@ -178,7 +179,8 @@
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-  class="typing-test"
+  class="typing-test reveal"
+  use:reveal
   class:is-open={isOpen}
   id="typing"
   role="region"

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Activity, Container, GitBranch, Globe, Network, Server } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
   import type { Internship, InternshipIcon } from '$lib/data/internships';
 
   let { internship }: { internship: Internship } = $props();
@@ -16,7 +17,12 @@
   const companyLabel = $derived(new URL(internship.companyUrl).host.replace(/^www\./, ''));
 </script>
 
-<section class="internship" id={internship.slug} aria-labelledby="{internship.slug}-heading">
+<section
+  class="internship reveal"
+  id={internship.slug}
+  aria-labelledby="{internship.slug}-heading"
+  use:reveal
+>
   <div class="panel">
     <div class="meta">
       <img

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Github, Linkedin, Mail, Send } from 'lucide-svelte';
+  import { reveal } from '$lib/actions/reveal';
 
   let name = 'Firaol Gemeda';
   let role = 'Software Engineer & Cybersecurity Analyst';
@@ -7,10 +8,10 @@
 </script>
 
 <div class="about-section">
-  <h1 class="about-title">About Me</h1>
+  <h1 class="about-title reveal" use:reveal>About Me</h1>
 
   <div class="about-container">
-    <div class="avatar-column">
+    <div class="avatar-column reveal" use:reveal={80}>
       <div class="avatar-frame">
         <img
           src="/images/avatar-anime.png"
@@ -24,7 +25,7 @@
       </div>
     </div>
 
-    <div class="content-column">
+    <div class="content-column reveal" use:reveal={150}>
       <div class="bio-content">
         <p class="bio-text">
           Hey! I’m <span class="link accent">{name}</span> — a {role} at
