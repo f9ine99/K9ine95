@@ -13,6 +13,11 @@
 
     // Dynamically import Leaflet only on the client
     L = (await import('leaflet')).default;
+    const { maplibreGL } = await import('@maplibre/maplibre-gl-leaflet');
+    const { setWorkerUrl } = await import('maplibre-gl');
+    const workerUrl = (await import('maplibre-gl/dist/maplibre-gl-worker.mjs?url')).default;
+    setWorkerUrl(workerUrl);
+    await import('maplibre-gl/dist/maplibre-gl.css');
 
     // Bole Medhanialem, Addis Ababa
     const lat = 9.0054;
@@ -30,9 +35,10 @@
       boxZoom: true
     });
 
-    // Premium Dark Theme tiles
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      maxZoom: 19
+    // Street basemap with no API key. OpenStreetMap data via OpenFreeMap.
+    maplibreGL({
+      style: 'https://tiles.openfreemap.org/styles/liberty',
+      attributionControl: false
     }).addTo(map);
 
     // GTA Style Marker (Small white arrow with blue stroke)
@@ -40,7 +46,7 @@
       className: 'gta-marker',
       html: `
         <div class="gta-arrow">
-          <svg viewBox="0 0 24 24" fill="white" stroke="#3b82f6" stroke-width="2">
+          <svg viewBox="0 0 24 24" fill="#2563eb" stroke="white" stroke-width="2">
             <path d="M12 2l8 18-8-4-8 4z" />
           </svg>
         </div>
@@ -80,7 +86,7 @@
   .map-element {
     width: 100%;
     height: 100%;
-    background: #000;
+    background: #3c3a36;
   }
 
   .plane-container {
@@ -169,7 +175,7 @@
     inset: 0;
     pointer-events: none;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.12);
     z-index: 1000;
   }
 
@@ -201,5 +207,19 @@
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 4px !important;
     margin-bottom: 4px !important;
+  }
+
+  :global(.maplibregl-map) {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(.maplibregl-canvas) {
+    filter: invert(0.86) hue-rotate(180deg) saturate(1.2) brightness(1.08) contrast(1.04);
+  }
+
+  :global(.leaflet-control-attribution),
+  :global(.maplibregl-ctrl-attrib) {
+    display: none !important;
   }
 </style>
