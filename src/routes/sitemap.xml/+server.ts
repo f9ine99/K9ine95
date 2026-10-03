@@ -4,6 +4,7 @@ import { SITE_URL } from '$lib/seo/site';
 const staticRoutes = [
   { path: '', priority: '1.0', changefreq: 'weekly' },
   { path: '/about', priority: '0.9', changefreq: 'monthly' },
+  { path: '/intern', priority: '0.8', changefreq: 'monthly' },
   { path: '/projects', priority: '0.9', changefreq: 'weekly' }
 ];
 

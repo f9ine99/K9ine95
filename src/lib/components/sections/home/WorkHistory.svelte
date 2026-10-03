@@ -1,11 +1,13 @@
 <script lang="ts">
-  import { ArrowUpRight } from 'lucide-svelte';
+  import { ArrowRight, ArrowUpRight } from 'lucide-svelte';
+  import { internships } from '$lib/data/internships';
 
   type WorkItem = {
     name: string;
     role: string;
     image: string;
     link: string;
+    external?: boolean;
     current: boolean;
     period: string;
     invert?: boolean;
@@ -19,6 +21,15 @@
       current: true,
       period: 'Present',
       link: 'https://ethiohamerai.vercel.app'
+    },
+    {
+      name: 'Atlas Computer Technology',
+      role: 'System Engineering Intern',
+      image: '/images/atlas.png',
+      current: false,
+      period: 'Jun–Sep 2026',
+      link: '/intern#atlas',
+      external: false
     },
     {
       name: 'INSA',
@@ -56,7 +67,13 @@
           {/if}
         </div>
 
-        <a href={item.link} target="_blank" rel="noopener noreferrer" class="row">
+        <a
+          href={item.link}
+          class="row"
+          class:internal={item.external === false}
+          target={item.external === false ? undefined : '_blank'}
+          rel={item.external === false ? undefined : 'noopener noreferrer'}
+        >
           <span class="logo-wrap">
             <img
               src={item.image}
@@ -81,13 +98,44 @@
           </span>
 
           <span class="period">{item.period}</span>
-          <span class="arrow" aria-hidden="true">
-            <ArrowUpRight size={15} />
+          <span class="arrow" class:internal={item.external === false} aria-hidden="true">
+            {#if item.external === false}
+              <ArrowRight size={15} />
+            {:else}
+              <ArrowUpRight size={15} />
+            {/if}
           </span>
         </a>
       </li>
     {/each}
   </ol>
+
+  {#if internships.length}
+    <div class="intern-cards">
+      {#each internships as item (item.slug)}
+        <a class="intern-card" href="/intern#{item.slug}">
+          <span class="intern-glow" aria-hidden="true"></span>
+          <img
+            src={item.image}
+            alt=""
+            class="intern-logo"
+            width="46"
+            height="46"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="intern-copy">
+            <span class="intern-kicker">Internship</span>
+            <span class="intern-title">{item.org}</span>
+            <span class="intern-meta">{item.cardMeta}</span>
+          </span>
+          <span class="intern-go" aria-hidden="true">
+            <ArrowRight size={16} />
+          </span>
+        </a>
+      {/each}
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -189,6 +237,10 @@
     transform: translate(1px, -1px);
   }
 
+  .row:hover .arrow.internal {
+    transform: translateX(3px);
+  }
+
   .logo-wrap {
     width: 40px;
     height: 40px;
@@ -263,6 +315,127 @@
     transition:
       color 0.18s ease,
       transform 0.18s ease;
+  }
+
+  .intern-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.15rem;
+  }
+
+  .intern-card {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.85rem 0.9rem 0.85rem 0.85rem;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 18px;
+    border: 1px solid color-mix(in srgb, var(--accent-orange) 28%, var(--border-medium));
+    background:
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--accent-orange) 8%, transparent),
+        transparent 42%
+      ),
+      color-mix(in srgb, var(--card-bg) 78%, transparent);
+    box-shadow: 0 16px 40px -28px var(--shadow-color);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .intern-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--accent-orange) 55%, var(--border-medium));
+    box-shadow: 0 18px 36px -24px var(--shadow-medium);
+  }
+
+  .intern-glow {
+    position: absolute;
+    top: -2.5rem;
+    right: -1.5rem;
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--accent-blue) 28%, transparent),
+      transparent 68%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .intern-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .intern-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 0.08rem;
+  }
+
+  .intern-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+  }
+
+  .intern-title {
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .intern-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .intern-go {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 999px;
+    color: var(--bg-color);
+    background: var(--accent-orange);
+    transition: transform 0.2s ease;
+  }
+
+  .intern-card:hover .intern-go {
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intern-card,
+    .intern-go {
+      transition: none;
+    }
+
+    .intern-card:hover,
+    .intern-card:hover .intern-go {
+      transform: none;
+    }
   }
 
   @media (max-width: 560px) {

@@ -50,6 +50,9 @@
         class:active={currentPathname === '/projects' || currentPathname.startsWith('/projects/')}
         onclick={onCloseDrawer}>Projects</a
       >
+      <a href="/intern" class:active={currentPathname === '/intern'} onclick={onCloseDrawer}
+        >Intern</a
+      >
     </div>
 
     {#if currentPathname === '/'}

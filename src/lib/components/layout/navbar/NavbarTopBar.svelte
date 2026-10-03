@@ -42,6 +42,9 @@
         </a>
       </li>
       <li>
+        <a href="/intern" class:active={currentPathname === '/intern'}>Intern</a>
+      </li>
+      <li>
         <button
           type="button"
           class="nav-more-trigger"
@@ -92,7 +95,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
-    width: min(92%, 720px);
+    width: min(92%, 820px);
     margin: 0 auto;
     padding: 0.72rem 1.35rem;
     pointer-events: auto;
@@ -110,7 +113,7 @@
   }
 
   .navbar-wrapper.scrolled .navbar {
-    width: min(92%, 640px);
+    width: min(92%, 760px);
     padding: 0.62rem 1.2rem;
     box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.45);
   }
@@ -147,7 +150,7 @@
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 1.35rem;
+    gap: 1.05rem;
     list-style: none;
     margin: 0;
     padding: 0;
